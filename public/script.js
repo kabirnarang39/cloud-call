@@ -8,7 +8,7 @@ const peers = {}
 var peer = new Peer(undefined,{
     path:'/peerjs',
     host:'/',
-    port:'3000'
+    port:'443'
 }); 
 
 //console.log(videoGrid)
@@ -191,7 +191,7 @@ const hideShow=()=>{
       }
     else
     if(x.style.display==='none'){
-        console.log('hey ')
+       //heroku console.log('hey ')
         displayChat();
       
       
