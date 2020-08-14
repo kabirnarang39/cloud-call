@@ -4,10 +4,11 @@ let myVideoStream;
 const videoGrid=document.querySelector('.video-grid')
 const myVideoElement=document.createElement('video')
 myVideoElement.muted=true;
+const peers = {}
 var peer = new Peer(undefined,{
     path:'/peerjs',
     host:'/',
-    port:'443'
+    port:'3000'
 }); 
 
 //console.log(videoGrid)
@@ -28,6 +29,7 @@ peer.on('call', call=> {
 socket.on('user-connected',(userId)=>{
     connectToNewUser(userId,stream);
 })
+
 const text=document.querySelector('input')
 text.addEventListener('change',(event)=>{
 if(event.target.value.length!==0){
@@ -35,6 +37,7 @@ socket.emit('message',event.target.value)
 event.target.value='';
 }
 })
+
 socket.on('createMessage',message=>{
     const ul=document.querySelector('.messages');
     const node=document.createElement('li');
@@ -48,10 +51,14 @@ socket.on('createMessage',message=>{
     //ul.append(`<li class="message"><b>user</b><br/>${message}</li>`)
 })
 
+
 })
 .catch(err=>{
     console.log(err)
 })
+socket.on('user-disconnected', userId => {
+    if (peers[userId]) peers[userId].close()
+  })
 peer.on('open',id=>{
     socket.emit('join-room',ROOM_ID,id)
 })
@@ -63,6 +70,11 @@ const connectToNewUser=(userId,stream)=>{
     call.on('stream', userVideoStream=> {
     addStream(video,userVideoStream)
   });
+  call.on('close', () => {
+    video.remove()
+  })
+
+  peers[userId] = call
 }
 const addStream=(video,stream)=>{
     video.srcObject=stream;
@@ -138,4 +150,50 @@ const setStopVideo=()=>{
 <span>Stop Video</span>
     `
     document.querySelector('.main_video_button').innerHTML=html;
+}
+const displayChat=()=>{
+    const html=`
+    <svg width="24px" height="24px" viewBox="0 0 16 16" class="bi bi-chat-left-fill" fill="#eb534b" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+          </svg>
+    <span>Hide Chat</span>
+    `
+    document.querySelector('.main_left').style.flex="0.8";
+    document.querySelector('.main_right').style.display="flex";
+    document.querySelector('.main_right').style.flex="0.2";
+    document.querySelector('.chat_display').innerHTML=html;
+
+ }
+ const hideChat=()=>{
+    const html=`
+    <svg width="24px" height="24px" viewBox="0 0 16 16" class="bi bi-chat-left-fill" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+          </svg>
+    <span>Chat</span>
+    `
+    document.querySelector('.main_right').style.display="none";
+    document.querySelector('.main_left').style.flex="1.0";
+    
+    document.querySelector('.main_right').style.flex="0";
+    
+        document.querySelector('.chat_display').innerHTML=html;
+
+}
+//console.log(dis)
+const hideShow=()=>{
+     const x=document.querySelector('.main_right');
+     console.log(x.style.display)
+    if(x.style.display==='flex'){
+        //console.log('hey')
+        hideChat();
+       
+       
+      }
+    else
+    if(x.style.display==='none'){
+        console.log('hey ')
+        displayChat();
+      
+      
+    }
 }
