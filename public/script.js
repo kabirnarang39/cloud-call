@@ -132,7 +132,7 @@ const connectToNewUser=(userId,stream)=>{
   })
 
   peers[userId] = call
-  console.log(peers[userId])
+  console.log(peers)
 }
 const addStream=(video,stream)=>{
     video.srcObject=stream;
@@ -253,9 +253,9 @@ const screenShare=()=>{
     navigator.mediaDevices.getDisplayMedia({ cursor: true})
    .then(stream=>{
             const screenTrack=stream.getTracks()[0];
-            peers.current.find(sender => sender.track.kind === 'video').replaceTrack(screenTrack);
+            peers.find(sender => sender.track.kind === 'video').replaceTrack(screenTrack);
             screenTrack.onended = function() {
-                peers.current.find(sender => sender.track.kind === "video").replaceTrack(userStream.current.getTracks()[1]);
+                peers.find(sender => sender.track.kind === "video").replaceTrack(userStream.current.getTracks()[1]);
             }
     })
   }
