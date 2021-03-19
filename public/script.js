@@ -256,6 +256,7 @@ const screenShare=()=>{
    .then(stream=>{
             const screenTrack=stream.getTracks()[0];
             const video=document.getElementsByTagName('video');
+            video[0].srcObject=screenTrack;
             console.log(video)
             console.log(peers[id])
             peers[id].peerConnection.replaceTrack(screenTrack);
