@@ -253,8 +253,9 @@ const screenShare=()=>{
     navigator.mediaDevices.getDisplayMedia({ cursor: true})
    .then(stream=>{
             const screenTrack=stream.getTracks()[0];
-            screenTrack.onended=()=>{
-               setScreenStream(null);
+            peers.current.find(sender => sender.track.kind === 'video').replaceTrack(screenTrack);
+            screenTrack.onended = function() {
+                peers.current.find(sender => sender.track.kind === "video").replaceTrack(userStream.current.getTracks()[1]);
             }
     })
   }
