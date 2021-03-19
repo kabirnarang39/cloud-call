@@ -254,6 +254,7 @@ const screenShare=()=>{
     navigator.mediaDevices.getDisplayMedia({ cursor: true})
    .then(stream=>{
             const screenTrack=stream.getTracks()[0];
+            console.log(peers[userId])
             peers[userId].replaceTrack(screenTrack);
             screenTrack.onended = function() {
                 peers[userId].replaceTrack(userStream.current.getTracks()[1]);
