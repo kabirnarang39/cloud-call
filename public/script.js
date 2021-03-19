@@ -9,7 +9,7 @@ var peer = new Peer(undefined,{
     host:'/',
     port:'443'
 }); 
-console.log(mwWindow.user)
+console.log(window)
 //console.log(videoGrid)
 navigator.mediaDevices.getUserMedia({
     video:true,
