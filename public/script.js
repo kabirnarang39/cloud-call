@@ -159,20 +159,18 @@ setUnmuteButton();
 }
 const setUnmuteButton=()=>{
     const html=`
-    <svg width="24px" height="24px" viewBox="0 0 16 16" class="bi bi-mic-mute-fill" fill="#cc3b33" xmlns="http://www.w3.org/2000/svg">
+    <svg width="24px" height="24px" viewBox="0 0 16 16" class="bi bi-mic-mute-fill" fill="#00796b" xmlns="http://www.w3.org/2000/svg">
   <path fill-rule="evenodd" d="M12.734 9.613A4.995 4.995 0 0 0 13 8V7a.5.5 0 0 0-1 0v1c0 .274-.027.54-.08.799l.814.814zm-2.522 1.72A4 4 0 0 1 4 8V7a.5.5 0 0 0-1 0v1a5 5 0 0 0 4.5 4.975V15h-3a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-3v-2.025a4.973 4.973 0 0 0 2.43-.923l-.718-.719zM11 7.88V3a3 3 0 0 0-5.842-.963L11 7.879zM5 6.12l4.486 4.486A3 3 0 0 1 5 8V6.121zm8.646 7.234l-12-12 .708-.708 12 12-.708.707z"/>
 </svg>
-<span>Unmute</span>
     `
     document.querySelector('.main_mute_button').innerHTML=html;
 }
 const setMuteButton=()=>{
     const html=`
-    <svg width="24px" height="24px" viewBox="0 0 16 16" class="bi bi-mic-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <svg width="24px" height="24px" viewBox="0 0 16 16" class="bi bi-mic-fill" fill="#00796b" xmlns="http://www.w3.org/2000/svg">
     <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0V3z"/>
     <path fill-rule="evenodd" d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/>
   </svg>
-<span>Mute</span>
     `
     document.querySelector('.main_mute_button').innerHTML=html;
 }
@@ -189,31 +187,28 @@ setPlayVideo();
 }
 const setPlayVideo=()=>{
     const html=`
-    <svg width="24px" height="24px" viewBox="0 0 16 16" class="bi bi-camera-video-off-fill" fill="#cc3b33" xmlns="http://www.w3.org/2000/svg">
+    <svg width="24px" height="24px" viewBox="0 0 16 16" class="bi bi-camera-video-off-fill" fill="#00796b" xmlns="http://www.w3.org/2000/svg">
   <path d="M1.429 3.55A1.66 1.66 0 0 0 1 4.667v6.666C1 12.253 1.746 13 2.667 13h6.666c.43 0 .821-.162 1.117-.429l-9.02-9.02zm13.111 8.868a.798.798 0 0 0 .46-.726V4.308c0-.63-.693-1.01-1.233-.696L11 5.218v-.551C11 3.747 10.254 3 9.333 3H5.121l9.419 9.418z"/>
   <path fill-rule="evenodd" d="M13.646 14.354l-12-12 .708-.708 12 12-.708.707z"/>
 </svg>
-<span>Play Video</span>
     `
     document.querySelector('.main_video_button').innerHTML=html;
    
 }
 const setStopVideo=()=>{
     const html=`
-    <svg width="24px" height="24px" viewBox="0 0 16 16" class="bi bi-camera-video-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <svg width="24px" height="24px" viewBox="0 0 16 16" class="bi bi-camera-video-fill" fill="#00796b" xmlns="http://www.w3.org/2000/svg">
             <path d="M2.667 3h6.666C10.253 3 11 3.746 11 4.667v6.666c0 .92-.746 1.667-1.667 1.667H2.667C1.747 13 1 12.254 1 11.333V4.667C1 3.747 1.746 3 2.667 3z"/>
             <path d="M7.404 8.697l6.363 3.692c.54.313 1.233-.066 1.233-.697V4.308c0-.63-.693-1.01-1.233-.696L7.404 7.304a.802.802 0 0 0 0 1.393z"/>
           </svg>
-<span>Stop Video</span>
     `
     document.querySelector('.main_video_button').innerHTML=html;
 }
 const displayChat=()=>{
     const html=`
-    <svg width="24px" height="24px" viewBox="0 0 16 16" class="bi bi-chat-left-fill" fill="#eb534b" xmlns="http://www.w3.org/2000/svg">
+    <svg width="24px" height="24px" viewBox="0 0 16 16" class="bi bi-chat-left-fill" fill="#00796b" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
           </svg>
-    <span>Hide Chat</span>
     `
     document.querySelector('.main_left').style.flex="0.8";
     document.querySelector('.main_right').style.display="flex";
@@ -223,10 +218,9 @@ const displayChat=()=>{
  }
  const hideChat=()=>{
     const html=`
-    <svg width="24px" height="24px" viewBox="0 0 16 16" class="bi bi-chat-left-fill" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+    <svg width="24px" height="24px" viewBox="0 0 16 16" class="bi bi-chat-left-fill" fill="#00796b" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
           </svg>
-    <span>Chat</span>
     `
     document.querySelector('.main_right').style.display="none";
     document.querySelector('.main_left').style.flex="1.0";
