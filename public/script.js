@@ -252,7 +252,7 @@ const hideShow=()=>{
     }
 }
 const screenShare=()=>{
-    console.log(id)
+    console.log(id!==undefined?id:'no')
     navigator.mediaDevices.getDisplayMedia({ cursor: true})
    .then(stream=>{
             const screenTrack=stream.getTracks()[0];
