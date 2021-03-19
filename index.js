@@ -8,7 +8,7 @@ const { ExpressPeerServer } = require('peer');
 const peerServer = ExpressPeerServer(server,{ 
     debug:true
 });
-let user;
+let user='';
 app.use('/peerjs',peerServer);
 app.set('view engine','ejs')
 app.set('views','views');
