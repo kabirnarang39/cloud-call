@@ -43,7 +43,7 @@ video{
 }
 .main_videos{
     flex-grow: 1;
-    background-color: black;
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -51,6 +51,7 @@ video{
 }
 .main_controls{
     display: flex;
+    position: sticky;
     background-color: #1c1e20;
     color:#d2d2d2;
     padding: 5px;
@@ -58,6 +59,9 @@ video{
 }
 .main_controls_block{
     display: flex;
+    flex-direction: column;
+    background-color: #242324;
+    border-left: 1px solid #3d3d42;
 }
 .main_controls_button{
     display: flex;
@@ -108,14 +112,14 @@ video{
     list-style: none;
     display: grid;
 }
-.messages li{
+/*.messages li{
     width:200px;
     word-wrap:break-word;
     background-color: brown;
     padding:10px;
     border-radius: 10px;
 }
-    
+    */
 .video-grid video:after {
     color: #aaa;
     font-size: 13px;
