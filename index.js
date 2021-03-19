@@ -37,10 +37,10 @@ app.post('/users',(req,res,next)=>{
  
 })
 io.on('connection',socket=>{
-    socket.on('join-room',(roomId,userId,loggedInUser)=>{
+    socket.on('join-room',(roomId,userId,users)=>{
         socket.join(roomId);
        // console.log('joined')
-        socket.to(roomId).broadcast.emit('user-connected',userId,loggedInUser)
+        socket.to(roomId).broadcast.emit('user-connected',userId,users)
         socket.on('message',message=>{
             io.to(roomId).emit('createMessage',message)
         })
