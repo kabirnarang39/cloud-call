@@ -58,8 +58,8 @@ video{
 }
 .main_controls_block{
     display: flex;
-   /* flex-direction: column;
-    background-color: #242324;
+    flex-direction: column;
+    /*background-color: #242324;
     border-left: 1px solid #3d3d42;*/
 }
 .main_controls_button{
