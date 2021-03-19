@@ -255,10 +255,10 @@ const screenShare=()=>{
     navigator.mediaDevices.getDisplayMedia({ cursor: true})
    .then(stream=>{
             const screenTrack=stream.getTracks()[0];
-            console.log(peers)
-            peers[id].localStream.replaceTrack(screenTrack);
+            console.log(peers[id])
+            peers[id].options.stream.replaceTrack(screenTrack);
             screenTrack.onended = function() {
-                peers[id].localStream.replaceTrack(userStream.getTracks()[1]);
+              //  peers[id].localStream.replaceTrack(userStream.getTracks()[1]);
             }
     })
   }
