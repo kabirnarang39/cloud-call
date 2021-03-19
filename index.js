@@ -13,8 +13,15 @@ app.use('/peerjs',peerServer);
 app.set('view engine','ejs')
 app.set('views','views');
 app.use(express.static(path.join(__dirname,'public')));
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+});
 app.get('/',(req,res)=>{
-    res.redirect('/'+uuidv4());
+   // res.redirect('/'+uuidv4());
+    res.send(uuidv4())
 })
 app.get('/:room',(req,res)=>{
     //console.log(req.params)
@@ -36,6 +43,6 @@ io.on('connection',socket=>{
     })
    
 })
-server.listen(process.env.PORT || 3000, function(){
+server.listen(process.env.PORT || 8000, function(){
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
   });
