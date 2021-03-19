@@ -8,7 +8,7 @@ const { ExpressPeerServer } = require('peer');
 const peerServer = ExpressPeerServer(server,{ 
     debug:true
 });
-let loggedInUser;
+let users=[];
 app.use('/peerjs',peerServer);
 app.set('view engine','ejs')
 app.set('views','views');
@@ -29,8 +29,12 @@ app.get('/:room',(req,res)=>{
         roomId:req.params.room
     })
 })
-app.post('/user',(req,res,next)=>{
-loggedInUser=req.body.user.profileObj;
+app.post('/users',(req,res,next)=>{
+    users.push({
+        user:req.body.user.profileObj
+    })
+  //  console.log(users)
+ 
 })
 io.on('connection',socket=>{
     socket.on('join-room',(roomId,userId,loggedInUser)=>{
