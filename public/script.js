@@ -132,6 +132,7 @@ const connectToNewUser=(userId,stream)=>{
   })
 
   peers[userId] = call
+  console.log(peers)
 }
 const addStream=(video,stream)=>{
     video.srcObject=stream;
@@ -248,3 +249,12 @@ const hideShow=()=>{
       
     }
 }
+const screenShare=()=>{
+    navigator.mediaDevices.getDisplayMedia({ cursor: true})
+   .then(stream=>{
+            const screenTrack=stream.getTracks()[0];
+            screenTrack.onended=()=>{
+               setScreenStream(null);
+            }
+    })
+  }
