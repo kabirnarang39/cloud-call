@@ -251,13 +251,11 @@ const hideShow=()=>{
     }
 }
 const screenShare=()=>{
-
+    const id=localStorage.getItem('id');
     navigator.mediaDevices.getDisplayMedia({ cursor: true})
    .then(stream=>{
             const screenTrack=stream.getTracks()[0];
-            const id=localStorage.getItem('id');
-    console.log(id)
-            console.log(peers[id])
+            console.log(peers)
             peers[id].localStream.replaceTrack(screenTrack);
             screenTrack.onended = function() {
                 peers[id].localStream.replaceTrack(userStream.getTracks()[1]);
