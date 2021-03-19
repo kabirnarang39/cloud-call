@@ -9,7 +9,6 @@ var peer = new Peer(undefined,{
     host:'/',
     port:'443'
 }); 
-console.log(window.user)
 //console.log(videoGrid)
 navigator.mediaDevices.getUserMedia({
     video:true,
@@ -25,8 +24,8 @@ peer.on('call', call=> {
       addStream(video,userVideoStream)
     });
 })
-socket.on('user-connected',(userId)=>{
-    console.log(userId)
+socket.on('user-connected',(userId,user)=>{
+    console.log(user)
     localStorage.setItem('id',userId)
     connectToNewUser(userId,stream);
 })
