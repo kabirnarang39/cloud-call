@@ -32,7 +32,7 @@ app.get('/:room',(req,res)=>{
    // console.log(req.params)
     res.render('zoom',{
         roomId:req.params.room,
-        user:user!==undefined?user:'User'
+        user:user!==null?user:'User'
     })
 })
 io.on('connection',socket=>{
