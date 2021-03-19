@@ -132,7 +132,7 @@ const connectToNewUser=(userId,stream)=>{
   })
 
   peers[userId] = call
-  console.log(peers)
+  console.log(peers[userId])
 }
 const addStream=(video,stream)=>{
     video.srcObject=stream;
