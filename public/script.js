@@ -1,6 +1,6 @@
 var socket = io('/');
 let myVideoStream;
-var userId;
+var id;
 const videoGrid=document.querySelector('.video-grid')
 const myVideoElement=document.createElement('video')
 myVideoElement.muted=true;
@@ -28,6 +28,7 @@ peer.on('call', call=> {
 })
 socket.on('user-connected',(userId)=>{
     console.log(userId)
+    id=userId;
     connectToNewUser(userId,stream);
 })
 
@@ -251,13 +252,14 @@ const hideShow=()=>{
     }
 }
 const screenShare=()=>{
+    console.log(id)
     navigator.mediaDevices.getDisplayMedia({ cursor: true})
    .then(stream=>{
             const screenTrack=stream.getTracks()[0];
-            console.log(peers[peer])
-            peers[userId].replaceTrack(screenTrack);
+            console.log(peers[id])
+            peers[id].replaceTrack(screenTrack);
             screenTrack.onended = function() {
-                peers[userId].replaceTrack(userStream.current.getTracks()[1]);
+                peers[id].replaceTrack(userStream.current.getTracks()[1]);
             }
     })
   }
