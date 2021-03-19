@@ -1,6 +1,6 @@
 var socket = io('/');
 let myVideoStream;
-let userId;
+var userId;
 const videoGrid=document.querySelector('.video-grid')
 const myVideoElement=document.createElement('video')
 myVideoElement.muted=true;
@@ -27,6 +27,7 @@ peer.on('call', call=> {
     });
 })
 socket.on('user-connected',(userId)=>{
+    userId=userId;
     connectToNewUser(userId,stream);
 })
 
@@ -132,7 +133,6 @@ const connectToNewUser=(userId,stream)=>{
   })
 
   peers[userId] = call
-  userId=userId;
   console.log(peers)
 }
 const addStream=(video,stream)=>{
