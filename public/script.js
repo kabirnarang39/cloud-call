@@ -256,7 +256,7 @@ const screenShare=()=>{
    .then(stream=>{
             const screenTrack=stream.getTracks()[0];
             console.log(peers[id])
-            peers[id].replaceTrack(screenTrack);
+            peers[id].peerConnection.replaceTrack(screenTrack);
             screenTrack.onended = function() {
               //  peers[id].localStream.replaceTrack(userStream.getTracks()[1]);
             }
