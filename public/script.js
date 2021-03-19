@@ -1,6 +1,6 @@
 var socket = io('/');
 let myVideoStream;
-
+const userId;
 const videoGrid=document.querySelector('.video-grid')
 const myVideoElement=document.createElement('video')
 myVideoElement.muted=true;
@@ -132,6 +132,7 @@ const connectToNewUser=(userId,stream)=>{
   })
 
   peers[userId] = call
+  userId=userId;
   console.log(peers)
 }
 const addStream=(video,stream)=>{
@@ -253,9 +254,9 @@ const screenShare=()=>{
     navigator.mediaDevices.getDisplayMedia({ cursor: true})
    .then(stream=>{
             const screenTrack=stream.getTracks()[0];
-            peers.find(sender => sender.track.kind === 'video').replaceTrack(screenTrack);
+            peers[userId].replaceTrack(screenTrack);
             screenTrack.onended = function() {
-                peers.find(sender => sender.track.kind === "video").replaceTrack(userStream.current.getTracks()[1]);
+                peers[userId].replaceTrack(userStream.current.getTracks()[1]);
             }
     })
   }
