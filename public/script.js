@@ -27,6 +27,7 @@ peer.on('call', call=> {
     });
 })
 socket.on('user-connected',(userId)=>{
+    console.log(userId)
     connectToNewUser(userId,stream);
 })
 
@@ -253,7 +254,7 @@ const screenShare=()=>{
     navigator.mediaDevices.getDisplayMedia({ cursor: true})
    .then(stream=>{
             const screenTrack=stream.getTracks()[0];
-            console.log(peers)
+            console.log(peers[peer])
             peers[userId].replaceTrack(screenTrack);
             screenTrack.onended = function() {
                 peers[userId].replaceTrack(userStream.current.getTracks()[1]);
