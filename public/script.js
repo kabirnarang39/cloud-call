@@ -1,6 +1,6 @@
 var socket = io('/');
 let myVideoStream;
-const userId;
+let userId;
 const videoGrid=document.querySelector('.video-grid')
 const myVideoElement=document.createElement('video')
 myVideoElement.muted=true;
