@@ -40,7 +40,7 @@ io.on('connection',socket=>{
         socket.on('message',(message,user)=>{
             io.to(roomId).emit('createMessage',message,username)
         })
-        io.in(roomID).emit("participants", users[roomID]);
+        io.in(roomId).emit("participants", users[roomId]);
         socket.on('disconnect', () => {
             socket.to(roomId).broadcast.emit('user-disconnected', userId,username)
             users[roomId] = users[roomId].filter((user) => user.id !== userId);
