@@ -1,4 +1,4 @@
-/*<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -79,30 +79,19 @@
     </div>
     </div>
     </div>
-    
-    <div class="main__right screen-hide">
-        <div class="main__right__render screen-hide" id="chat-screen">
-            <div class="main__header">
-                <h4>Chat Box</h4>
-            </div>
-            <div class="main__chat__box">
-                <ul id="messages"></ul>
-            </div>
-            <form class="main__message__container">
-                <textarea id="chat-message" cols="20" rows="1" placeholder="Type a message here"></textarea>
-                <button class="main__message__send" type="submit" id="send-btn">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </form>
-        </div>
-        <div class="main__right__render screen-hide" id="users-screen">
-            <div class="main__header">
-                <h4>Participants</h4>
-            </div>
-            <div class="main__users__box">
-                <ul id="users"></ul>
-            </div>
-        </div>
+    <div class="main_right" style="display: none; flex: 0;">
+    <div class="main_header">
+     <h6 >Chat</h6>
+     
+    </div>
+    <div class="main_chat_window">
+    <ul class="messages">
+
+    </ul>
+    </div>
+    <div class="main_message_container">
+   <input type="text" id="chat_message" placeholder="Type message here.....">
+    </div>
     </div>
     </div>
     <script src="script.js"></script>

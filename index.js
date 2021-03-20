@@ -8,8 +8,6 @@ const { ExpressPeerServer } = require('peer');
 const peerServer = ExpressPeerServer(server,{ 
     debug:true
 });
-const users = {};
-
 app.use('/peerjs',peerServer);
 app.set('view engine','ejs')
 app.set('views','views');
@@ -30,56 +28,20 @@ app.get('/:room',(req,res)=>{
         roomId:req.params.room
     })
 })
-io.on("connection", (socket) => {
-    socket.on("join-room", (roomID, userID, username) => {
-        if (users[roomID]) users[roomID].push({ id: userID, name: username, video: true, audio: true });
-        else users[roomID] = [{ id: userID, name: username, video: true, audio: true }];
-
-        socket.join(roomID);
-        socket.to(roomID).broadcast.emit("user-connected", userID, username);
-
-        socket.on("message", (message) => {
-            io.in(roomID).emit("message", message, userID, username);
-        });
-
-        io.in(roomID).emit("participants", users[roomID]);
-
-        socket.on("mute-mic", () => {
-            users[roomID].forEach((user) => {
-                if (user.id === userID) return (user.audio = false);
-            });
-            io.in(roomID).emit("participants", users[roomID]);
-        });
-
-        socket.on("unmute-mic", () => {
-            users[roomID].forEach((user) => {
-                if (user.id === userID) return (user.audio = true);
-            });
-            io.in(roomID).emit("participants", users[roomID]);
-        });
-
-        socket.on("stop-video", () => {
-            users[roomID].forEach((user) => {
-                if (user.id === userID) return (user.video = false);
-            });
-            io.in(roomID).emit("participants", users[roomID]);
-        });
-
-        socket.on("play-video", () => {
-            users[roomID].forEach((user) => {
-                if (user.id === userID) return (user.video = true);
-            });
-            io.in(roomID).emit("participants", users[roomID]);
-        });
-
-        socket.on("disconnect", () => {
-            socket.to(roomID).broadcast.emit("user-disconnected", userID, username);
-            users[roomID] = users[roomID].filter((user) => user.id !== userID);
-            if (users[roomID].length === 0) delete users[roomID];
-            else io.in(roomID).emit("participants", users[roomID]);
-        });
-    });
-});
+io.on('connection',socket=>{
+    socket.on('join-room',(roomId,userId,)=>{
+        socket.join(roomId);
+       // console.log('joined')
+        socket.to(roomId).broadcast.emit('user-connected',userId)
+        socket.on('message',message=>{
+            io.to(roomId).emit('createMessage',message)
+        })
+        socket.on('disconnect', () => {
+            socket.to(roomId).broadcast.emit('user-disconnected', userId)
+          })
+    })
+   
+})
 server.listen(process.env.PORT || 8000, function(){
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
   });

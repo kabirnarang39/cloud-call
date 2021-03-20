@@ -1,6 +1,4 @@
 var socket = io('/');
-var myId="";
-var activeSreen = "";
 let myVideoStream;
 const videoGrid=document.querySelector('.video-grid')
 const myVideoElement=document.createElement('video')
@@ -14,7 +12,7 @@ var peer = new Peer(undefined,{
 console.log(window.location.search);
 const urlParams = new URLSearchParams(window.location.search);
 const myParam = urlParams.get('user');
-const user=(JSON.parse(myParam));
+const user=(JSON.parse(myParam))
 //console.log(window.location.href.split('?')[1])
 //console.log(user);
 //console.log(videoGrid)
@@ -32,25 +30,12 @@ peer.on('call', call=> {
       addStream(video,userVideoStream)
     });
 })
-socket.on('user-connected',(userId,username)=>{
+socket.on('user-connected',(userId)=>{
+    localStorage.setItem('id',userId)
     connectToNewUser(userId,stream);
-    systemMessage(username, true);
 })
-socket.emit("participants");
 
-})
-.catch(err=>{
-    console.log(err)
-})
-socket.on("user-disconnected", (userID, username) => {
-    peers[userID]?.close();
-    systemMessage(username);
-});
-peer.on("open", (id) => {
-    socket.emit("join-room", ROOM_ID, id, USERNAME);
-    myID = id;
-});
-/*const text=document.querySelector('input')
+const text=document.querySelector('input')
 text.addEventListener('change',(event)=>{
 if(event.target.value.length!==0){
 socket.emit('message',event.target.value)
@@ -58,7 +43,7 @@ event.target.value='';
 }
 })
 
-socket.on('createMessage',(message,userId,username)=>{
+socket.on('createMessage',message=>{
     const ul=document.querySelector('.messages');
     const node=document.createElement('li');
     const textNode=document.createTextNode(message)
@@ -70,44 +55,18 @@ socket.on('createMessage',(message,userId,username)=>{
     scrollToBottom();
     //ul.append(`<li class="message"><b>user</b><br/>${message}</li>`)
 })
-*/
-const msg = document.getElementById("chat-message");
-const btn = document.getElementById("send-btn");
-const lists = document.getElementById("messages");
 
-const sendMessage = (message) => {
-    if (message) socket.emit("message", stripHTML(message));
-    msg.value = "";
-    msg.focus();
-};
 
-msg.addEventListener("keypress", (e) => {
-    if (e.key == "Enter" && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage(msg.value);
-    }
-});
-
-btn.addEventListener("click", (e) => {
-    e.preventDefault();
-    sendMessage(msg.value);
-});
-
-socket.on("message", (message, userID, username) => {
-    const container = document.querySelector(".main__chat__box");
-    const list = document.createElement("li");
-    list.className = userID === myID ? "message-right" : "message-left";
-    list.innerHTML = `
-        ${userID !== myID ? "<div class='message__avatar'>" + username[0].toUpperCase() + "</div>" : ""}
-        <div class="message__content">
-            ${userID !== myID ? "<span>" + username + "</span>" : ""}
-            <div class="message__text"><span>${message}<span></div>
-        </div>`;
-
-    lists.append(list);
-    container.scrollTop = container.scrollHeight;
-});
-
+})
+.catch(err=>{
+    console.log(err)
+})
+socket.on('user-disconnected', userId => {
+    if (peers[userId]) peers[userId].close()
+  })
+peer.on('open',id=>{
+    socket.emit('join-room',ROOM_ID,id)
+})
 function Area(Increment, Count, Width, Height, Margin = 10) {
     let i =0, w = 0;
     let h = Increment * 0.75 + (Margin * 2);
@@ -196,12 +155,10 @@ const scrollToBottom=()=>{
 const muteUnmute=()=>{
     const enabled=myVideoStream.getAudioTracks()[0].enabled;
     if(enabled){
-        socket.emit("mute-mic");
 myVideoStream.getAudioTracks()[0].enabled=false;
 setUnmuteButton();
     }
     else{
-        socket.emit("unmute-mic");
         setMuteButton();
         myVideoStream.getAudioTracks()[0].enabled=true;
     }
@@ -226,12 +183,10 @@ const setMuteButton=()=>{
 const playStop=()=>{
     const enabled=myVideoStream.getVideoTracks()[0].enabled;
     if(enabled){
-        socket.emit("stop-video");
 myVideoStream.getVideoTracks()[0].enabled=false;
 setPlayVideo();
     }
     else{
-        socket.emit("play-video");
         setStopVideo();
         myVideoStream.getVideoTracks()[0].enabled=true;
     } 
@@ -299,71 +254,15 @@ const hideShow=()=>{
       
     }
 }
-const isHidden = (screen) => screen.classList.contains("screen-hide");
-const handleScreen = (screen) => {
-    const left_container = document.querySelector(".main_left");
-    const right_container = document.querySelector(".main__right");
-    const chatScreen = document.getElementById("chat-screen");
-    const usersScreen = document.getElementById("users-screen");
-
-    if (screen.id === "chats") {
-        handleActive("chat-btn");
-        if (activeSreen === "") {
-            chatScreen.classList.remove("screen-hide");
-            activeSreen = "chats";
-        } else if (activeSreen === "chats") {
-            chatScreen.classList.add("screen-hide");
-            activeSreen = "";
-        } else {
-            chatScreen.classList.remove("screen-hide");
-            usersScreen.classList.add("screen-hide");
-            activeSreen = "chats";
-            handleActive("users-btn");
-        }
-    } else {
-        handleActive("users-btn");
-        if (activeSreen === "") {
-            usersScreen.classList.remove("screen-hide");
-            activeSreen = "users";
-        } else if (activeSreen === "users") {
-            usersScreen.classList.add("screen-hide");
-            activeSreen = "";
-        } else {
-            usersScreen.classList.remove("screen-hide");
-            chatScreen.classList.add("screen-hide");
-            activeSreen = "users";
-            handleActive("chat-btn");
-        }
-    }
-
-    if (isHidden(right_container)) {
-        right_container.classList.remove("screen-hide");
-        left_container.classList.remove("screen-full");
-    } else if (activeSreen === "") {
-        right_container.classList.add("screen-hide");
-        left_container.classList.add("screen-full");
-    }
-};
-  const systemMessage = (username, join = false) => {
-    const date = new Date();
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    const format = hours >= 12 ? "PM" : "AM";
-    hours %= 12;
-    hours = hours ? hours : 12;
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-
-    const container = document.querySelector(".main__chat__box");
-    const list = document.createElement("li");
-    list.className = "system-message";
-    list.innerHTML = `<span>${hours}:${minutes}${format}</span><span>${username} has ${
-        join ? "joined" : "left"
-    } the meeting</span>`;
-
-    lists.append(list);
-    container.scrollTop = container.scrollHeight;
-};
-
-const handleInvite = () => {
-    alert(`Invite people to your room:\n\nRoom ID: ${ROOM_ID}\nCopy this link to join: ${window.location.href}`);
-};
+const screenShare=()=>{
+    const id=localStorage.getItem('id');
+    navigator.mediaDevices.getDisplayMedia({ cursor: true})
+   .then(stream=>{
+            const screenTrack=stream.getTracks()[0];
+            console.log(peer)
+            peers[id].peerConnection.replaceTrack(screenTrack);
+            screenTrack.onended = function() {
+              //  peers[id].localStream.replaceTrack(userStream.getTracks()[1]);
+            }
+    })
+  }
