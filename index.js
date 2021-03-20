@@ -8,6 +8,7 @@ const { ExpressPeerServer } = require('peer');
 const peerServer = ExpressPeerServer(server,{ 
     debug:true
 });
+let user;
 app.use('/peerjs',peerServer);
 app.set('view engine','ejs')
 app.set('views','views');
@@ -19,17 +20,19 @@ app.use((req, res, next) => {
     next();
 });
 app.get('/',(req,res)=>{
+   
    // res.redirect('/'+uuidv4());
     res.send(uuidv4())
 })
 app.get('/:room',(req,res)=>{
    // console.log(req.params)
     res.render('zoom',{
-        roomId:req.params.room
+        roomId:req.params.room,
+        user:req.query.user
     })
 })
 io.on('connection',socket=>{
-    socket.on('join-room',(roomId,userId,)=>{
+    socket.on('join-room',(roomId,userId)=>{
         socket.join(roomId);
        // console.log('joined')
         socket.to(roomId).broadcast.emit('user-connected',userId)
