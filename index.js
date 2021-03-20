@@ -8,7 +8,6 @@ const { ExpressPeerServer } = require('peer');
 const peerServer = ExpressPeerServer(server,{ 
     debug:true
 });
-const users = {};
 app.use('/peerjs',peerServer);
 app.set('view engine','ejs')
 app.set('views','views');
@@ -30,22 +29,15 @@ app.get('/:room',(req,res)=>{
     })
 })
 io.on('connection',socket=>{
-
-    socket.on('join-room',(roomId,userId,username)=>{
-        if (users[roomId]) users[roomId].push({ id: userId, name: username, video: true, audio: true });
-        else users[roomId] = [{ id: userId, name: username, video: true, audio: true }];
+    socket.on('join-room',(roomId,userId,)=>{
         socket.join(roomId);
        // console.log('joined')
-        socket.to(roomId).broadcast.emit('user-connected',userId,username)
-        socket.on('message',(message,user)=>{
-            io.to(roomId).emit('createMessage',message,username)
+        socket.to(roomId).broadcast.emit('user-connected',userId)
+        socket.on('message',message=>{
+            io.to(roomId).emit('createMessage',message)
         })
-        io.in(roomId).emit("participants", users[roomId]);
         socket.on('disconnect', () => {
-            socket.to(roomId).broadcast.emit('user-disconnected', userId,username)
-            users[roomId] = users[roomId].filter((user) => user.id !== userId);
-            if (users[roomId].length === 0) delete users[roomId];
-            else io.in(roomId).emit("participants", users[roomId]);
+            socket.to(roomId).broadcast.emit('user-disconnected', userId)
           })
     })
    

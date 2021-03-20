@@ -12,7 +12,7 @@ var peer = new Peer(undefined,{
 console.log(window.location.search);
 const urlParams = new URLSearchParams(window.location.search);
 const myParam = urlParams.get('user');
-const user=(JSON.parse(myParam))
+console.log(JSON.parse(myParam))
 //console.log(window.location.href.split('?')[1])
 //console.log(user);
 //console.log(videoGrid)
@@ -30,17 +30,11 @@ peer.on('call', call=> {
       addStream(video,userVideoStream)
     });
 })
-socket.on('user-connected',(userId,username)=>{
-  //  localStorage.setItem('id',userId)
+socket.on('user-connected',(userId)=>{
+    localStorage.setItem('id',userId)
     connectToNewUser(userId,stream);
 })
-socket.emit("participants");
 
-
-})
-.catch(err=>{
-    console.log(err)
-})
 const text=document.querySelector('input')
 text.addEventListener('change',(event)=>{
 if(event.target.value.length!==0){
@@ -49,12 +43,12 @@ event.target.value='';
 }
 })
 
-socket.on('createMessage',(message,username)=>{
+socket.on('createMessage',message=>{
     const ul=document.querySelector('.messages');
     const node=document.createElement('li');
     const textNode=document.createTextNode(message)
     const bold=document.createElement('b')
-    const textNode2=document.createTextNode(username)
+    const textNode2=document.createTextNode("user")
     bold.appendChild(textNode2)
     node.appendChild(textNode)
     ul.append(bold,node)
@@ -62,11 +56,16 @@ socket.on('createMessage',(message,username)=>{
     //ul.append(`<li class="message"><b>user</b><br/>${message}</li>`)
 })
 
-socket.on('user-disconnected', (userId,username) => {
+
+})
+.catch(err=>{
+    console.log(err)
+})
+socket.on('user-disconnected', userId => {
     if (peers[userId]) peers[userId].close()
   })
 peer.on('open',id=>{
-    socket.emit('join-room',ROOM_ID,id,USERNAME)
+    socket.emit('join-room',ROOM_ID,id)
 })
 function Area(Increment, Count, Width, Height, Margin = 10) {
     let i =0, w = 0;
@@ -267,24 +266,3 @@ const screenShare=()=>{
             }
     })
   }
-  socket.on("participants", (users) => {
-    // const container = document.querySelector(".main__users__box");
-    const lists = document.getElementById("users");
-    lists.innerHTML = "";
-    lists.textContent = "";
-
-    users.forEach((user) => {
-        const list = document.createElement("li");
-        list.className = "user";
-        list.innerHTML = `
-            <div class="user__avatar">${user.name[0].toUpperCase()}</div>
-            <span class="user__name">${user.name}${user.id == myID ? " (You)" : ""}</span>
-            <div class="user__media">
-                <i class="fas fa-microphone${user.audio === false ? "-slash" : ""}"></i>
-                <i class="fas fa-video${user.video === false ? "-slash" : ""}"></i>
-            </div>
-        `;
-
-        lists.append(list);
-    });
-});
