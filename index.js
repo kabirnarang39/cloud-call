@@ -28,16 +28,26 @@ app.get('/:room',(req,res)=>{
         roomId:req.params.room
     })
 })
+const urlParams = new URLSearchParams(window.location.search);
+const myParam = urlParams.get('user');
+const user=(JSON.parse(myParam)).name;
 io.on('connection',socket=>{
-    socket.on('join-room',(roomId,userId,)=>{
+
+    socket.on('join-room',(roomId,userId,username)=>{
+        if (users[roomId]) users[roomId].push({ id: userId, name: username, video: true, audio: true });
+        else users[roomId] = [{ id: userId, name: username, video: true, audio: true }];
         socket.join(roomId);
        // console.log('joined')
-        socket.to(roomId).broadcast.emit('user-connected',userId)
-        socket.on('message',message=>{
-            io.to(roomId).emit('createMessage',message)
+        socket.to(roomId).broadcast.emit('user-connected',userId,username)
+        socket.on('message',(message,user)=>{
+            io.to(roomId).emit('createMessage',message,username)
         })
+        io.in(roomID).emit("participants", users[roomID]);
         socket.on('disconnect', () => {
-            socket.to(roomId).broadcast.emit('user-disconnected', userId)
+            socket.to(roomId).broadcast.emit('user-disconnected', userId,username)
+            users[roomId] = users[roomId].filter((user) => user.id !== userId);
+            if (users[roomId].length === 0) delete users[roomId];
+            else io.in(roomId).emit("participants", users[roomId]);
           })
     })
    

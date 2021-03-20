@@ -150,3 +150,64 @@ body{
         transform: scale(1) translateY(0);
     }
 }
+.screen-full {
+    flex: 1 !important;
+}
+
+.screen-hide {
+    display: none !important;
+}
+
+.active-btn {
+    color: var(--purple);
+}
+
+.fa-microphone-slash,
+.fa-video-slash {
+    color: #eb534b;
+}
+
+/* Participants */
+
+#users {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+}
+
+.user {
+    display: flex;
+    list-style: none;
+    padding: 10px;
+    align-items: center;
+}
+
+.user__avatar {
+    width: 34px;
+    height: 34px;
+    background-color: wheat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 17px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.user__name {
+    color: #d2d2d2;
+    flex: 1;
+}
+
+.user__media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6e6e79;
+    font-size: 18px;
+}
+
+.user__media > i:first-child {
+    margin-right: 12px;
+}
