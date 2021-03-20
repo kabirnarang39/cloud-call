@@ -31,7 +31,7 @@ peer.on('call', call=> {
     });
 })
 socket.on('user-connected',(userId)=>{
-    localStorage.setItem('id',userId)
+    document.getElementsByClassName('flash').innerHTML='User Connected'+userId;
     connectToNewUser(userId,stream);
 })
 
@@ -62,6 +62,7 @@ socket.on('createMessage',message=>{
     console.log(err)
 })
 socket.on('user-disconnected', userId => {
+    document.getElementsByClassName('flash').innerHTML='User Disconnected'+userId;
     if (peers[userId]) peers[userId].close()
   })
 peer.on('open',id=>{
