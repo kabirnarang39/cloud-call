@@ -10,10 +10,7 @@ var peer = new Peer(undefined,{
     port:'443'
 }); 
 console.log(window.location.href);
-//console.log(videoGrid)
-const urlParams = new URLSearchParams(window.location.search);
-const myParam = urlParams.get('user');
-console.log(myParam)
+
 navigator.mediaDevices.getUserMedia({
     video:true,
     audio:true
