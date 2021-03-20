@@ -12,6 +12,9 @@ var peer = new Peer(undefined,{
 console.log(window.location.href);
 //console.log(videoGrid)
 console.log(user)
+const urlParams = new URLSearchParams(window.location.search);
+const myParam = urlParams.get('user');
+console.log(myParam)
 navigator.mediaDevices.getUserMedia({
     video:true,
     audio:true
