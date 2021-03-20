@@ -9,8 +9,6 @@ var peer = new Peer(undefined,{
     host:'/',
     port:'443'
 });
-var formElements = document.forms['myform'].elements['user'].value; 
-console.log(formElements)
 //console.log(user);
 //console.log(videoGrid)
 navigator.mediaDevices.getUserMedia({
