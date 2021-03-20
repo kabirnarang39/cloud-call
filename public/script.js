@@ -12,7 +12,7 @@ var peer = new Peer(undefined,{
 console.log(window.location.search);
 const urlParams = new URLSearchParams(window.location.search);
 const user = urlParams.get('user');
-console.log(user.email);
+console.log(user);
 //console.log(videoGrid)
 navigator.mediaDevices.getUserMedia({
     video:true,
