@@ -68,11 +68,11 @@ server.listen(process.env.PORT || 8000, function(){
   
   app.get("/", (req, res) => {
       res.send(uuid());
-      res.redirect(`/room/${uuid()}`);
+     // res.redirect(`/room/${uuid()}`);
   });
   
-  app.get("/room/:id", (req, res) => {
-      const { id } = req.params;
+  app.get("/:room", (req, res) => {
+      const id  = req.params.room;
       res.render("main", { roomID: id });
   });
   
