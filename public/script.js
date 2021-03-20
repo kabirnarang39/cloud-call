@@ -9,6 +9,7 @@ var peer = new Peer(undefined,{
     host:'/',
     port:'443'
 });
+console.log(window.location.search);
 console.log(window.location.href.split('?')[1])
 //console.log(user);
 //console.log(videoGrid)
