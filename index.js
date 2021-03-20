@@ -29,9 +29,6 @@ app.get('/:room',(req,res)=>{
         roomId:req.params.room
     })
 })
-const urlParams = new URLSearchParams(window.location.search);
-const myParam = urlParams.get('user');
-const user=(JSON.parse(myParam)).name;
 io.on('connection',socket=>{
 
     socket.on('join-room',(roomId,userId,username)=>{
