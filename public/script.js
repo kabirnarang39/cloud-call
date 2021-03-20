@@ -10,6 +10,9 @@ var peer = new Peer(undefined,{
     port:'443'
 });
 console.log(window.location.search);
+const urlParams = new URLSearchParams(window.location.search);
+const myParam = urlParams.get('user');
+console.log(myParam)
 console.log(window.location.href.split('?')[1])
 //console.log(user);
 //console.log(videoGrid)
