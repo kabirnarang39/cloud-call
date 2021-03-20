@@ -28,7 +28,7 @@ app.get('/:room',(req,res)=>{
    // console.log(req.params)
     res.render('zoom',{
         roomId:req.params.room,
-        user:req.query.user
+        user:req.query.user.imageUrl
     })
 })
 io.on('connection',socket=>{
