@@ -56,7 +56,7 @@ body{
     padding: 18px;
     justify-content: space-between !important;
     position: fixed;
-    margin-bottom: 0px !important;
+    bottom: 0 !important;
     width: 100%;
 
 }
