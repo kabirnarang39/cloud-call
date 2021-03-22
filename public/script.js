@@ -291,7 +291,7 @@ const screenShare=()=>{
             screenTrack.onended = function() {
               //  peers[id].localStream.replaceTrack(userStream.getTracks()[1]);
               video.remove();
-            }*/
+            }
      addScreenStream(myVideoElementScreen,stream);
       peer.on('call', call=> {
       call.answer(stream); // Answer the call with an A/V stream.
@@ -299,7 +299,7 @@ const screenShare=()=>{
       call.on('stream', userVideoStream=> {
      addScreenStream(video,userVideoStream)
     });
-    })
+    })*/
     socket.on('screen-connected',(userId)=>{
         //document.querySelector('.flash').innerHTML='User Connected'+userId;
         connectToNewScreen(userId,stream);
