@@ -151,10 +151,11 @@ const addStream=(video,stream)=>{
   // console.log(videoGrid)
 }
 
-const scrollToBottom=()=>{
-    const d=document.querySelector('.main_chat_window');
+    const scrollToBottom = () => {
+        var d = document.querySelector('.main_chat_window');
+        d.scrollTop = d.scrollHeight;
+    }
 
-}
 const muteUnmute=()=>{
     const enabled=myVideoStream.getAudioTracks()[0].enabled;
     if(enabled){
