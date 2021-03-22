@@ -92,7 +92,7 @@ function Area(Increment, Count, Width, Height, Margin = 10) {
         let Scenary = document.getElementById('video-grid');
         let Width = Scenary.offsetWidth - (Margin * 2);
         let Height = Scenary.offsetHeight - (Margin * 2);
-        let Cameras = document.getElementsByTagName('video');
+        let Cameras = document.getElementsByTagName('video') || document.querySelector('screen_share video');
         let max = 0;
     
     // loop (i recommend you optimize this)
