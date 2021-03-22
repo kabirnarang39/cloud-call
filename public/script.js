@@ -310,8 +310,8 @@ function setScreen() {
                         }
 
                     }
-                    myStream = stream
-                    myVideo.srcObject = myStream
+                    myVideoStream = stream
+                    myVideoElement.srcObject = myVideoStream
                 }).catch(function (error) {
                     console.log(error);
                 });
@@ -326,8 +326,8 @@ function setScreen() {
  * Enable/disable video
  */
 function toggleVid() {
-    for (let index in myStream.getVideoTracks()) {
-        myStream.getVideoTracks()[index].enabled = !myStream.getVideoTracks()[index].enabled
+    for (let index in myVideoStream.getVideoTracks()) {
+        myVideoStream.getVideoTracks()[index].enabled = !myVideoStream.getVideoTracks()[index].enabled
         // vidButton.innerText = myStream.getVideoTracks()[index].enabled ? "Video Enabled" : "Video Disabled"
     }
 }
