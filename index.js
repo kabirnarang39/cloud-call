@@ -35,7 +35,7 @@ io.on('connection',socket=>{
         socket.to(roomId).broadcast.emit('user-connected',userId)
         
         socket.on('screen',userId=>{
-            io.to(roomId).emit('createScreen',userId)
+            socket.to(roomId).broadcast.emit('createScreen',userId)
         })
         socket.on('message',message=>{
             io.to(roomId).emit('createMessage',message)
