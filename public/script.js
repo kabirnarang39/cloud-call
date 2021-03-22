@@ -260,16 +260,8 @@ const screenShare=()=>{
     navigator.mediaDevices.getDisplayMedia({ cursor: true})
    .then(stream=>{
             const video=document.createElement('video');
-            const videoGrid=document.querySelector('.screen_share');
-            const screenTrack=stream.getTracks()[0];
-            video.srcObject=stream;
-            video.addEventListener('loadedmetadata',()=>{
-                video.play();
-            })
-           videoGrid.append(video)
-            screenTrack.onended = function() {
-              //  peers[id].localStream.replaceTrack(userStream.getTracks()[1]);
-              video.remove();
-            }
+            //const videoGrid=document.querySelector('.screen_share');
+            //const screenTrack=stream.getTracks()[0];
+           addStream(video,stream);
     })
   }
