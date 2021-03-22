@@ -272,11 +272,10 @@ const connectToNewScreen=(userId,stream)=>{
     addStream(video,userVideoStream)
   });
   call.on('close', () => {
-    video.remove()
+    myVideoElementScreen.remove()
   })
 
-  peers[userId] = call
-  console.log(peers)
+  peers[userId] = call;
 }
 const screenShare=()=>{
     navigator.mediaDevices.getDisplayMedia({ cursor: true})
