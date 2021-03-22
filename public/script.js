@@ -280,15 +280,16 @@ function setScreen() {
             const screenTrack = stream.getTracks()[0];
          console.log("stream.getTracks() ", stream.getTracks())
             for (let socket_id in peers) {
-                 console.log("peers[socket_id].streams[0].getTracks() ", peers[socket_id].streams[0].getTracks())
-                for (let index in peers[socket_id].streams[0].getTracks()) {
+                console.log(socket_id)
+                // console.log("peers[socket_id].streams[0].getTracks() ", peers[socket_id].streams[0].getTracks())
+                //for (let index in peers[socket_id].streams[0].getTracks()) {
                     for (let index2 in stream.getTracks()) {
                         if (peers[socket_id].streams[0].getTracks()[index].kind === stream.getTracks()[index2].kind) {
                             peers[socket_id].replaceTrack(peers[socket_id].streams[0].getTracks()[index], stream.getTracks()[index2], peers[socket_id].streams[0])
                             break;
                         }
                     }
-                }
+               // }
 
             }
 
@@ -300,7 +301,7 @@ function setScreen() {
                 navigator.mediaDevices.getUserMedia(constraints).then(stream => {
                     for (let socket_id in peers) {
                         console.log(socket_id)
-                      //  for (let index in peers[socket_id].streams[0].getTracks()) {
+                       for (let index in peers[socket_id].streams[0].getTracks()) {
                             for (let index2 in stream.getTracks()) {
                                 if (peers[socket_id].streams[0].getTracks()[index].kind === stream.getTracks()[index2].kind) {
                                     console.log("entered")
@@ -308,7 +309,7 @@ function setScreen() {
                                     break;
                                 }
                             }
-                        //}
+                        }
 
                     }
                     myVideoStream = stream
