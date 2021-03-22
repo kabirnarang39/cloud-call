@@ -303,10 +303,7 @@ const connectToNewScreen=(userId,stream)=>{
     addStream(video,userVideoStream)
   });
   call.on('close', () => {
-    screen_Share.style.display='none';
-    screen_Share.style.width='0px';
-    myVideoElementScreen.style.display='none';
-    myVideoElementScreen.style.width='0px';
+document.querySelector('.screen_share video').style.display='none';
     video.remove()
     
   })
