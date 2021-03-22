@@ -281,10 +281,10 @@ function setScreen() {
          console.log("stream.getTracks() ", stream.getTracks())
             for (let socket_id in peers) {
                 console.log(socket_id)
-                // console.log("peers[socket_id].streams[0].getTracks() ", peers[socket_id].streams[0].getTracks())
-                for (let index in peers[socket_id].streams[1].getTracks()) {
+                 console.log("peers[socket_id].streams[0].getTracks() ", peers[socket_id])
+                for (let index in peers[socket_id].streams[0].getTracks()) {
                     for (let index2 in stream.getTracks()) {
-                        if (peers[socket_id].streams[1].getTracks()[index].kind === stream.getTracks()[index2].kind) {
+                        if (peers[socket_id].streams[0].getTracks()[index].kind === stream.getTracks()[index2].kind) {
                             peers[socket_id].replaceTrack(peers[socket_id].streams[0].getTracks()[index], stream.getTracks()[index2], peers[socket_id].streams[0])
                             break;
                         }
