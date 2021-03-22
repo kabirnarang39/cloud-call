@@ -259,7 +259,7 @@ const screenShare=()=>{
     const id=localStorage.getItem('id');
     navigator.mediaDevices.getDisplayMedia({ cursor: true})
    .then(stream=>{
-            const videoGrid=document.getElementsByClassName('screen_share');
+            const videoGrid=document.querySelector('.screen_share');
             const screenTrack=stream.getTracks()[0];
             video.srcObject=stream;
             video.addEventListener('loadedmetadata',()=>{
