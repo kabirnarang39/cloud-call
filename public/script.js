@@ -278,14 +278,13 @@ function setScreen() {
     })
         .then(stream => {
             const screenTrack = stream.getTracks()[0];
-         console.log("stream.getTracks() ", stream.getTracks())
+            // console.log("stream.getTracks() ", stream.getTracks())
             for (let socket_id in peers) {
-                console.log(socket_id)
-                 console.log("peers[socket_id].streams[0].getTracks() ", peers[socket_id])
-                for (let index in peers[socket_id].options._stream.getTracks()) {
+                // console.log("peers[socket_id].streams[0].getTracks() ", peers[socket_id].streams[0].getTracks())
+                for (let index in peers[socket_id].streams[0].getTracks()) {
                     for (let index2 in stream.getTracks()) {
-                        if (peers[socket_id].options._stream.getTracks()[index].kind === stream.getTracks()[index2].kind) {
-                            peers[socket_id].options.replaceTrack(peers[socket_id].options._stream.getTracks()[index], stream.getTracks()[index2], peers[socket_id].options._streams)
+                        if (peers[socket_id].streams[0].getTracks()[index].kind === stream.getTracks()[index2].kind) {
+                            peers[socket_id].replaceTrack(peers[socket_id].streams[0].getTracks()[index], stream.getTracks()[index2], peers[socket_id].streams[0])
                             break;
                         }
                     }
@@ -300,8 +299,7 @@ function setScreen() {
                 // document.querySelector(".screen_sharing").style.display = "none";
                 navigator.mediaDevices.getUserMedia(constraints).then(stream => {
                     for (let socket_id in peers) {
-                        console.log(socket_id)
-                       for (let index in peers[socket_id].streams[0].getTracks()) {
+                        for (let index in peers[socket_id].streams[0].getTracks()) {
                             for (let index2 in stream.getTracks()) {
                                 if (peers[socket_id].streams[0].getTracks()[index].kind === stream.getTracks()[index2].kind) {
                                     console.log("entered")
@@ -312,8 +310,8 @@ function setScreen() {
                         }
 
                     }
-                    myVideoStream = stream
-                    myVideoElement.srcObject = myVideoStream
+                    myStream = stream
+                    myVideo.srcObject = myStream
                 }).catch(function (error) {
                     console.log(error);
                 });
@@ -328,8 +326,8 @@ function setScreen() {
  * Enable/disable video
  */
 function toggleVid() {
-    for (let index in myVideoStream.getVideoTracks()) {
-        myVideoStream.getVideoTracks()[index].enabled = !myVideoStream.getVideoTracks()[index].enabled
+    for (let index in myStream.getVideoTracks()) {
+        myStream.getVideoTracks()[index].enabled = !myStream.getVideoTracks()[index].enabled
         // vidButton.innerText = myStream.getVideoTracks()[index].enabled ? "Video Enabled" : "Video Disabled"
     }
 }
