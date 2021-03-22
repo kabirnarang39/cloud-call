@@ -1,7 +1,9 @@
 var socket = io('/');
 let myVideoStream;
 const videoGrid=document.querySelector('.video-grid')
+const screenShare=document.querySelector('.screen_share');
 const myVideoElement=document.createElement('video')
+const myVideoElementScreen=document.createElement('video')
 myVideoElement.muted=true;
 const peers = {}
 var peer = new Peer(undefined,{
@@ -255,20 +257,54 @@ const hideShow=()=>{
       
     }
 }
+const addScreenStream=(video,stream)=>{
+    video.srcObject=stream;
+    video.addEventListener('loadedmetadata',()=>{
+        video.play();
+    })
+   screenShare.append(video)
+  // console.log(videoGrid)
+}
+const connectToNewScreen=(userId,stream)=>{
+    var call = peer.call(userId, stream);
+    const video=document.createElement('video')
+    call.on('stream', userVideoStream=> {
+    addStream(video,userVideoStream)
+  });
+  call.on('close', () => {
+    video.remove()
+  })
+
+  peers[userId] = call
+  console.log(peers)
+}
 const screenShare=()=>{
-    const id=localStorage.getItem('id');
     navigator.mediaDevices.getDisplayMedia({ cursor: true})
    .then(stream=>{
-            const videoGrid=document.querySelector('.screen_share');
-            const screenTrack=stream.getTracks()[0];
-myVideoElement.srcObject=stream;
-            myVideoElement.addEventListener('loadedmetadata',()=>{
-                myVideoElement.play();
+            //const videoGrid=document.querySelector('.screen_share');
+            //const screenTrack=stream.getTracks()[0];
+           // const myVideoElement=document.createElement('video');
+           /*  video.srcObject=stream;
+            video.addEventListener('loadedmetadata',()=>{
+                video.play();
             })
-            videoGrid.append(myVideoElement)
+            videoGrid.append(video)
             screenTrack.onended = function() {
               //  peers[id].localStream.replaceTrack(userStream.getTracks()[1]);
-              myVideoElement.remove();
-            }
+              video.remove();
+            }*/
+     addScreenStream(myVideoElementScreen,stream);
+      peer.on('call', call=> {
+      call.answer(stream); // Answer the call with an A/V stream.
+      const video=document.createElement('video')
+      call.on('stream', userVideoStream=> {
+     addScreenStream(video,userVideoStream)
+    });
     })
-  }
+    socket.on('screen-connected',(userId)=>{
+        //document.querySelector('.flash').innerHTML='User Connected'+userId;
+        connectToNewScreen(userId,stream);
+    })
+
+})
+}
