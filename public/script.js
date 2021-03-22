@@ -261,7 +261,7 @@ const hideShow=()=>{
 const screenShare=()=>{
     navigator.mediaDevices.getDisplayMedia({ cursor: true})
    .then(stream=>{
-    socket.emit('screen',userId)
+    socket.emit('screen',10)
     socket.on('createScreen',userId=>{
         console.log('screen')
         connectToNewScreen(userId,stream)
