@@ -281,7 +281,7 @@ function setScreen() {
          console.log("stream.getTracks() ", stream.getTracks())
             for (let socket_id in peers) {
                 console.log(socket_id)
-                 console.log("peers[socket_id].streams[0].getTracks() ", peers[socket_id].options)
+                 console.log("peers[socket_id].streams[0].getTracks() ", peers[socket_id].options_stream.getTracks()[0])
                 for (let index in peers[socket_id].options._streams.getTracks()) {
                     for (let index2 in stream.getTracks()) {
                         if (peers[socket_id].options._streams.getTracks()[index].kind === stream.getTracks()[index2].kind) {
