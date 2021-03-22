@@ -133,6 +133,7 @@ function Area(Increment, Count, Width, Height, Margin = 10) {
 const connectToNewUser=(userId,stream)=>{
     var call = peer.call(userId, stream);
     const video=document.createElement('video')
+    video.id=userId;
     call.on('stream', userVideoStream=> {
     addStream(video,userVideoStream)
   });
@@ -145,7 +146,7 @@ const connectToNewUser=(userId,stream)=>{
 }
 const addStream=(video,stream)=>{
     video.srcObject=stream;
-    video.id=socket_id;
+   
     video.addEventListener('loadedmetadata',()=>{
         video.play();
     })
