@@ -47,16 +47,17 @@ body{
     justify-content: center;
     align-items: center;
     padding:40px;
-    margin-bottom: 0px !important;
-    width: 100%;
+   
 }
 .main_controls{
     display: flex;
     background-color: #1c1e20;;
     color:#d2d2d2;
     padding: 18px;
-    justify-content: space-between;
+    justify-content: space-between !important;
     position: fixed;
+    margin-bottom: 0px !important;
+    width: 100%;
 
 }
 .main_controls_block{
