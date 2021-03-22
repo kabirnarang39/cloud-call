@@ -261,6 +261,10 @@ const hideShow=()=>{
 const screenShare=()=>{
     navigator.mediaDevices.getDisplayMedia({ cursor: true})
    .then(stream=>{
+    socket.emit('screen','Screen')
+    socket.on('createScreen',msg=>{
+        console.log(msg);
+    })
             //const videoGrid=document.querySelector('.screen_share');
             //const screenTrack=stream.getTracks()[0];
            // const myVideoElement=document.createElement('video');
@@ -273,21 +277,22 @@ const screenShare=()=>{
               //  peers[id].localStream.replaceTrack(userStream.getTracks()[1]);
               video.remove();
             }*/
+            
      addScreenStream(myVideoElementScreen,stream);
      peer.on('call',call=>{
-         call.answer(stream)
+        // call.answer(stream)
          const video=document.createElement('video');
          call.on('stream',userVideoStream=>{
         addScreenStream(video,userVideoStream);
          })
      })
-     socket.emit('screen',userId)
+     socket.on('screen-connected',userId=>{
+         console.log('screen')
+         connectToNewScreen(userId,stream)
+     })
+     
 })
 }
-socket.on('screen-connected',userId=>{
-        console.log(userId)
-       connectToNewScreen(userId,stream)
-    })
 const addScreenStream=(video,stream)=>{
     video.srcObject=stream;
     video.addEventListener('loadedmetadata',()=>{
@@ -298,10 +303,10 @@ const addScreenStream=(video,stream)=>{
 }
 const connectToNewScreen=(userId,stream)=>{
     var call = peer.call(userId, stream);
-    const video=document.createElement('video')
-    call.on('stream', userVideoStream=> {
-    addStream(video,userVideoStream)
-  });
+   // const video=document.createElement('video')
+   // call.on('stream', userVideoStream=> {
+    //addStream(video,userVideoStream)
+  //});
   call.on('close', () => {
 //document.querySelector('.screen_share video').style.display='none';
     myVideoElementScreen.remove()

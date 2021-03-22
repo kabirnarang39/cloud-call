@@ -33,10 +33,10 @@ io.on('connection',socket=>{
         socket.join(roomId);
        // console.log('joined')
         socket.to(roomId).broadcast.emit('user-connected',userId)
-        socket.on('screen',(userId)=>{
-            io.to(roomId).emit('screen-connected',userId)
+        socket.to(roomId).broadcast.emit('screen-connected',userId)
+        socket.on('screen',msg=>{
+            io.to(roomId).emit('createScreen',msg) 
         })
-       
         socket.on('message',message=>{
             io.to(roomId).emit('createMessage',message)
         })
