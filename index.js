@@ -33,7 +33,7 @@ io.on('connection',socket=>{
         socket.join(roomId);
        // console.log('joined')
         socket.to(roomId).broadcast.emit('user-connected',userId)
-        io.in(roomId).emit("createScreen", "the game will start soon");
+        io.to(roomId).emit("createScreen", "the game will start soon");
         socket.on('message',message=>{
             io.to(roomId).emit('createMessage',message)
         })
