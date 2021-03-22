@@ -282,6 +282,7 @@ const screenShare=()=>{
          })
      })
      socket.on('screen-connected',userId=>{
+         console.log('screen',userId)
          connectToNewScreen(userId,stream)
      })
 })
