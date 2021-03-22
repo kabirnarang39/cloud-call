@@ -261,11 +261,7 @@ const hideShow=()=>{
 const screenShare=()=>{
     navigator.mediaDevices.getDisplayMedia({ cursor: true})
    .then(stream=>{
-    socket.emit('screen',10)
-    socket.on('createScreen',userId=>{
-        console.log('screen')
-        connectToNewScreen(userId,stream)
-    })
+   
             //const videoGrid=document.querySelector('.screen_share');
             //const screenTrack=stream.getTracks()[0];
            // const myVideoElement=document.createElement('video');
@@ -286,6 +282,11 @@ const screenShare=()=>{
          call.on('stream',userVideoStream=>{
         addScreenStream(video,userVideoStream);
          })
+     })
+     socket.emit('screen',10)
+     socket.on('createScreen',userId=>{
+         console.log(userId)
+         connectToNewScreen(userId,stream)
      })
      
 })
