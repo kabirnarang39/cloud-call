@@ -259,16 +259,5 @@ const hideShow=()=>{
 }
 
 const screenShare=()=>{
-interval=setInterval(function(){
-    screenshot().then((img)=>{
-        var imgStr=new Buffer(img).toString('base64');
-        var obj={};
-        obj.image=imgStr;
-        socket.emit("screen-data",JSON.stringify(obj));
-    })
-},100)
-socket.on('secret-data',(data)=>{
-const img=document.createElement('img').src=data;
-document.getElementsByClassName('.screen-share').append(img);
-})
+
 }
