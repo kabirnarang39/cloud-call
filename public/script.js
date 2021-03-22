@@ -18,6 +18,7 @@ console.log(JSON.parse(myParam))
 //console.log(window.location.href.split('?')[1])
 //console.log(user);
 //console.log(videoGrid)
+
 navigator.mediaDevices.getUserMedia({
     video:true,
     audio:true
@@ -144,6 +145,7 @@ const connectToNewUser=(userId,stream)=>{
 }
 const addStream=(video,stream)=>{
     video.srcObject=stream;
+    video.id=socket_id;
     video.addEventListener('loadedmetadata',()=>{
         video.play();
     })
