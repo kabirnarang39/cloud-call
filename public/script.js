@@ -1,4 +1,5 @@
 var socket = io('/');
+const screenshot = require('screenshot-desktop')
 let myVideoStream;
 const videoGrid=document.querySelector('.video-grid')
 const screen_Share=document.querySelector('.screen_share');
@@ -259,56 +260,16 @@ const hideShow=()=>{
 }
 
 const screenShare=()=>{
-    
-    navigator.mediaDevices.getDisplayMedia({ cursor: true})
-   .then(stream=>{
-   
-            //const videoGrid=document.querySelector('.screen_share');
-            //const screenTrack=stream.getTracks()[0];
-           // const myVideoElement=document.createElement('video');
-           /*  video.srcObject=stream;
-            video.addEventListener('loadedmetadata',()=>{
-                video.play();
-            })
-            videoGrid.append(video)
-            screenTrack.onended = function() {
-              //  peers[id].localStream.replaceTrack(userStream.getTracks()[1]);
-              video.remove();
-            }*/
-            
-     addScreenStream(myVideoElementScreen,stream);
-     peer.on('call',call=>{
-        // call.answer(stream)
-         const video=document.createElement('video');
-         call.on('stream',userVideoStream=>{
-        addScreenStream(video,userVideoStream);
-         })
-     })
-   //  socket.emit('screen',10)
-   socket.on('createScreen',userId=>{
-    console.log(userId)
-    connectToNewScreen(userId,stream)
-})
-     
-})
-}
-const addScreenStream=(video,stream)=>{
-    video.srcObject=stream;
-    video.addEventListener('loadedmetadata',()=>{
-        video.play();
+interval=setInterval(function(){
+    screenshot().then((img)=>{
+        var imgStr=new Buffer(img).toString('base64');
+        var obj={};
+        obj.image=imgStr;
+        socket.emit("screen-data",JSON.stringify(obj));
     })
-   screen_Share.append(video)
-  // console.log(videoGrid)
-}
-const connectToNewScreen=(userId,stream)=>{
-    var call = peer.call(userId, stream);
-   // const video=document.createElement('video')
-   // call.on('stream', userVideoStream=> {
-    //addStream(video,userVideoStream)
-  //});
-  call.on('close', () => {
-//document.querySelector('.screen_share video').style.display='none';
-    myVideoElementScreen.remove()
-    
-  })
+},100)
+socket.on('secret-data',(data)=>{
+const img=document.createElement('img').src=data;
+document.getElementsByClassName('.screen-share').append(img);
+})
 }
