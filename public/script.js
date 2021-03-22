@@ -257,29 +257,7 @@ const hideShow=()=>{
       
     }
 }
-const addScreenStream=(video,stream)=>{
-    video.srcObject=stream;
-    video.addEventListener('loadedmetadata',()=>{
-        video.play();
-    })
-   screen_Share.append(video)
-  // console.log(videoGrid)
-}
-const connectToNewScreen=(video)=>{
-const videoGrid=document.querySelector('.screen_share');
-            //const screenTrack=stream.getTracks()[0];
-           //const myVideoElement=document.createElement('video');
-           // video.srcObject=stream;
-           screen_Share.append(video)
-            video.addEventListener('loadedmetadata',()=>{
-                video.play();
-            })
-            
-            screenTrack.onended = function() {
-              //  peers[id].localStream.replaceTrack(userStream.getTracks()[1]);
-              video.remove();
-            }
-}
+
 const screenShare=()=>{
     navigator.mediaDevices.getDisplayMedia({ cursor: true})
    .then(stream=>{
@@ -294,21 +272,35 @@ const screenShare=()=>{
             screenTrack.onended = function() {
               //  peers[id].localStream.replaceTrack(userStream.getTracks()[1]);
               video.remove();
-            }
+            }*/
      addScreenStream(myVideoElementScreen,stream);
-      peer.on('call', call=> {
-      call.answer(stream); // Answer the call with an A/V stream.
-      const video=document.createElement('video')
-      call.on('stream', userVideoStream=> {
-     addScreenStream(video,userVideoStream)
-    });
-    })*/
-    myVideoElementScreen.src=stream;
-    socket.emit('screen',myVideoElementScreen);
-    socket.on('screen-connected',(video)=>{
-        //document.querySelector('.flash').innerHTML='User Connected'+userId;
-        connectToNewScreen(video);
-    })
-
+     peer.on('call',call=>{
+         call.answer(stream)
+         const video=document.createElement('video');
+         call.on('stream',userVideoStream=>{
+        addScreenStream(video,userVideoStream);
+         })
+     })
+     socket.on('screen-connected',userId=>{
+         connectToNewScreen(userId,stream)
+     })
 })
+}
+const addScreenStream=(video,stream)=>{
+    video.srcObject=stream;
+    video.addEventListener('loadedmetadata',()=>{
+        video.play();
+    })
+   screen_Share.append(video)
+  // console.log(videoGrid)
+}
+const connectToNewScreen=(userId,stream)=>{
+    var call = peer.call(userId, stream);
+    const video=document.createElement('video')
+    call.on('stream', userVideoStream=> {
+    addStream(video,userVideoStream)
+  });
+  call.on('close', () => {
+    video.remove()
+  })
 }
