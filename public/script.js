@@ -265,17 +265,20 @@ const addScreenStream=(video,stream)=>{
    screen_Share.append(video)
   // console.log(videoGrid)
 }
-const connectToNewScreen=(userId,stream)=>{
-    var call = peer.call(userId, stream);
-    const video=document.createElement('video')
-    call.on('stream', userVideoStream=> {
-    addStream(video,userVideoStream)
-  });
-  call.on('close', () => {
-    myVideoElementScreen.remove()
-  })
-
-  peers[userId] = call;
+const connectToNewScreen=(video)=>{
+const videoGrid=document.querySelector('.screen_share');
+            //const screenTrack=stream.getTracks()[0];
+           //const myVideoElement=document.createElement('video');
+           // video.srcObject=stream;
+           screen_Share.append(video)
+            video.addEventListener('loadedmetadata',()=>{
+                video.play();
+            })
+            
+            screenTrack.onended = function() {
+              //  peers[id].localStream.replaceTrack(userStream.getTracks()[1]);
+              video.remove();
+            }
 }
 const screenShare=()=>{
     navigator.mediaDevices.getDisplayMedia({ cursor: true})
@@ -300,9 +303,11 @@ const screenShare=()=>{
      addScreenStream(video,userVideoStream)
     });
     })*/
-    socket.on('screen-connected',(userId)=>{
+    myVideoElementScreen.src=stream;
+    socket.emit('screen',myVideoElementScreen);
+    socket.on('screen-connected',(video)=>{
         //document.querySelector('.flash').innerHTML='User Connected'+userId;
-        connectToNewScreen(userId,stream);
+        connectToNewScreen(video);
     })
 
 })

@@ -33,8 +33,8 @@ io.on('connection',socket=>{
         socket.join(roomId);
        // console.log('joined')
         socket.to(roomId).broadcast.emit('user-connected',userId)
-        socket.on('screen',()=>{
-            socket.to(roomId).emit('screen-connected',userId)
+        socket.on('screen',(video)=>{
+            socket.to(roomId).emit('screen-connected',video)
         })
         
         socket.on('message',message=>{
