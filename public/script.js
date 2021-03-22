@@ -281,11 +281,13 @@ const screenShare=()=>{
         addScreenStream(video,userVideoStream);
          })
      })
-     socket.on('screen-connected',userId=>{
-         console.log(userId)
-        connectToNewScreen(userId,stream)})
+     socket.emit('screen',userId)
 })
 }
+socket.on('screen-connected',userId=>{
+        console.log(userId)
+       connectToNewScreen(userId,stream)
+    })
 const addScreenStream=(video,stream)=>{
     video.srcObject=stream;
     video.addEventListener('loadedmetadata',()=>{
