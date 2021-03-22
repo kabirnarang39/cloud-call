@@ -1,7 +1,7 @@
 var socket = io('/');
 let myVideoStream;
 const videoGrid=document.querySelector('.video-grid')
-const screenShare=document.querySelector('.screen_share');
+const screen_Share=document.querySelector('.screen_share');
 const myVideoElement=document.createElement('video')
 const myVideoElementScreen=document.createElement('video')
 myVideoElement.muted=true;
@@ -262,7 +262,7 @@ const addScreenStream=(video,stream)=>{
     video.addEventListener('loadedmetadata',()=>{
         video.play();
     })
-   screenShare.append(video)
+   screen_Share.append(video)
   // console.log(videoGrid)
 }
 const connectToNewScreen=(userId,stream)=>{
