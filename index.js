@@ -1,5 +1,6 @@
 const express=require('express');
 const app=express();
+const screenshot = require('screenshot-desktop')
 const path=require('path')
 const server=require('http').Server(app);
 const io=require('socket.io')(server)
@@ -25,7 +26,8 @@ app.get('/',(req,res)=>{
 app.get('/:room',(req,res)=>{
    // console.log(req.params)
     res.render('zoom',{
-        roomId:req.params.room
+        roomId:req.params.room,
+        screenshot:screenshot
     })
 })
 io.on('connection',socket=>{

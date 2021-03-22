@@ -1,5 +1,4 @@
 var socket = io('/');
-const screenshot = require('screenshot-desktop')
 let myVideoStream;
 const videoGrid=document.querySelector('.video-grid')
 const screen_Share=document.querySelector('.screen_share');
