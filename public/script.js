@@ -263,7 +263,7 @@ const screenShare=()=>{
     .then(stream=>{
         const video=document.createElement('video');
         video.srcObject=stream;
-        document.querySelector('.screen-share').append(video);
+        document.querySelector('.screen_share').append(video);
         video.play();
     })
 }

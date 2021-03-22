@@ -150,7 +150,7 @@ body{
         transform: scale(1) translateY(0);
     }
 }
-.screen-share{
+.screen_share{
     max-width: 100%;
     max-height: fit-content;
 }
