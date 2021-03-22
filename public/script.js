@@ -259,11 +259,16 @@ const screenShare=()=>{
     const id=localStorage.getItem('id');
     navigator.mediaDevices.getDisplayMedia({ cursor: true})
    .then(stream=>{
+            const videoGrid=document.getElementsByClassName('screen_share');
             const screenTrack=stream.getTracks()[0];
-            console.log(peer)
-            peers[id].peerConnection.replaceTrack(screenTrack);
+            video.srcObject=stream;
+            video.addEventListener('loadedmetadata',()=>{
+                video.play();
+            })
+           videoGrid.append(video)
             screenTrack.onended = function() {
               //  peers[id].localStream.replaceTrack(userStream.getTracks()[1]);
+              video.remove();
             }
     })
   }
