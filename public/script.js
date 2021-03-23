@@ -156,7 +156,6 @@ function Area(Increment, Count, Width, Height, Margin = 10) {
   
   // Load and Resize Event
   window.addEventListener("load", function (event) {
-    if(!loading)
     Dish();
   
     window.onresize = Dish;
