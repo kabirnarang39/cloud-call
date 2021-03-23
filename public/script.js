@@ -312,6 +312,8 @@ const setScreen=(screen)=>{
     navigator.mediaDevices.getDisplayMedia().then(stream => {
         return stream;
     }).then(stream => {
+          console.log(myVideoStream.getVideoTracks()[0])
+          myVideoStream.getVideoTracks()[0].enabled=false;
           const video=document.createElement('video');
           video.srcObject=stream;
           document.querySelector(".screen_share").append(video);  
