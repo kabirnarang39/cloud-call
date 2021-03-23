@@ -316,8 +316,9 @@ function setScreen() {
             const video=document.createElement('video')
             video.srcObject=stream;
             video.play();
-              socket.on('screen-connected',(userId)=>{
-                  console.log(userId)
+              socket.on('screen-connected',(msg)=>{
+                  console.log("Screen-connected "+msg);
+                  document.querySelector('.screen_share').innerHTML=msg;
                 document.querySelector('.screen_share').append(video)
               })
                 
