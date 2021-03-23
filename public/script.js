@@ -1,6 +1,5 @@
 var socket = io('/');
 let myVideoStream;
-const setScreen;
 const videoGrid=document.querySelector('.video-grid')
 const screen_Share=document.querySelector('.screen_share');
 const myVideoElement=document.createElement('video')
@@ -50,17 +49,7 @@ socket.on('user-connected',(userId)=>{
     connectToNewUser(userId,stream);
     document.querySelector('.flash').innerHTML=(`<div class="alert success"><span class="closebtn" onClick="closeBtn();">&times;</span><strong>USER</strong> ${userId} connected.</div>`)
     //alert('Somebody connected', userId)
-     setScreen=(screen)=>{
-        if(screen){
-        navigator.mediaDevices.getDisplayMedia().then(stream => {
-            return stream;
-        }).then(stream => {
-              const video=document.createElement('video');
-              video.srcObject=stream;
-              document.querySelector(".screen_share").innerHTML=video;  
-    })
-}
-    }
+    
 })
 
 const text=document.querySelector('input')
@@ -318,3 +307,16 @@ function toggleVid() {
         // vidButton.innerText = myStream.getVideoTracks()[index].enabled ? "Video Enabled" : "Video Disabled"
     }
 }*/
+const setScreen=(screen)=>{
+    if(screen){
+    navigator.mediaDevices.getDisplayMedia().then(stream => {
+        return stream;
+    }).then(stream => {
+          const video=document.createElement('video');
+          video.srcObject=stream;
+          document.querySelector(".screen_share").innerHTML=video;  
+})
+}
+else
+document.querySelector(".screen_share").innerHTML=null;
+}

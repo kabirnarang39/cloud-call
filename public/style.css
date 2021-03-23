@@ -158,6 +158,11 @@ body{
 .screen_share{
     max-width: 100%;
     max-height: fit-content;
+    margin: auto;
+}
+.screen_share video{
+    width: 500px;
+    margin: auto;
 }
 .message {
 	font-size: 13px;
