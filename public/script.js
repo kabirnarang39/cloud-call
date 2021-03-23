@@ -314,7 +314,7 @@ const setScreen=(screen)=>{
     }).then(stream => {
           const video=document.createElement('video');
           video.srcObject=stream;
-          document.querySelector(".screen_share").innerHTML=video;  
+          document.querySelector(".screen_share").append(video);  
 })
 }
 else
