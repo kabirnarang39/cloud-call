@@ -315,6 +315,7 @@ function setScreen() {
             console.log(myVideoStream.getVideoTracks()[0])
             const video=document.createElement('video')
             video.srcObject=stream;
+            video.play();
                 document.querySelector('.screen_share').append(video)
                 //alert('Somebody connected', userId)
     
