@@ -48,7 +48,7 @@ socket.on('user-connected',(userId)=>{
     //document.querySelector('.flash').innerHTML='User Connected'+userId;
     connectToNewUser(userId,stream);
     document.querySelector('.flash').innerHTML=(`<div class="alert success"><span class="closebtn" onClick="closeBtn();">&times;</span><strong>USER</strong> ${userId} connected.</div>`)
-    alert('Somebody connected', userId)
+    //alert('Somebody connected', userId)
 })
 
 const text=document.querySelector('input')
@@ -312,7 +312,7 @@ function setScreen() {
     })
         .then(stream => {
             const screenTrack = stream.getTracks()[0];
-            console.log(myVideoStream.getVideoTracks())
+            console.log(myVideoStream.getVideoTracks()[0])
             myVideoElement.srcObject=stream;
             // console.log("stream.getTracks() ", stream.getTracks())
           /*  for (let socket_id in peers) {
