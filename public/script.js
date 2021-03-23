@@ -333,20 +333,8 @@ function setScreen() {
                 console.log("ended")
                 // document.querySelector(".screen_sharing").style.display = "none";
                 navigator.mediaDevices.getUserMedia(constraints).then(stream => {
-                    for (let socket_id in peers) {
-                        for (let index in peers[socket_id].streams[0].getTracks()) {
-                            for (let index2 in stream.getTracks()) {
-                                if (peers[socket_id].streams[0].getTracks()[index].kind === stream.getTracks()[index2].kind) {
-                                    console.log("entered")
-                                    peers[socket_id].replaceTrack(peers[socket_id].streams[0].getTracks()[index], stream.getTracks()[index2], peers[socket_id].streams[0])
-                                    break;
-                                }
-                            }
-                        }
-
-                    }
-                    myVideoStream = stream
-                    myVideoElement.srcObject = myVideoStream
+                    console.log(myVideoElement.getVideoTracks())
+                    myVideoElement.srcObject = stream;
                 }).catch(function (error) {
                     console.log(error);
                 });
