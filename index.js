@@ -34,15 +34,11 @@ io.on('connection',socket=>{
        // console.log('joined')
        
        socket.to(roomId).broadcast.emit('user-connected',userId)
-       socket.to(roomId).broadcast.emit('screen-connected',"Hey There")
-       socket.on('screen-data',(data)=>{
-       data=JSON.parse(data);
-       var imgStr=data.image;
-       socket.broadcast.to(roomId).emit('screen-data',imgStr)
-       })
+       
         socket.on('message',message=>{
             io.to(roomId).emit('createMessage',message)
         })
+        socket.to(roomId).broadcast.emit('screen-connected',"Hey There")
         socket.on('disconnect', () => {
             socket.to(roomId).broadcast.emit('user-disconnected', userId)
           })
