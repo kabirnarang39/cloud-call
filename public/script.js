@@ -18,7 +18,18 @@ console.log(JSON.parse(myParam))
 //console.log(window.location.href.split('?')[1])
 //console.log(user);
 //console.log(videoGrid)
+const closeBtn=()=>{
+    var close = document.getElementsByClassName("closebtn");
+var i;
 
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function(){
+    var div = this.parentElement;
+    div.style.opacity = "0";
+    setTimeout(function(){ div.style.display = "none"; }, 600);
+  }
+}
+}
 navigator.mediaDevices.getUserMedia({
     video:true,
     audio:true
@@ -36,6 +47,7 @@ peer.on('call', call=> {
 socket.on('user-connected',(userId)=>{
     //document.querySelector('.flash').innerHTML='User Connected'+userId;
     connectToNewUser(userId,stream);
+    document.getElementsByClassName('flash').append(`<div class="alert success"><span class="closebtn" onClick="closeBtn();">&times;</span><strong>USER</strong> ${userId} connected.</div>`)
     alert('Somebody connected', userId)
 })
 
