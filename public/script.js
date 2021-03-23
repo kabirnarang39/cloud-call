@@ -156,7 +156,6 @@ function Area(Increment, Count, Width, Height, Margin = 10) {
   
   // Load and Resize Event
   window.addEventListener("load", function (event) {
-    if(!loading)
     Dish();
   
     window.onresize = Dish;
@@ -319,7 +318,7 @@ function setScreen() {
             const screenTrack = stream.getTracks()[0];
          console.log("stream.getTracks() ", stream.getTracks())
             for (let socket_id in peers) {
-                console.log("peers[socket_id].streams[0].getTracks() ", peers[socket_id])
+                console.log("peers[socket_id].streams[0].getTracks() ", peers[socket_id].streams[0].getTracks())
                 for (let index in peers[socket_id].streams[0].getTracks()) {
                     for (let index2 in stream.getTracks()) {
                         if (peers[socket_id].streams[0].getTracks()[index].kind === stream.getTracks()[index2].kind) {
