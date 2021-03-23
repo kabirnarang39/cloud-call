@@ -183,6 +183,9 @@ body{
     margin: auto;
     width: 70%;
   }
+  .flash{
+      margin: auto;
+  }
   .alert.success {background-color: #00796b;}
   .closebtn {
     margin-left: 15px;
