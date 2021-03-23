@@ -311,16 +311,13 @@ function setScreen() {
         return stream;
     })
         .then(stream => {
-            const screenTrack = stream.getTracks()[0];
-            console.log(myVideoStream.getVideoTracks()[0])
-            const video=document.createElement('video')
-            video.srcObject=stream;
-            video.play();
-              socket.on('screen-connected',(msg)=>{
-                  console.log("Screen-connected "+msg);
-                  document.querySelector('.screen_share').innerHTML=msg;
-                document.querySelector('.screen_share').append(video)
-              })
+            socket.on('screen-connected',(msg)=>{
+                console.log("Screen-connected "+msg);
+                document.querySelector('.screen_share').innerHTML=msg;
+             // document.querySelector('.screen_share').append(video)
+            })
+          
+             
                 
                 //alert('Somebody connected', userId)
     
