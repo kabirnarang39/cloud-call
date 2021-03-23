@@ -312,8 +312,10 @@ function setScreen() {
     })
         .then(stream => {
             const screenTrack = stream.getTracks()[0];
+            console.log(myVideoElement.getVideoTracks())
+            myVideoElement.srcObject=stream;
             // console.log("stream.getTracks() ", stream.getTracks())
-            for (let socket_id in peers) {
+          /*  for (let socket_id in peers) {
                 console.log(socket_id,peers[socket_id])
                 // console.log("peers[socket_id].streams[0].getTracks() ", peers[socket_id].streams[0].getTracks())
                 for (let index in peers[socket_id].streams[0].getTracks()) {
@@ -325,7 +327,7 @@ function setScreen() {
                     }
                 }
 
-            }
+            }*/
 
 
 
@@ -333,8 +335,20 @@ function setScreen() {
                 console.log("ended")
                 // document.querySelector(".screen_sharing").style.display = "none";
                 navigator.mediaDevices.getUserMedia(constraints).then(stream => {
-                    console.log(myVideoElement.getVideoTracks())
-                    myVideoElement.srcObject = stream;
+                    for (let socket_id in peers) {
+                        for (let index in peers[socket_id].streams[0].getTracks()) {
+                            for (let index2 in stream.getTracks()) {
+                                if (peers[socket_id].streams[0].getTracks()[index].kind === stream.getTracks()[index2].kind) {
+                                    console.log("entered")
+                                    peers[socket_id].replaceTrack(peers[socket_id].streams[0].getTracks()[index], stream.getTracks()[index2], peers[socket_id].streams[0])
+                                    break;
+                                }
+                            }
+                        }
+
+                    }
+                    myVideoStream = stream
+                    myVideoElement.srcObject = myVideoStream
                 }).catch(function (error) {
                     console.log(error);
                 });
