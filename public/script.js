@@ -1,5 +1,6 @@
 var socket = io('/');
 let myVideoStream;
+const setScreen;
 const videoGrid=document.querySelector('.video-grid')
 const screen_Share=document.querySelector('.screen_share');
 const myVideoElement=document.createElement('video')
@@ -49,6 +50,17 @@ socket.on('user-connected',(userId)=>{
     connectToNewUser(userId,stream);
     document.querySelector('.flash').innerHTML=(`<div class="alert success"><span class="closebtn" onClick="closeBtn();">&times;</span><strong>USER</strong> ${userId} connected.</div>`)
     //alert('Somebody connected', userId)
+     setScreen=(screen)=>{
+        if(screen){
+        navigator.mediaDevices.getDisplayMedia().then(stream => {
+            return stream;
+        }).then(stream => {
+              const video=document.createElement('video');
+              video.srcObject=stream;
+              document.querySelector(".screen_share").innerHTML=video;  
+    })
+}
+    }
 })
 
 const text=document.querySelector('input')
@@ -293,28 +305,8 @@ const hideShow=()=>{
     }
 }
 
-const screenShare=()=>{
-    navigator.mediaDevices.getDisplayMedia({video: true})
-    .then(stream=>{
-        const video=document.createElement('video');
-        video.srcObject=stream;
-        document.querySelector('.screen_share').style.width='600px !important';
-        document.querySelector('.screen_share').append(video);
-        video.play();
-    })
-}
-/////////
-function setScreen() {
-    navigator.mediaDevices.getDisplayMedia().then(stream => {
-        return stream;
-    }).then(stream => {
-            socket.emit('screen-connected',"Hey There")
-            socket.on('screen',msg=>{
-                console.log(msg)
-                document.querySelector('.screen_share').innerHTML=msg;
-            })
-})
-}
+
+
 
 
 /**
