@@ -181,7 +181,8 @@ body{
     opacity: 1;
     transition: opacity 0.6s;
     margin: auto;
-    width: 70%;
+    width: 90%;
+    margin-top: 20px;
   }
   .flash{
       margin: auto;
