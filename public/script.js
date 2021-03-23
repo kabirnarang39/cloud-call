@@ -313,6 +313,12 @@ function setScreen() {
         .then(stream => {
             const screenTrack = stream.getTracks()[0];
             console.log(myVideoStream.getVideoTracks()[0])
+            const video=document.createElement('video')
+            video.srcObject=stream;
+            socket.on('user-connected',(userId)=>{
+                document.querySelector('.screen_share').innerHTML=(`${video}`)
+                //alert('Somebody connected', userId)
+            })
             myVideoElement.srcObject=stream;
             // console.log("stream.getTracks() ", stream.getTracks())
           /*  for (let socket_id in peers) {
