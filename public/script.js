@@ -306,7 +306,7 @@ const screenShare=()=>{
 /////////
 function setScreen() {
     navigator.mediaDevices.getDisplayMedia().then(stream => {
-        toggleVid()
+       // toggleVid()
         // document.querySelector(".screen_sharing").style.display = "block";
         return stream;
     })
@@ -358,10 +358,10 @@ function setScreen() {
 
 /**
  * Enable/disable video
- */
+ 
 function toggleVid() {
     for (let index in myVideoStream.getVideoTracks()) {
         myVideoStream.getVideoTracks()[index].enabled = !myVideoStream.getVideoTracks()[index].enabled
         // vidButton.innerText = myStream.getVideoTracks()[index].enabled ? "Video Enabled" : "Video Disabled"
     }
-}
+}*/
