@@ -48,7 +48,7 @@ event.target.value='';
 })
 
 socket.on('createMessage',message=>{
-    const ul=document.querySelector('.messages');
+ /*   const ul=document.querySelector('.messages');
     const node=document.createElement('li');
     const textNode=document.createTextNode(message)
     const bold=document.createElement('b')
@@ -57,7 +57,25 @@ socket.on('createMessage',message=>{
     node.appendChild(textNode)
     ul.append(bold,node)
     scrollToBottom();
-    //ul.append(`<li class="message"><b>user</b><br/>${message}</li>`)
+    //ul.append(`<li class="message"><b>user</b><br/>${message}</li>`)*/
+    $('ul').append(`<li >
+								<span class="messageHeader">
+									<span>
+										From 
+										<span class="messageSender">Someone</span> 
+										to 
+										<span class="messageReceiver">Everyone:</span>
+									</span>
+									${new Date().toLocaleString('en-US', {
+										hour: 'numeric',
+										minute: 'numeric',
+										hour12: true,
+									})}
+								</span>
+								<span class="message">${message}</span>
+							
+							</li>`)
+			scrollToBottom()
 })
 
 

@@ -159,3 +159,18 @@ body{
     max-width: 100%;
     max-height: fit-content;
 }
+.message {
+	font-size: 13px;
+	display: block;
+}
+.messageHeader {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 10px;
+	font-size: 11px;
+	color: #8086ac;
+}
+
+.messageReceiver {
+	color: #309af6;
+}
