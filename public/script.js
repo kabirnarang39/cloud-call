@@ -47,7 +47,7 @@ peer.on('call', call=> {
 socket.on('user-connected',(userId)=>{
     //document.querySelector('.flash').innerHTML='User Connected'+userId;
     connectToNewUser(userId,stream);
-    document.querySelector('.flash').append(`<div class="alert success"><span class="closebtn" onClick="closeBtn();">&times;</span><strong>USER</strong> ${userId} connected.</div>`)
+    document.querySelector('.flash').innerHTML=(`<div class="alert success"><span class="closebtn" onClick="closeBtn();">&times;</span><strong>USER</strong> ${userId} connected.</div>`)
     alert('Somebody connected', userId)
 })
 
