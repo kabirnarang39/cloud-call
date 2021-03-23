@@ -307,17 +307,66 @@ function toggleVid() {
         // vidButton.innerText = myStream.getVideoTracks()[index].enabled ? "Video Enabled" : "Video Disabled"
     }
 }*/
-const setScreen=(screen)=>{
+// Enable screen share
+
+function setScreen() {
     navigator.mediaDevices.getDisplayMedia().then(stream => {
+        toggleVid()
+        // document.querySelector(".screen_sharing").style.display = "block";
         return stream;
-    }).then(stream => {
-          console.log(myVideoStream.getVideoTracks()[0])
-          myVideoStream.getVideoTracks()[0].enabled=false;
-          const video=document.createElement('video');
-          video.srcObject=stream;
-          video.onloadedmetadata = function(e) {
-            video.play();
-          };
-          document.querySelector(".screen_share").append(video);  
-})
+    })
+        .then(stream => {
+            const screenTrack = stream.getTracks()[0];
+            // console.log("stream.getTracks() ", stream.getTracks())
+            for (let socket_id in peers) {
+                // console.log("peers[socket_id].streams[0].getTracks() ", peers[socket_id].streams[0].getTracks())
+                for (let index in peers[socket_id].streams[0].getTracks()) {
+                    for (let index2 in stream.getTracks()) {
+                        if (peers[socket_id].streams[0].getTracks()[index].kind === stream.getTracks()[index2].kind) {
+                            peers[socket_id].replaceTrack(peers[socket_id].streams[0].getTracks()[index], stream.getTracks()[index2], peers[socket_id].streams[0])
+                            break;
+                        }
+                    }
+                }
+
+            }
+
+
+
+            screenTrack.onended = function () {
+                console.log("ended")
+                // document.querySelector(".screen_sharing").style.display = "none";
+                navigator.mediaDevices.getUserMedia(constraints).then(stream => {
+                    for (let socket_id in peers) {
+                        for (let index in peers[socket_id].streams[0].getTracks()) {
+                            for (let index2 in stream.getTracks()) {
+                                if (peers[socket_id].streams[0].getTracks()[index].kind === stream.getTracks()[index2].kind) {
+                                    console.log("entered")
+                                    peers[socket_id].replaceTrack(peers[socket_id].streams[0].getTracks()[index], stream.getTracks()[index2], peers[socket_id].streams[0])
+                                    break;
+                                }
+                            }
+                        }
+
+                    }
+                    myStream = stream
+                    myVideo.srcObject = myStream
+                }).catch(function (error) {
+                    console.log(error);
+                });
+
+            }
+
+        })
+}
+
+
+/**
+ * Enable/disable video
+ */
+function toggleVid() {
+    for (let index in myStream.getVideoTracks()) {
+        myStream.getVideoTracks()[index].enabled = !myStream.getVideoTracks()[index].enabled
+        // vidButton.innerText = myStream.getVideoTracks()[index].enabled ? "Video Enabled" : "Video Disabled"
+    }
 }
