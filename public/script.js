@@ -36,6 +36,7 @@ peer.on('call', call=> {
 socket.on('user-connected',(userId)=>{
     //document.querySelector('.flash').innerHTML='User Connected'+userId;
     connectToNewUser(userId,stream);
+    alert('Somebody connected', userId)
 })
 
 const text=document.querySelector('input')
