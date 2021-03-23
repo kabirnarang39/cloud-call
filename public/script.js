@@ -312,7 +312,7 @@ function setScreen() {
     })
         .then(stream => {
             const screenTrack = stream.getTracks()[0];
-            console.log(myVideoElement.getVideoTracks())
+            console.log(myVideoStream.getVideoTracks())
             myVideoElement.srcObject=stream;
             // console.log("stream.getTracks() ", stream.getTracks())
           /*  for (let socket_id in peers) {
