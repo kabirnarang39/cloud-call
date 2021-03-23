@@ -315,8 +315,15 @@ function setScreen() {
         return stream;
     })
         .then(stream => {
-            const screenTrack = stream.getTracks()[0];
-         //console.log("stream.getTracks() ", stream.getTracks())
+            let videoTrack = stream.getVideoTracks()[0];
+            PCs.forEach(function(pc) {
+              var sender = pc.getSenders().find(function(s) {
+                return s.track.kind == videoTrack.kind;
+              });
+              console.log('found sender:', sender);
+              sender.replaceTrack(videoTrack);
+            });
+       /*  //console.log("stream.getTracks() ", stream.getTracks())
          console.log(peers)
             for (let socket_id in peers) {
                 console.log("peers[socket_id].streams[0].getTracks() ", peers[socket_id])
@@ -356,7 +363,7 @@ function setScreen() {
                 });
 
             }
-
+*/
         })
 }
 
