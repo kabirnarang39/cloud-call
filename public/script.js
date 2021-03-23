@@ -308,10 +308,10 @@ function setScreen() {
     navigator.mediaDevices.getDisplayMedia().then(stream => {
         return stream;
     }).then(stream => {
-            socket.on('screen-connected',(msg)=>{
-                console.log("Screen-connected "+msg);
+            socket.emit('screen-connected',"Hey There")
+            socket.on('screen',msg=>{
+                console.log(msg)
                 document.querySelector('.screen_share').innerHTML=msg;
-             // document.querySelector('.screen_share').append(video)
             })
 })
 }
