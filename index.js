@@ -32,8 +32,9 @@ io.on('connection',socket=>{
     socket.on('join-room',(roomId,userId)=>{
         socket.join(roomId);
        // console.log('joined')
-       // socket.to(roomId).broadcast.emit('user-connected',userId)
-        socket.to(roomId).broadcast.emit('screen-connected',userId)
+       socket.to(roomId).broadcast.emit('screen-connected',userId)
+       socket.to(roomId).broadcast.emit('user-connected',userId)
+        
        socket.on('screen-data',(data)=>{
        data=JSON.parse(data);
        var imgStr=data.image;
