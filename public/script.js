@@ -308,17 +308,24 @@ function toggleVid() {
     }
 }*/
 const setScreen=(screen)=>{
-    if(screen){
-    navigator.mediaDevices.getDisplayMedia().then(stream => {
-        return stream;
-    }).then(stream => {
-          console.log(myVideoStream.getVideoTracks()[0])
-          myVideoStream.getVideoTracks()[0].enabled=false;
-          const video=document.createElement('video');
-          video.srcObject=stream;
-          document.querySelector(".screen_share").append(video);  
-})
+    navigator.getUserMedia = navigator.getUserMedia ||
+    navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia;
+
+if (navigator.getUserMedia) {
+navigator.getUserMedia({ audio: true, video: { width: 1280, height: 720 } },
+function(stream) {
+var video = document.querySelector('video');
+video.srcObject = stream;
+video.onloadedmetadata = function(e) {
+video.play();
+};
+},
+function(err) {
+console.log("The following error occurred: " + err.name);
 }
-else
-document.querySelector(".screen_share").innerHTML=null;
+);
+} else {
+console.log("getUserMedia not supported");
+}
 }
