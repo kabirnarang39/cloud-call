@@ -42,17 +42,9 @@ async function startCapture() {
   
 try {
       videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
-      interval = setInterval(function() {
-        screenshot().then((img) => {
-            var imgStr = new Buffer(img).toString('base64');
-
-            var obj = {};
-            obj.room = ROOM_ID;
-            obj.image = imgStr;
-
-            socket.emit("screen-data", JSON.stringify(obj));
-        })
-    }, 100)
+     socket.emit("screen-data", userId=>{
+         console.log(userId)
+     });
       dumpOptionsInfo();
     } catch(err) {
       console.error("Error: " + err);
