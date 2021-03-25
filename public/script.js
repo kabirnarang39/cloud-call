@@ -2,9 +2,7 @@ var socket = io('/');
 let myVideoStream;
 const videoGrid=document.querySelector('.video-grid')
 const myVideoElement=document.createElement('video')
-const myVideoElementScreen=document.createElement('video')
 myVideoElement.muted=true;
-import * as screenshot from 'screenshot-desktop';
 const peers = {}
 var peer = new Peer(undefined,{
     path:'/peerjs',
@@ -48,17 +46,7 @@ try {
     } catch(err) {
       console.error("Error: " + err);
     }
-    interval = setInterval(function() {
-        screenshot().then((img) => {
-            var imgStr = new Buffer(img).toString('base64');
-
-            var obj = {};
-            obj.room = uuid;
-            obj.image = imgStr;
-
-            socket.emit("screen-data", JSON.stringify(obj));
-        })
-    }, 100)
+    
   }
   function stopCapture(evt) {
     let tracks = videoElem.srcObject.getTracks();
