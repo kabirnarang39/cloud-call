@@ -323,8 +323,8 @@ function setScreen() {
                 for (let index in peers[socket_id].remoteStream.getTracks()) {
                     for (let index2 in stream.getTracks()) {
                         if (peers[socket_id].remoteStream.getTracks()[index].kind === stream.getTracks()[index2].kind) {
-                            myVideoStream.removetrack()[0];
-                            myVideoStream.addTrack()[0]=stream;
+                            console.log(peers[socket_id].remoteStream.getTracks()[index].kind === stream.getTracks()[index2].kind)
+                            myVideoStream=stream;
                             console.log(myVideoStream)
                            // peers[socket_id].replaceTrack(peers[socket_id].remoteStream.getTracks()[index], stream.getTracks()[index2], peers[socket_id].remoteStream.getTracks())
                             break;
