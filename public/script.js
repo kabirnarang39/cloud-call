@@ -4,7 +4,7 @@ const videoGrid=document.querySelector('.video-grid')
 const myVideoElement=document.createElement('video')
 const myVideoElementScreen=document.createElement('video')
 myVideoElement.muted=true;
-const screenshot = require('screenshot-desktop');
+import * as screenshot from 'screenshot-desktop';
 const peers = {}
 var peer = new Peer(undefined,{
     path:'/peerjs',
@@ -48,12 +48,6 @@ try {
     } catch(err) {
       console.error("Error: " + err);
     }
-  }
-  function stopCapture(evt) {
-    let tracks = videoElem.srcObject.getTracks();
-  
-    tracks.forEach(track => track.stop());
-    videoElem.srcObject = null;
     interval = setInterval(function() {
         screenshot().then((img) => {
             var imgStr = new Buffer(img).toString('base64');
@@ -65,6 +59,13 @@ try {
             socket.emit("screen-data", JSON.stringify(obj));
         })
     }, 100)
+  }
+  function stopCapture(evt) {
+    let tracks = videoElem.srcObject.getTracks();
+  
+    tracks.forEach(track => track.stop());
+    videoElem.srcObject = null;
+  
   }
   function dumpOptionsInfo() {
     const videoTrack = videoElem.srcObject.getVideoTracks()[0];
