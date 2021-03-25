@@ -2,7 +2,7 @@ body{
     margin: 0;
     padding: 0;
 }
-.video-grid{
+.video-grid,.screen-share{
     display: flex;
     align-content: center;
     flex-wrap: wrap;
@@ -16,7 +16,7 @@ body{
     top: 0px;
     right: 0px;
 }
-.video-grid video{
+.video-grid video,.screen-share video{
     margin: 10px;
     position: relative;
     vertical-align: middle;
