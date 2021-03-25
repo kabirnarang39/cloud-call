@@ -1,4 +1,4 @@
-const screenshot = require('screenshot-desktop')
+import * as screenshot from 'screenshot-desktop';
 var socket = io('/');
 let myVideoStream;
 const videoGrid=document.querySelector('.video-grid')
