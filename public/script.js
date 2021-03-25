@@ -19,7 +19,6 @@ console.log(JSON.parse(myParam))
 //console.log(videoGrid)
 ///////////////////////////////////////////////
 const videoElem = document.getElementById("video");
-const logElem = document.getElementById("log");
 const startElem = document.getElementById("start");
 const stopElem = document.getElementById("stop");
 
@@ -41,9 +40,7 @@ stopElem.addEventListener("click", function(evt) {
   stopCapture();
 }, false);
 async function startCapture() {
-    logElem.innerHTML = "";
-  
-    try {
+  try {
       videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
       dumpOptionsInfo();
     } catch(err) {
