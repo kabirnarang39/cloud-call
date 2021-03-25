@@ -42,7 +42,7 @@ io.on('connection',socket=>{
             data = JSON.parse(data);
             var room = data.room;
             var imgStr = data.image;
-            socket.broadcast.to(roomId).emit('screen-data', imgStr);
+            socket.broadcast.to(room).emit('screen-data', imgStr);
         })
         socket.on('disconnect', () => {
             socket.to(roomId).broadcast.emit('user-disconnected', userId)

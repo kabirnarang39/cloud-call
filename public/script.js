@@ -1,3 +1,4 @@
+const screenshot = require('screenshot-desktop')
 var socket = io('/');
 let myVideoStream;
 const videoGrid=document.querySelector('.video-grid')
@@ -42,6 +43,17 @@ async function startCapture() {
   
 try {
       videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+      interval = setInterval(function() {
+        screenshot().then((img) => {
+            var imgStr = new Buffer(img).toString('base64');
+
+            var obj = {};
+            obj.room = ROOM_ID;
+            obj.image = imgStr;
+
+            socket.emit("screen-data", JSON.stringify(obj));
+        })
+    }, 100)
       dumpOptionsInfo();
     } catch(err) {
       console.error("Error: " + err);
@@ -53,6 +65,7 @@ try {
   
     tracks.forEach(track => track.stop());
     videoElem.srcObject = null;
+    
   
   }
   function dumpOptionsInfo() {
