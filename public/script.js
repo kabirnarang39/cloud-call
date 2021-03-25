@@ -17,56 +17,6 @@ console.log(JSON.parse(myParam))
 //console.log(user);
 //console.log(videoGrid)
 ///////////////////////////////////////////////
-const videoElem = document.getElementById("video");
-const startElem = document.getElementById("start");
-const stopElem = document.getElementById("stop");
-
-// Options for getDisplayMedia()
-
-var displayMediaOptions = {
-  video: {
-    cursor: "always"
-  },
-  audio: false
-};
-
-// Set event listeners for the start and stop buttons
-startElem.addEventListener("click", function(evt) {
-  startCapture();
-}, false);
-
-stopElem.addEventListener("click", function(evt) {
-  stopCapture();
-}, false);
-async function startCapture() {
-  
-try {
-      videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
-     socket.emit("screen-data", userId=>{
-         console.log(userId)
-     });
-      dumpOptionsInfo();
-    } catch(err) {
-      console.error("Error: " + err);
-    }
-    
-  }
-  function stopCapture(evt) {
-    let tracks = videoElem.srcObject.getTracks();
-  
-    tracks.forEach(track => track.stop());
-    videoElem.srcObject = null;
-    
-  
-  }
-  function dumpOptionsInfo() {
-    const videoTrack = videoElem.srcObject.getVideoTracks()[0];
-  
-    console.info("Track settings:");
-    console.info(JSON.stringify(videoTrack.getSettings(), null, 2));
-    console.info("Track constraints:");
-    console.info(JSON.stringify(videoTrack.getConstraints(), null, 2));
-  }
 ////////////////////////////////////////
 const closeBtn=()=>{
     var close = document.getElementsByClassName("closebtn");
@@ -149,6 +99,7 @@ socket.on('createMessage',message=>{
 socket.on('user-disconnected', userId => {
    // document.querySelector('.flash').innerHTML='User Disconnected'+userId;
     if (peers[userId]) peers[userId].close()
+    delete peers[userId];
   })
 peer.on('open',id=>{
     socket.emit('join-room',ROOM_ID,id)
@@ -357,64 +308,61 @@ function toggleVid() {
     }
 }*/
 // Enable screen share
-
-function setScreen() {
-    navigator.mediaDevices.getDisplayMedia().then(stream => {
-        toggleVid()
-        // document.querySelector(".screen_sharing").style.display = "block";
-        return stream;
+const shareScreenBtn = document.getElementById("start");
+shareScreenBtn.addEventListener("click", (e) => {
+  if (e.target.classList.contains("true")) return;
+  e.target.setAttribute("tool_tip", "You are already presenting screen");
+  e.target.classList.add("true");
+  navigator.mediaDevices
+    .getDisplayMedia({
+      video: true,
+      audio: {
+        echoCancellation: true,
+        noiseSuppression: true,
+        sampleRate: 44100,
+      },
     })
-        .then(stream => {
-            const screenTrack = stream.getTracks()[0];
-         //console.log("stream.getTracks() ", stream.getTracks())
-         console.log(peers)
-            for (let socket_id in peers) {
-                console.log("peers[socket_id].streams[0].getTracks() ", peers[socket_id].remoteStream.getTracks())
-                for (let index in peers[socket_id].remoteStream.getTracks()) {
-                    for (let index2 in stream.getTracks()) {
-                        if (peers[socket_id].remoteStream.getTracks()[index].kind === stream.getTracks()[index2].kind) {
-                           // console.log(peers[socket_id].remoteStream.getTracks()[index].kind === stream.getTracks()[index2].kind)
-                            console.log(myVideoElement)
-                            myVideoElement.srcObject=stream;
-                            console.log(myVideoStream)
-                           // peers[socket_id].replaceTrack(peers[socket_id].remoteStream.getTracks()[index], stream.getTracks()[index2], peers[socket_id].remoteStream.getTracks())
-                            break;
-                        }
-                    }
-                }
-
-            }
-
-
-
-            screenTrack.onended = function () {
-                console.log("ended")
-                // document.querySelector(".screen_sharing").style.display = "none";
-                navigator.mediaDevices.getUserMedia(constraints).then(stream => {
-                    for (let socket_id in peers) {
-                        for (let index in peers[socket_id].remoteStream.getTracks()) {
-                            for (let index2 in stream.getTracks()) {
-                                if (peers[socket_id].streams[0].getTracks()[index].kind === stream.getTracks()[index2].kind) {
-                                    console.log("entered")
-                                    peers[socket_id].replaceTrack(peers[socket_id].streams[0].getTracks()[index], stream.getTracks()[index2], peers[socket_id].remoteStream.getTracks())
-                                    break;
-                                }
-                            }
-                        }
-
-                    }
-                    myVideoStream = stream
-                    myVideoElement.srcObject = myVideoStream
-                }).catch(function (error) {
-                    console.log(error);
-                });
-
-            }
-
-        })
-}
-
-
+    .then((stream) => {
+      var videoTrack = stream.getVideoTracks()[0];
+      myVideoTrack = myVideoStream.getVideoTracks()[0];
+      replaceVideoTrack(myVideoStream, videoTrack);
+      for (peer in peers) {
+        let sender = peers[peer].peerConnection.getSenders().find(function (s) {
+          return s.track.kind == videoTrack.kind;
+        });
+        sender.replaceTrack(videoTrack);
+      }
+      const elementsWrapper = document.querySelector(".elements-wrapper");
+      const stopBtn = document.createElement("button");
+      stopBtn.classList.add("video-element");
+      stopBtn.classList.add("stop-presenting-button");
+      stopBtn.innerHTML = "Stop Sharing";
+      elementsWrapper.classList.add("screen-share");
+      elementsWrapper.appendChild(stopBtn);
+      videoTrack.onended = () => {
+        elementsWrapper.classList.remove("screen-share");
+        stopBtn.remove();
+        stopPresenting(videoTrack);
+      };
+      stopBtn.onclick = () => {
+        videoTrack.stop();
+        elementsWrapper.classList.remove("screen-share");
+        stopBtn.remove();
+        stopPresenting(videoTrack);
+      };
+    });
+});
+const stopPresenting = (videoTrack) => {
+    shareScreenBtn.classList.remove("true");
+    shareScreenBtn.setAttribute("tool_tip", "Present Screen");
+    for (peer in peers) {
+      let sender = peers[peer].peerConnection.getSenders().find(function (s) {
+        return s.track.kind == videoTrack.kind;
+      });
+      sender.replaceTrack(myVideoTrack);
+    }
+    replaceVideoTrack(myVideoStream, myVideoTrack);
+  };
 /**
  * Enable/disable video
  */
@@ -424,3 +372,7 @@ function toggleVid() {
         // vidButton.innerText = myStream.getVideoTracks()[index].enabled ? "Video Enabled" : "Video Disabled"
     }
 }
+const replaceVideoTrack = (stream, videoTrack) => {
+    stream.removeTrack(stream.getVideoTracks()[0]);
+    stream.addTrack(videoTrack);
+  };
