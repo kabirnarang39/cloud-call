@@ -254,10 +254,10 @@ body{
   ion-icon {
     pointer-events: none;
     transition: all 0.24s linear;
-    font-size: 2.3rem;
+    font-size: 2.0rem;
   }
   .name {
-    font-size: 0.75rem;
+    font-size: 1.2rem;
   }
   .effect-container {
     margin: 0.5rem;
