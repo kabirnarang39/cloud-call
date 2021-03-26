@@ -96,6 +96,7 @@ body{
     flex-grow: 1;
     overflow-y: scroll;
     box-sizing: content-box;
+    z-index: 1000;
 }
 .main_message_container{
     padding: 22px 12px;
