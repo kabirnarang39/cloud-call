@@ -217,6 +217,7 @@ videoWrapper.classList.add("video-wrapper");
     })
     videoWrapper.appendChild(elementsWrapper);
   videoWrapper.appendChild(video);
+  videoGrid.append(videoWrapper)
    
   // console.log(videoGrid)
 }
