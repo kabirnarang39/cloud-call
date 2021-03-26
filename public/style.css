@@ -286,6 +286,15 @@ body{
   }
 
 
+  #loadingIndicator {
+	position: relative;
+	height: 90px;
+	width: 150px;
+	top: 10px;
+	left: 50%;
+	transform: translate(-50%, 0%);
+}
+
 .loadingBar {
 	position: absolute;
 	top: 30px;
@@ -293,7 +302,6 @@ body{
 	height: 30px;
 	border-radius: 30px;
 	animation: loadingAnimation 3s infinite;
-    
 }
 
 #loadingBar1 {
@@ -340,17 +348,3 @@ body{
 		top: 30px;
 	}
 }
-
-.card-wrapper {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    z-index: 99999999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.816);
-    user-select: none;
-    
-  }
-  
