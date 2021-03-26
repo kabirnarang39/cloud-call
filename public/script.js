@@ -190,7 +190,7 @@ const addStream=(video,stream,user)=>{
   
    // peer name
    const namePara = document.createElement("p");
-   namePara.innerHTML = user.name;
+   namePara.innerHTML = user;
    namePara.classList.add("video-element");
    namePara.classList.add("name");
  
@@ -205,7 +205,7 @@ const addStream=(video,stream,user)=>{
     video.addEventListener('loadedmetadata',()=>{
         video.play();
     })
-    videoGrid.appendChild(elementsWrapper)
+   videoGrid.appendChild(elementsWrapper)
    videoGrid.appendChild(video)
    
   // console.log(videoGrid)
