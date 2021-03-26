@@ -215,8 +215,8 @@ videoWrapper.classList.add("video-wrapper");
     video.addEventListener('loadedmetadata',()=>{
         video.play();
     })
-    videoGrid.appendChild(elementsWrapper);
-    videoGrid.appendChild(video);
+    videoWrapper.appendChild(elementsWrapper);
+  videoWrapper.appendChild(video);
    
   // console.log(videoGrid)
 }
