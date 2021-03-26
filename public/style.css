@@ -290,10 +290,9 @@ body{
 	position: absolute;
 	height: 90px;
 	width: 150px;
-	top: 100px;
+	top: 50%;
 	left: 50%;
 	transform: translate(-50%, 0%);
-    background-color: #1c1e20;
 }
 
 .loadingBar {
