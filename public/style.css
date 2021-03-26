@@ -236,7 +236,7 @@ body{
 .video-off-indicator {
     width: 80px;
     height: 80px;
-    background-color: rgb(106, 90, 205);
+    background-color: #00796b;;
     border-radius: 50%;
     position: absolute;
     top: 50%;
@@ -275,13 +275,13 @@ body{
     position: relative;
     height: 19%;
     width: 6px;
-    background: rgb(106, 90, 205);
+    background: #00796b;;
     margin: 2px;
     border-radius: 200px;
     transition: all linear 0.1s;
   }
   .video-disable {
-    background-color: rgb(60, 60, 60);
+    background-color: #1c1e20;;
     border-radius: 10px;
   }
  
