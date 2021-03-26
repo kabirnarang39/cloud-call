@@ -199,7 +199,6 @@ const addStream=(video,stream,user)=>{
    elementsWrapper.appendChild(namePara);
    // elementsWrapper.appendChild(optionBtn);
    elementsWrapper.appendChild(pinBtn);
-   elementsWrapper.appendChild(micBtn);
    elementsWrapper.appendChild(audioFXElement);
    elementsWrapper.appendChild(videoOffIndicator);
     video.srcObject=stream;
