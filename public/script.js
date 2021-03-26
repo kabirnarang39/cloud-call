@@ -10,19 +10,7 @@ var peer = new Peer(undefined,{
     host:'/',
     port:'443'
 });
-window.onload = function () {
-    const loader = document.createElement("div");
-    loader.classList.add("card-wrapper");
-    loader.innerHTML = `
-	<div class="loadingBar" id="loadingBar1"></div>
-	<div class="loadingBar" id="loadingBar2"></div>
-	<div class="loadingBar" id="loadingBar3"></div>
-	<div class="loadingBar" id="loadingBar4"></div>`;
-    document.body.appendChild(loader);
-    setTimeout(() => {
-      loader.remove();
-    }, 3000);
-  };
+
 console.log(window.location.search);
 const urlParams = new URLSearchParams(window.location.search);
 const myParam = urlParams.get('user');
