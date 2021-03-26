@@ -314,14 +314,17 @@ body{
     padding-top: 2rem;
     color: white;
   }
- 
+  .spinner {
+    --animation-duration: 1150ms;
+   
+  }
   .spinner-item {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 40px;
     display: inline-block;
     margin: 0 3px;
     border-radius: 50%;
-    border: 4px solid pink;
+    border: 4px solid rgba(46,44,180,1);
     animation: spinner4 1150ms ease-in-out infinite;
     @keyframes spinner4 {
       0%,
@@ -334,16 +337,16 @@ body{
     }
   }
   .spinner-item:nth-child(1) {
-    animation-delay: 1000ms;
+       animation: delay 191ms #2e2cb4;
   }
   .spinner-item:nth-child(2) {
-    animation-delay: 1200ms;
+    animation: delay 383px #4745ce;
   }
   .spinner-item:nth-child(3) {
-    animation-delay:1400ms;
+    animation: delay 575ms #6765cf;
   }
   .spinner-item:nth-child(4) {
-    animation-delay: 1600ms;
+    animation: delay 766px #8786df;
   }
   /* width */
   ::-webkit-scrollbar {
@@ -354,17 +357,17 @@ body{
   
   /* Track */
   ::-webkit-scrollbar-track {
-    background: green;
+    background: #8786df;
   }
   
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: orange;
+    background: #6765cf;
     border-radius: 10px;
   }
   
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: purple;
+    background: #6765cf;
   }
   
