@@ -371,3 +371,95 @@ body{
     background: #6765cf;
   }
   
+.card-loader {
+    width: 100%;
+    width: 500px;
+    height: 250px;
+    border-radius: 0.25rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+user agent stylesheet
+div {
+    display: block;
+}
+.card-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999999;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.816);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+body {
+    background-color: #1b2127;
+    background-color: #1b2127;
+    font-family: "Comfortaa", cursive;
+}
+:root {
+    --color1: 27, 33, 39;
+    --color2: 22, 28, 33;
+    --color3: 71, 69, 206;
+    --color4: 37, 42, 48;
+    --color5: 4, 231, 98;
+    --color6: 255, 47, 25;
+    --footer-height: 80px;
+    --size: 75px;
+    --clr1: #2e2cb4;
+    --clr2: #4745ce;
+    --clr3: #6765cf;
+    --clr4: #8786df;
+}
+.hydrated {
+    visibility: inherit;
+}
+::after, ::before {
+    font-family: "Comfortaa", cursive;
+}
+::after, ::before {
+    font-family: "Comfortaa", cursive;
+}
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    border-radius: 50;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(var(--color3), 0.6);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+    background: rgba(var(--color4), 1);
+}
