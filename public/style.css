@@ -259,4 +259,30 @@ body{
   .name {
     font-size: 0.75rem;
   }
-  
+  .effect-container {
+    margin: 0.5rem;
+    width: 32.8px;
+    height: 32.8px;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+  }
+  .o1,
+  .o2 {
+    position: relative;
+    height: 19%;
+    width: 6px;
+    background: rgba(var(--color3), 1);
+    margin: 2px;
+    border-radius: 200px;
+    transition: all linear 0.1s;
+  }
+  .video-disable {
+    background-color: rgba(var(--color4), 1);
+  }
+  .video-off-indicator {
+    opacity: 1;
+  }

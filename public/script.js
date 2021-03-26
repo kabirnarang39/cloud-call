@@ -258,13 +258,20 @@ const playStop=()=>{
     const enabled=myVideoStream.getVideoTracks()[0].enabled;
     if(enabled){
 myVideoStream.getVideoTracks()[0].enabled=false;
+videoWrapperVideoToggle(myVideoElement, false);
 setPlayVideo();
     }
     else{
+        videoWrapperVideoToggle(myVideoElement, true);
         setStopVideo();
         myVideoStream.getVideoTracks()[0].enabled=true;
     } 
 }
+const videoWrapperVideoToggle = (element, type) => {
+    const videoWrapper = element.previousSibling;
+    if (type) videoWrapper.classList.remove("video-disable");
+    else videoWrapper.classList.add("video-disable");
+  };
 const setPlayVideo=()=>{
     const html=`
     <svg width="26px" height="26px" viewBox="0 0 16 16" class="bi bi-camera-video-off-fill" fill="#cc3b33" xmlns="http://www.w3.org/2000/svg">
@@ -426,4 +433,43 @@ const setScreenShareDisableButton=()=>{
 </svg>
     `
     document.querySelector('.main_screen_button').innerHTML=html;
+}
+class SE {
+    constructor(mediaStream) {
+      this.mediaStream = mediaStream;
+    }
+    createElement() {
+      this.element = document.createElement("div");
+      this.element.classList.add("effect-container");
+      const a1 = document.createElement("div");
+      a1.classList.add("o1");
+      const a2 = document.createElement("div");
+      a2.classList.add("o2");
+      const a3 = document.createElement("div");
+      a3.classList.add("o1");
+      this.element.appendChild(a1);
+      this.element.appendChild(a2);
+      this.element.appendChild(a3);
+  
+      this.audioCTX = new AudioContext();
+      this.analyser = this.audioCTX.createAnalyser();
+      console.log(this.audioCTX);
+      const source = this.audioCTX.createMediaStreamSource(this.mediaStream);
+      source.connect(this.analyser);
+  
+      const frameLoop = () => {
+        window.requestAnimationFrame(frameLoop);
+        let fbc_array = new Uint8Array(this.analyser.frequencyBinCount);
+        this.analyser.getByteFrequencyData(fbc_array);
+        let o1 = fbc_array[20] / 300;
+        let o2 = fbc_array[50] / 200;
+        o1 = o1 < 0.5 ? 0.19 : o1 > 1 ? 1 : o1;
+        o2 = o2 < 0.4 ? 0.19 : o2 > 1 ? 1 : o2;
+        a1.style.height = `${o1 * 100}%`;
+        a3.style.height = `${o1 * 100}%`;
+        a2.style.height = `${o2 * 100}%`;
+      };
+      frameLoop();
+      return this.element;
+    }
 }
