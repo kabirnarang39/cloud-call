@@ -359,3 +359,27 @@ body{
 	}
 }
 
+.card-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.816);
+    user-select: none;
+  }
+  
+  .card-loader {
+    width: 100%;
+    width: 500px;
+    height: 250px;
+    border-radius: 0.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
