@@ -1,5 +1,6 @@
 var socket = io('/');
 let myVideoStream;
+var myVideoTrack;
 const videoGrid=document.querySelector('.video-grid')
 const myVideoElement=document.createElement('video')
 myVideoElement.muted=true;
@@ -36,6 +37,7 @@ navigator.mediaDevices.getUserMedia({
 })
 .then(stream=>{
 myVideoStream=stream;
+myVideoTrack = stream.getVideoTracks()[0];
 addStream(myVideoElement,stream,myParam);
 peer.on('call', call=> {
       call.answer(stream); // Answer the call with an A/V stream.
