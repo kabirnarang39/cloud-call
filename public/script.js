@@ -14,14 +14,15 @@ window.onload = function () {
     const loader = document.createElement("div");
     loader.classList.add("card-wrapper");
     loader.innerHTML = `
-      <div class="card-loader">
-          <div class="spinner">
-          <div class="spinner-item"></div>
-          <div class="spinner-item"></div>
-          <div class="spinner-item"></div>
-          <div class="spinner-item"></div>
-          </div>
-          <p>Loading ....</p>
+    <h1 id="description">
+	Loading... Please&nbsp;wait!
+</h1>
+<div id="loadingIndicator">
+	<div class="loadingBar" id="loadingBar1"></div>
+	<div class="loadingBar" id="loadingBar2"></div>
+	<div class="loadingBar" id="loadingBar3"></div>
+	<div class="loadingBar" id="loadingBar4"></div>
+</div>
       </div>`;
     document.body.appendChild(loader);
     setTimeout(() => {

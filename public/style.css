@@ -285,181 +285,77 @@ body{
     border-radius: 10px;
   }
 
-  .card-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 99999999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.816);
-    user-select: none;
-  }
-  
-  .card-loader {
-    width: 100%;
-    width: 500px;
-    height: 250px;
-    border-radius: 0.25rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-  
-  .card-loader p {
-    padding-top: 2rem;
-    color: white;
-  }
-  .spinner {
-    --animation-duration: 1150ms;
-   
-  }
-  .spinner-item {
-    width: 80px;
-    height: 40px;
-    display: inline-block;
-    margin: 0 3px;
-    border-radius: 50%;
-    border: 4px solid rgba(46,44,180,1);
-    animation: spinner4 1150ms ease-in-out infinite;
-    @keyframes spinner4 {
-      0%,
-      100% {
-        transform: translateY(75%);
-      }
-      50% {
-        transform: translateY(-75%);
-      }
-    }
-  }
-  .spinner-item:nth-child(1) {
-       animation: delay 191ms #2e2cb4;
-  }
-  .spinner-item:nth-child(2) {
-    animation: delay 383px #4745ce;
-  }
-  .spinner-item:nth-child(3) {
-    animation: delay 575ms #6765cf;
-  }
-  .spinner-item:nth-child(4) {
-    animation: delay 766px #8786df;
-  }
-  /* width */
-  ::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
-    border-radius: 50;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #8786df;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #6765cf;
-    border-radius: 10px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #6765cf;
-  }
-  
-.card-loader {
-    width: 100%;
-    width: 500px;
-    height: 250px;
-    border-radius: 0.25rem;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
+  #description {
+	position: absolute;
+	left: 50%;
+	top: 150px;
+	transform: translate(-50%, -50%);
+
+	text-align: center;
+	font-family: Raleway;
+	color: white;
 }
 
-* {
-    padding: 0;
-    margin: 0;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+#loadingIndicator {
+	position: relative;
+	height: 90px;
+	width: 150px;
+	top: 10px;
+	left: 50%;
+	transform: translate(-50%, 0%);
 }
-user agent stylesheet
-div {
-    display: block;
+
+.loadingBar {
+	position: absolute;
+	top: 30px;
+	width: 30px;
+	height: 30px;
+	border-radius: 30px;
+	animation: loadingAnimation 3s infinite;
 }
-.card-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 99999999;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.816);
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+
+#loadingBar1 {
+	background: #1e00ff;
+	animation-delay: 0s;
+	left: 0px;
 }
-body {
-    background-color: #1b2127;
-    background-color: #1b2127;
-    font-family: "Comfortaa", cursive;
+#loadingBar2 {
+	background: #ff0061;
+	animation-delay: 0.2s;
+	left: 40px;
 }
-:root {
-    --color1: 27, 33, 39;
-    --color2: 22, 28, 33;
-    --color3: 71, 69, 206;
-    --color4: 37, 42, 48;
-    --color5: 4, 231, 98;
-    --color6: 255, 47, 25;
-    --footer-height: 80px;
-    --size: 75px;
-    --clr1: #2e2cb4;
-    --clr2: #4745ce;
-    --clr3: #6765cf;
-    --clr4: #8786df;
+
+#loadingBar3 {
+	background: #e1ff00;
+	animation-delay: 0.4s;
+	left: 80px;
 }
-.hydrated {
-    visibility: inherit;
+#loadingBar4 {
+	background: #00ff9e;
+	animation-delay: 0.6s;
+	left: 120px;
 }
-::after, ::before {
-    font-family: "Comfortaa", cursive;
+
+@keyframes loadingAnimation {
+	0% {
+		top: 30px;
+	}
+	20% {
+		top: 0px;
+	}
+	50% {
+		height: 30px;
+		top: 30px;
+		border-radius: 5px;
+	}
+	75% {
+		height: 90px;
+		top: 0px;
+		border-radius: 30px;
+	}
+	100% {
+		height: 30px;
+		top: 30px;
+	}
 }
-::after, ::before {
-    font-family: "Comfortaa", cursive;
-}
-::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
-    border-radius: 50;
-}
-::-webkit-scrollbar-thumb {
-    background: rgba(var(--color3), 0.6);
-    border-radius: 10px;
-}
-::-webkit-scrollbar-track {
-    background: rgba(var(--color4), 1);
-}
+
