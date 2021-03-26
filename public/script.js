@@ -1,6 +1,5 @@
 var socket = io('/');
 let myVideoStream;
-var myVideoTrack;
 const videoGrid=document.querySelector('.video-grid')
 const myVideoElement=document.createElement('video')
 myVideoElement.muted=true;
@@ -13,7 +12,7 @@ var peer = new Peer(undefined,{
 console.log(window.location.search);
 const urlParams = new URLSearchParams(window.location.search);
 const myParam = urlParams.get('user');
-console.log((myParam))
+console.log(JSON.parse(myParam))
 //console.log(window.location.href.split('?')[1])
 //console.log(user);
 //console.log(videoGrid)
@@ -37,8 +36,7 @@ navigator.mediaDevices.getUserMedia({
 })
 .then(stream=>{
 myVideoStream=stream;
-myVideoTrack = stream.getVideoTracks()[0];
-addStream(myVideoElement,stream,myParam);
+addStream(myVideoElement,stream);
 peer.on('call', call=> {
       call.answer(stream); // Answer the call with an A/V stream.
       const video=document.createElement('video')
@@ -46,7 +44,7 @@ peer.on('call', call=> {
       addStream(video,userVideoStream)
     });
 })
-socket.on('user-connected',(userId,myParam)=>{
+socket.on('user-connected',(userId)=>{
     //document.querySelector('.flash').innerHTML='User Connected'+userId;
     connectToNewUser(userId,stream);
     document.querySelector('.flash').innerHTML=(`<div class="alert success"><span class="closebtn" onClick="closeBtn();">&times;</span><strong>USER</strong> ${userId} connected.</div>`)
@@ -169,7 +167,7 @@ const connectToNewUser=(userId,stream)=>{
     const video=document.createElement('video')
     video.id=userId;
     call.on('stream', userVideoStream=> {
-    addStream(video,userVideoStream,myParam)
+    addStream(video,userVideoStream)
   });
   call.on('close', () => {
     video.remove()
@@ -178,46 +176,13 @@ const connectToNewUser=(userId,stream)=>{
   peers[userId] = call
   console.log(peers)
 }
-const addStream=(video,stream,user)=>{
-    // create audio FX
-  const audioFX = new SE(stream);
-  const audioFXElement = audioFX.createElement();
-  audioFXElement.classList.add("mic-button");
-      // video off element
-  const videoOffIndicator = document.createElement("div");
-  videoOffIndicator.classList.add("video-off-indicator");
-  videoOffIndicator.innerHTML = `<ion-icon name="videocam-outline"></ion-icon>`;
-// main wrapper
-const videoWrapper = document.createElement("div");
-videoWrapper.id = "video-wrapper";
-videoWrapper.classList.add("video-wrapper");
-  // create pin button
-  const pinBtn = document.createElement("button");
-  pinBtn.classList.add("video-element");
-  pinBtn.classList.add("pin-button");
-  pinBtn.innerHTML = `<ion-icon name="expand-outline"></ion-icon>`;
-  
-   // peer name
-   const namePara = document.createElement("p");
-   namePara.innerHTML = user;
-   namePara.classList.add("video-element");
-   namePara.classList.add("name");
- 
-   const elementsWrapper = document.createElement("div");
-   elementsWrapper.classList.add("elements-wrapper");
-   elementsWrapper.appendChild(namePara);
-   // elementsWrapper.appendChild(optionBtn);
-   elementsWrapper.appendChild(pinBtn);
-   elementsWrapper.appendChild(audioFXElement);
-   elementsWrapper.appendChild(videoOffIndicator);
+const addStream=(video,stream)=>{
     video.srcObject=stream;
    
     video.addEventListener('loadedmetadata',()=>{
         video.play();
     })
-    videoWrapper.appendChild(elementsWrapper);
-    videoWrapper.appendChild(video);
-    videoGrid.appendChild(videoWrapper)
+   videoGrid.append(video)
   // console.log(videoGrid)
 }
 
@@ -258,27 +223,13 @@ const playStop=()=>{
     const enabled=myVideoStream.getVideoTracks()[0].enabled;
     if(enabled){
 myVideoStream.getVideoTracks()[0].enabled=false;
-videoWrapperVideoToggle(myVideoElement, false);
 setPlayVideo();
     }
     else{
-        videoWrapperVideoToggle(myVideoElement, true);
         setStopVideo();
         myVideoStream.getVideoTracks()[0].enabled=true;
     } 
 }
-const videoWrapperVideoToggle = (element, type) => {
-    const videoWrapper = element.previousSibling;
-    if (type) {
-        videoWrapper.classList.remove("video-disable");
-      //  document.querySelector('.video-off-indicator').style.opacity='0';
-}
-    else {
-    videoWrapper.classList.add("video-disable");
-   // document.querySelector('.video-off-indicator').style.opacity='1';
-    //document.querySelector('.video-grid .elements-wrapper').style.backGroundColor=' rgba(32,42,48, 1)';
-    }
-  };
 const setPlayVideo=()=>{
     const html=`
     <svg width="26px" height="26px" viewBox="0 0 16 16" class="bi bi-camera-video-off-fill" fill="#cc3b33" xmlns="http://www.w3.org/2000/svg">
@@ -440,43 +391,4 @@ const setScreenShareDisableButton=()=>{
 </svg>
     `
     document.querySelector('.main_screen_button').innerHTML=html;
-}
-class SE {
-    constructor(mediaStream) {
-      this.mediaStream = mediaStream;
-    }
-    createElement() {
-      this.element = document.createElement("div");
-      this.element.classList.add("effect-container");
-      const a1 = document.createElement("div");
-      a1.classList.add("o1");
-      const a2 = document.createElement("div");
-      a2.classList.add("o2");
-      const a3 = document.createElement("div");
-      a3.classList.add("o1");
-      this.element.appendChild(a1);
-      this.element.appendChild(a2);
-      this.element.appendChild(a3);
-  
-      this.audioCTX = new AudioContext();
-      this.analyser = this.audioCTX.createAnalyser();
-      console.log(this.audioCTX);
-      const source = this.audioCTX.createMediaStreamSource(this.mediaStream);
-      source.connect(this.analyser);
-  
-      const frameLoop = () => {
-        window.requestAnimationFrame(frameLoop);
-        let fbc_array = new Uint8Array(this.analyser.frequencyBinCount);
-        this.analyser.getByteFrequencyData(fbc_array);
-        let o1 = fbc_array[20] / 300;
-        let o2 = fbc_array[50] / 200;
-        o1 = o1 < 0.5 ? 0.19 : o1 > 1 ? 1 : o1;
-        o2 = o2 < 0.4 ? 0.19 : o2 > 1 ? 1 : o2;
-        a1.style.height = `${o1 * 100}%`;
-        a3.style.height = `${o1 * 100}%`;
-        a2.style.height = `${o2 * 100}%`;
-      };
-      frameLoop();
-      return this.element;
-    }
 }
