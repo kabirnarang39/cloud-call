@@ -14,7 +14,6 @@ window.addEventListener("load", function (event) {
   
     window.onresize = Dish;
   }, false);
-console.log(username);
 const urlParams = new URLSearchParams(window.location.search);
 const myParam = urlParams.get('user');
 //console.log(JSON.parse(myParam))
@@ -49,10 +48,10 @@ peer.on('call', call=> {
       addStream(video,userVideoStream)
     });
 })
-socket.on('user-connected',(userId)=>{
+socket.on('user-connected',(userId,username)=>{
     //document.querySelector('.flash').innerHTML='User Connected'+userId;
     connectToNewUser(userId,stream);
-    document.querySelector('.flash').innerHTML=(`<div class="alert success"><span class="closebtn" onClick="closeBtn();">&times;</span><strong>USER</strong> ${userId} connected.</div>`)
+    document.querySelector('.flash').innerHTML=(`<div class="alert success"><span class="closebtn" onClick="closeBtn();">&times;</span><strong>${username}</strong> connected.</div>`)
     //alert('Somebody connected', userId)
     
 })
@@ -60,12 +59,12 @@ socket.on('user-connected',(userId)=>{
 const text=document.querySelector('input')
 text.addEventListener('change',(event)=>{
 if(event.target.value.length!==0){
-socket.emit('message',event.target.value)
+socket.emit('message',event.target.value,username)
 event.target.value='';
 }
 })
 
-socket.on('createMessage',message=>{
+socket.on('createMessage',(message,username)=>{
  /*   const ul=document.querySelector('.messages');
     const node=document.createElement('li');
     const textNode=document.createTextNode(message)
@@ -80,7 +79,7 @@ socket.on('createMessage',message=>{
 								<span class="messageHeader">
 									<span>
 										From 
-										<span class="messageSender">Someone</span> 
+										<span class="messageSender">${username}</span> 
 										to 
 										<span class="messageReceiver">Everyone:</span>
 									</span>
@@ -107,7 +106,7 @@ socket.on('user-disconnected', userId => {
     delete peers[userId];
   })
 peer.on('open',id=>{
-    socket.emit('join-room',ROOM_ID,id)
+    socket.emit('join-room',ROOM_ID,id,username)
 })
 function Area(Increment, Count, Width, Height, Margin = 10) {
     let i =0, w = 0;
