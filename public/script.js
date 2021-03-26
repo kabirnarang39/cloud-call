@@ -262,7 +262,6 @@ setPlayVideo();
     }
     else{
         videoWrapperVideoToggle(myVideoElement, true);
-        socket.emit("video-toggle", true);
     currentElement.setAttribute("tool_tip", "Video Off");
         setStopVideo();
         myVideoStream.getVideoTracks()[0].enabled=true;
