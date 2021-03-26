@@ -288,14 +288,12 @@ body{
 
 .loadingBar {
 	position: absolute;
-
-    
+	top: 30px;
 	width: 30px;
 	height: 30px;
 	border-radius: 30px;
 	animation: loadingAnimation 3s infinite;
-    left: 50%;
-	top: 150px;
+    
 }
 
 #loadingBar1 {
@@ -345,8 +343,6 @@ body{
 
 .card-wrapper {
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100vw;
     height: 100vh;
     z-index: 99999999;
