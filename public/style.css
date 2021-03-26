@@ -286,17 +286,6 @@ body{
   }
 
 
-#loadingIndicator {
-	position: relative;
-	height: 90px;
-	width: 150px;
-	top: 10px;
-	left: 50%;
-	transform: translate(-50%, 0%);
-    left: 50%;
-	top: 150px;
-}
-
 .loadingBar {
 	position: absolute;
 	top: 30px;
