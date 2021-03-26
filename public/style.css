@@ -275,13 +275,13 @@ body{
     position: relative;
     height: 19%;
     width: 6px;
-    background: #00796b;;
+    background: #00796b;
     margin: 2px;
     border-radius: 200px;
     transition: all linear 0.1s;
   }
   .video-disable {
-    background-color: #1c1e20;;
+    background-color: #1c1e20;
     border-radius: 10px;
   }
 
@@ -290,9 +290,10 @@ body{
 	position: absolute;
 	height: 90px;
 	width: 150px;
-	top: 10px;
+	top: 100px;
 	left: 50%;
 	transform: translate(-50%, 0%);
+    background-color: #1c1e20;
 }
 
 .loadingBar {
