@@ -288,11 +288,14 @@ body{
 
 .loadingBar {
 	position: absolute;
-	top: 30px;
+
+    
 	width: 30px;
 	height: 30px;
 	border-radius: 30px;
 	animation: loadingAnimation 3s infinite;
+    left: 50%;
+	top: 150px;
 }
 
 #loadingBar1 {
@@ -352,7 +355,6 @@ body{
     align-items: center;
     background-color: rgba(0, 0, 0, 0.816);
     user-select: none;
-    left: 50%;
-	top: 150px;
+    
   }
   
