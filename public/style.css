@@ -236,7 +236,7 @@ body{
     --indicatorSize: 80px;
     width: var(--indicatorSize);
     height: var(--indicatorSize);
-    background-color: rgba(var(--color3), 1);
+    background-color: rgba(50,50,50, 1);
     border-radius: 50%;
     position: absolute;
     top: 50%;
