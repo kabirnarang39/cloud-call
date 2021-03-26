@@ -10,11 +10,15 @@ var peer = new Peer(undefined,{
     host:'/',
     port:'443'
 });
-
 console.log(window.location.search);
 const urlParams = new URLSearchParams(window.location.search);
 const myParam = urlParams.get('user');
 console.log((myParam))
+//console.log(window.location.href.split('?')[1])
+//console.log(user);
+//console.log(videoGrid)
+///////////////////////////////////////////////
+////////////////////////////////////////
 const closeBtn=()=>{
     var close = document.getElementsByClassName("closebtn");
 var i;
@@ -212,8 +216,7 @@ videoWrapper.classList.add("video-wrapper");
         video.play();
     })
     videoWrapper.appendChild(elementsWrapper);
-  videoWrapper.appendChild(video);
-  videoGrid.append(videoWrapper)
+    videoWrapper.appendChild(video);
    
   // console.log(videoGrid)
 }
@@ -223,16 +226,15 @@ videoWrapper.classList.add("video-wrapper");
         d.scrollTop = d.scrollHeight;
     }
 
-const muteUnmute=(e)=>{
+const muteUnmute=()=>{
     const enabled=myVideoStream.getAudioTracks()[0].enabled;
     if(enabled){
 myVideoStream.getAudioTracks()[0].enabled=false;
 setUnmuteButton();
-
     }
     else{
+        setMuteButton();
         myVideoStream.getAudioTracks()[0].enabled=true;
-    setMuteButton();
     }
 }
 const setUnmuteButton=()=>{
@@ -252,17 +254,15 @@ const setMuteButton=()=>{
     `
     document.querySelector('.main_mute_button').innerHTML=html;
 }
-const playStop=(e)=>{
+const playStop=()=>{
     const enabled=myVideoStream.getVideoTracks()[0].enabled;
     if(enabled){
-
 myVideoStream.getVideoTracks()[0].enabled=false;
 videoWrapperVideoToggle(myVideoElement, false);
 setPlayVideo();
     }
     else{
         videoWrapperVideoToggle(myVideoElement, true);
-    currentElement.setAttribute("tool_tip", "Video Off");
         setStopVideo();
         myVideoStream.getVideoTracks()[0].enabled=true;
     } 
