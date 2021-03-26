@@ -16,6 +16,7 @@ window.addEventListener("load", function (event) {
   }, false);
 const urlParams = new URLSearchParams(window.location.search);
 const myParam = urlParams.get('user');
+const username=myParam;
 //console.log(JSON.parse(myParam))
 //console.log(window.location.href.split('?')[1])
 //console.log(user);
