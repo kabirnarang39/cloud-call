@@ -287,6 +287,7 @@ body{
  
 .video-grid .video-wrapper .elements-wrapper {
     z-index: 100;
+    background-color: rgba(20,230,230, 1);
     position: absolute;
     top: 0;
     left: 0;
