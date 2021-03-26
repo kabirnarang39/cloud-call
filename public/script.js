@@ -179,11 +179,18 @@ const connectToNewUser=(userId,stream)=>{
   console.log(peers)
 }
 const addStream=(video,stream,user)=>{
+    // create audio FX
+  const audioFX = new SE(stream);
+  const audioFXElement = audioFX.createElement();
+  audioFXElement.classList.add("mic-button");
       // video off element
   const videoOffIndicator = document.createElement("div");
   videoOffIndicator.classList.add("video-off-indicator");
   videoOffIndicator.innerHTML = `<ion-icon name="videocam-outline"></ion-icon>`;
-
+// main wrapper
+const videoWrapper = document.createElement("div");
+videoWrapper.id = "video-wrapper";
+videoWrapper.classList.add("video-wrapper");
   // create pin button
   const pinBtn = document.createElement("button");
   pinBtn.classList.add("video-element");
@@ -201,14 +208,15 @@ const addStream=(video,stream,user)=>{
    elementsWrapper.appendChild(namePara);
    // elementsWrapper.appendChild(optionBtn);
    elementsWrapper.appendChild(pinBtn);
+   elementsWrapper.appendChild(audioFXElement);
    elementsWrapper.appendChild(videoOffIndicator);
     video.srcObject=stream;
    
     video.addEventListener('loadedmetadata',()=>{
         video.play();
     })
-   videoGrid.appendChild(elementsWrapper)
-   videoGrid.appendChild(video)
+    videoWrapper.appendChild(elementsWrapper);
+    videoWrapper.appendChild(video);
    
   // console.log(videoGrid)
 }
