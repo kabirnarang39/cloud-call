@@ -40,6 +40,12 @@ io.on('connection',socket=>{
         socket.on('message',message=>{
             io.to(roomId).emit('createMessage',message)
         })
+        socket.on("audio-toggle", async (type) => {
+            socket.to(roomId).broadcast.emit("user-audio-toggle", peerId, type);
+          });
+          socket.on("video-toggle", async (type) => {
+            socket.to(roomId).broadcast.emit("user-video-toggle", peerId, type);
+          });
         socket.on('disconnect', () => {
             socket.to(roomId).broadcast.emit('user-disconnected', userId)
           })
