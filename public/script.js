@@ -10,6 +10,24 @@ var peer = new Peer(undefined,{
     host:'/',
     port:'443'
 });
+window.onload = function () {
+    const loader = document.createElement("div");
+    loader.classList.add("card-wrapper");
+    loader.innerHTML = `
+      <div class="card-loader">
+          <div class="spinner">
+          <div class="spinner-item"></div>
+          <div class="spinner-item"></div>
+          <div class="spinner-item"></div>
+          <div class="spinner-item"></div>
+          </div>
+          <p>Loading ....</p>
+      </div>`;
+    document.body.appendChild(loader);
+    setTimeout(() => {
+      loader.remove();
+    }, 3000);
+  };
 console.log(window.location.search);
 const urlParams = new URLSearchParams(window.location.search);
 const myParam = urlParams.get('user');
