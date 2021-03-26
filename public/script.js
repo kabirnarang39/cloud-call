@@ -273,6 +273,7 @@ const videoWrapperVideoToggle = (element, type) => {
     else {
     videoWrapper.classList.add("video-disable");
     document.querySelector('.video-off-indicator').style.opacity='1';
+    document.querySelector('.video-grid .elements-wrapper').style.backGroundColor=' rgba(20,230,230, 1)';
     }
   };
 const setPlayVideo=()=>{
