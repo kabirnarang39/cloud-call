@@ -352,5 +352,7 @@ body{
     align-items: center;
     background-color: rgba(0, 0, 0, 0.816);
     user-select: none;
+    left: 50%;
+	top: 150px;
   }
   
