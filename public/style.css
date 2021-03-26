@@ -287,9 +287,14 @@ body{
 
 
   #loadingIndicator {
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.816);
 	position: absolute;
-	height: 90px;
-	width: 150px;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, 0%);
@@ -348,12 +353,3 @@ body{
 		top: 30px;
 	}
 }
-.card-wrapper {
-    width: 100vw;
-    height: 100vh;
-    z-index: 99999999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.816);
-  }
