@@ -36,7 +36,7 @@ navigator.mediaDevices.getUserMedia({
 })
 .then(stream=>{
 myVideoStream=stream;
-addStream(myVideoElement,stream);
+addStream(myVideoElement,stream,myParam);
 peer.on('call', call=> {
       call.answer(stream); // Answer the call with an A/V stream.
       const video=document.createElement('video')
@@ -44,7 +44,7 @@ peer.on('call', call=> {
       addStream(video,userVideoStream)
     });
 })
-socket.on('user-connected',(userId)=>{
+socket.on('user-connected',(userId,myParam)=>{
     //document.querySelector('.flash').innerHTML='User Connected'+userId;
     connectToNewUser(userId,stream);
     document.querySelector('.flash').innerHTML=(`<div class="alert success"><span class="closebtn" onClick="closeBtn();">&times;</span><strong>USER</strong> ${userId} connected.</div>`)
@@ -167,7 +167,7 @@ const connectToNewUser=(userId,stream)=>{
     const video=document.createElement('video')
     video.id=userId;
     call.on('stream', userVideoStream=> {
-    addStream(video,userVideoStream)
+    addStream(video,userVideoStream,myParam)
   });
   call.on('close', () => {
     video.remove()
@@ -176,13 +176,40 @@ const connectToNewUser=(userId,stream)=>{
   peers[userId] = call
   console.log(peers)
 }
-const addStream=(video,stream)=>{
+const addStream=(video,stream,user)=>{
+      // video off element
+  const videoOffIndicator = document.createElement("div");
+  videoOffIndicator.classList.add("video-off-indicator");
+  videoOffIndicator.innerHTML = `<ion-icon name="videocam-outline"></ion-icon>`;
+
+  // create pin button
+  const pinBtn = document.createElement("button");
+  pinBtn.classList.add("video-element");
+  pinBtn.classList.add("pin-button");
+  pinBtn.innerHTML = `<ion-icon name="expand-outline"></ion-icon>`;
+  
+   // peer name
+   const namePara = document.createElement("p");
+   namePara.innerHTML = user.name;
+   namePara.classList.add("video-element");
+   namePara.classList.add("name");
+ 
+   const elementsWrapper = document.createElement("div");
+   elementsWrapper.classList.add("elements-wrapper");
+   elementsWrapper.appendChild(namePara);
+   // elementsWrapper.appendChild(optionBtn);
+   elementsWrapper.appendChild(pinBtn);
+   elementsWrapper.appendChild(micBtn);
+   elementsWrapper.appendChild(audioFXElement);
+   elementsWrapper.appendChild(videoOffIndicator);
     video.srcObject=stream;
    
     video.addEventListener('loadedmetadata',()=>{
         video.play();
     })
-   videoGrid.append(video)
+    videoGrid.appendChild(elementsWrapper)
+   videoGrid.appendChild(video)
+   
   // console.log(videoGrid)
 }
 
