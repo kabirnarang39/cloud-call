@@ -15,11 +15,6 @@ console.log(window.location.search);
 const urlParams = new URLSearchParams(window.location.search);
 const myParam = urlParams.get('user');
 console.log((myParam))
-//console.log(window.location.href.split('?')[1])
-//console.log(user);
-//console.log(videoGrid)
-///////////////////////////////////////////////
-////////////////////////////////////////
 const closeBtn=()=>{
     var close = document.getElementsByClassName("closebtn");
 var i;
@@ -230,19 +225,13 @@ videoWrapper.classList.add("video-wrapper");
 
 const muteUnmute=(e)=>{
     const enabled=myVideoStream.getAudioTracks()[0].enabled;
-    const currentElement = e.target;
     if(enabled){
-        socket.emit("audio-toggle", false);
 myVideoStream.getAudioTracks()[0].enabled=false;
-    currentElement.setAttribute("tool_tip", "Microphone On");
 setUnmuteButton();
 
     }
     else{
-        socket.emit("audio-toggle", true);
         myVideoStream.getAudioTracks()[0].enabled=true;
-       
-    currentElement.setAttribute("tool_tip", "Microphone Off");
     setMuteButton();
     }
 }
@@ -265,13 +254,10 @@ const setMuteButton=()=>{
 }
 const playStop=(e)=>{
     const enabled=myVideoStream.getVideoTracks()[0].enabled;
-    const currentElement = e.target;
     if(enabled){
 
 myVideoStream.getVideoTracks()[0].enabled=false;
 videoWrapperVideoToggle(myVideoElement, false);
-socket.emit("video-toggle", false);
-    currentElement.setAttribute("tool_tip", "Video On");
 setPlayVideo();
     }
     else{
@@ -493,24 +479,3 @@ class SE {
       return this.element;
     }
 }
-
-socket.on("user-audio-toggle", (id, type) => {
-    videoWrapperMicToggle(document.querySelector(`video[peer="${id}"]`), type);
-  });
-  
-  socket.on("user-video-toggle", (id, type) => {
-    videoWrapperVideoToggle(document.querySelector(`video[peer="${id}"]`), type);
-  });
-  
-  const videoWrapperMicToggle = (element, type) => {
-    const videoWrapper = element.previousSibling;
-    const micButtons = videoWrapper.childNodes;
-    if (type) {
-      micButtons[3].classList.remove("off");
-      micButtons[2].classList.add("off");
-    } else {
-      micButtons[2].classList.remove("off");
-      micButtons[3].classList.add("off");
-    }
-  };
-  
