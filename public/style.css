@@ -285,7 +285,7 @@ body{
     border-radius: 10px;
   }
  
-.video-grid .elements-wrapper {
+.video-grid .video-wrapper .elements-wrapper {
     z-index: 1;
     position: absolute;
     top: 0;
