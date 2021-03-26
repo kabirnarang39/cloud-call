@@ -254,7 +254,7 @@ body{
   ion-icon {
     pointer-events: none;
     transition: all 0.24s linear;
-    font-size: 1.3rem;
+    font-size: 2.3rem;
   }
   .name {
     font-size: 0.75rem;
