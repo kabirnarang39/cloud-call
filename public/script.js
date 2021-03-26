@@ -269,7 +269,8 @@ setPlayVideo();
 }
 const videoWrapperVideoToggle = (element, type) => {
     const videoWrapper = element.previousSibling;
-    if (type) videoWrapper.classList.remove("video-disable");
+    if (type) {videoWrapper.classList.remove("video-disable");
+    document.querySelector('.video-off-indicator').style.opacity='0';}
     else {
     videoWrapper.classList.add("video-disable");
     document.querySelector('.video-off-indicator').style.opacity='1';
