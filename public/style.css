@@ -234,9 +234,8 @@ body{
 
 }
 .video-off-indicator {
-    --indicatorSize: 80px;
-    width: var(--indicatorSize);
-    height: var(--indicatorSize);
+    width: 80px;
+    height: 80px;
     background-color: rgb(106, 90, 205);
     border-radius: 50%;
     position: absolute;
@@ -283,6 +282,7 @@ body{
   }
   .video-disable {
     background-color: rgb(60, 60, 60);
+    border-radius: 10px;
   }
  
 .video-grid .elements-wrapper {
