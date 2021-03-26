@@ -14,9 +14,6 @@ window.onload = function () {
     const loader = document.createElement("div");
     loader.classList.add("card-wrapper");
     loader.innerHTML = `
-    <h1 id="description">
-	Loading... Please&nbsp;wait!
-</h1>
 <div id="loadingIndicator">
 	<div class="loadingBar" id="loadingBar1"></div>
 	<div class="loadingBar" id="loadingBar2"></div>

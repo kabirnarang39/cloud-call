@@ -285,16 +285,6 @@ body{
     border-radius: 10px;
   }
 
-  #description {
-	position: absolute;
-	left: 50%;
-	top: 150px;
-	transform: translate(-50%, -50%);
-
-	text-align: center;
-	font-family: Raleway;
-	color: white;
-}
 
 #loadingIndicator {
 	position: relative;
@@ -303,6 +293,8 @@ body{
 	top: 10px;
 	left: 50%;
 	transform: translate(-50%, 0%);
+    left: 50%;
+	top: 150px;
 }
 
 .loadingBar {
@@ -371,5 +363,7 @@ body{
     align-items: center;
     background-color: rgba(0, 0, 0, 0.816);
     user-select: none;
+    left: 50%;
+	top: 150px;
   }
   
