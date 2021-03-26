@@ -249,7 +249,7 @@ body{
     align-items: center;
     color: white;
     transition: all 0.24s all;
-    opacity: 0;
+    opacity: 1;
     pointer-events: none;
   }
   ion-icon {
@@ -286,7 +286,7 @@ body{
   }
  
 .video-grid .video-wrapper .elements-wrapper {
-    z-index: 1;
+    z-index: 100;
     position: absolute;
     top: 0;
     left: 0;
