@@ -1,7 +1,6 @@
 body{
     margin: 0;
     padding: 0;
-    
 }
 .video-grid,.screen-share{
     display: flex;
@@ -217,71 +216,4 @@ body{
   .info {
     color: darkgreen;
   }
-  .video-element {
-    outline: none;
-    border: none;
-    z-index: 1;
-    position: absolute;
-    display: flex;
-    padding: 6px;
-    background-color: rgba(51,51,50, 0.8);
-    margin: 0.5rem;
-    color: white;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    transition: all 0.24s linear;
-    position: absolute;
-
-}
-.video-off-indicator {
-    width: 80px;
-    height: 80px;
-    background-color: #00796b;;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 2.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    transition: all 0.24s all;
-    opacity: 0;
-    pointer-events: none;
-  }
-  ion-icon {
-    pointer-events: none;
-    transition: all 0.24s linear;
-    font-size: 2.0rem;
-  }
-  .name {
-    font-size: 0.80rem;
-  }
-  .effect-container {
-    margin: 0.5rem;
-    width: 32.8px;
-    height: 32.8px;
-    position: absolute;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-   
-  }
-  .o1,
-  .o2 {
-    position: relative;
-    height: 19%;
-    width: 6px;
-    background: #00796b;
-    margin: 2px;
-    border-radius: 200px;
-    transition: all linear 0.1s;
-  }
-  .video-disable {
-    background-color: #1c1e20;
-    border-radius: 10px;
-  }
-
+  
