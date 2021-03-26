@@ -14,13 +14,10 @@ window.onload = function () {
     const loader = document.createElement("div");
     loader.classList.add("card-wrapper");
     loader.innerHTML = `
-<div id="loadingIndicator">
 	<div class="loadingBar" id="loadingBar1"></div>
 	<div class="loadingBar" id="loadingBar2"></div>
 	<div class="loadingBar" id="loadingBar3"></div>
-	<div class="loadingBar" id="loadingBar4"></div>
-</div>
-      </div>`;
+	<div class="loadingBar" id="loadingBar4"></div>`;
     document.body.appendChild(loader);
     setTimeout(() => {
       loader.remove();

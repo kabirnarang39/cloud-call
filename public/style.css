@@ -286,16 +286,19 @@ body{
   }
 
 
-  #loadingIndicator {
-	position: absolute;
-	height: 90px;
-	width: 150px;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, 0%);
-    background-color: #3d3d42;
-    background-size: cover;
-}
+  .card-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.816);
+    user-select: none;
+  }
 
 .loadingBar {
 	position: absolute;
