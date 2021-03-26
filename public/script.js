@@ -9,6 +9,11 @@ var peer = new Peer(undefined,{
     host:'/',
     port:'443'
 });
+window.addEventListener("load", function (event) {
+    Dish();
+  
+    window.onresize = Dish;
+  }, false);
 console.log(window.location.search);
 const urlParams = new URLSearchParams(window.location.search);
 const myParam = urlParams.get('user');
@@ -156,11 +161,7 @@ function Area(Increment, Count, Width, Height, Margin = 10) {
   }
   
   // Load and Resize Event
-  window.addEventListener("load", function (event) {
-    Dish();
-  
-    window.onresize = Dish;
-  }, false);
+ 
 
 const connectToNewUser=(userId,stream)=>{
     var call = peer.call(userId, stream);
