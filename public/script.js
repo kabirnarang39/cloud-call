@@ -234,7 +234,6 @@ const muteUnmute=(e)=>{
     if(enabled){
         socket.emit("audio-toggle", false);
 myVideoStream.getAudioTracks()[0].enabled=false;
-currentElement.innerHTML = `<ion-icon name="mic-off-outline"></ion-icon>`;
     currentElement.setAttribute("tool_tip", "Microphone On");
 setUnmuteButton();
 
@@ -242,7 +241,7 @@ setUnmuteButton();
     else{
         socket.emit("audio-toggle", true);
         myVideoStream.getAudioTracks()[0].enabled=true;
-        currentElement.innerHTML = `<ion-icon name="mic-outline"></ion-icon>`;
+       
     currentElement.setAttribute("tool_tip", "Microphone Off");
     setMuteButton();
     }
@@ -272,14 +271,12 @@ const playStop=(e)=>{
 myVideoStream.getVideoTracks()[0].enabled=false;
 videoWrapperVideoToggle(myVideoElement, false);
 socket.emit("video-toggle", false);
-currentElement.innerHTML = `<ion-icon name="videocam-off-outline"></ion-icon>`;
     currentElement.setAttribute("tool_tip", "Video On");
 setPlayVideo();
     }
     else{
         videoWrapperVideoToggle(myVideoElement, true);
         socket.emit("video-toggle", true);
-        currentElement.innerHTML = `<ion-icon name="videocam-outline"></ion-icon>`;
     currentElement.setAttribute("tool_tip", "Video Off");
         setStopVideo();
         myVideoStream.getVideoTracks()[0].enabled=true;
@@ -496,3 +493,24 @@ class SE {
       return this.element;
     }
 }
+
+socket.on("user-audio-toggle", (id, type) => {
+    videoWrapperMicToggle(document.querySelector(`video[peer="${id}"]`), type);
+  });
+  
+  socket.on("user-video-toggle", (id, type) => {
+    videoWrapperVideoToggle(document.querySelector(`video[peer="${id}"]`), type);
+  });
+  
+  const videoWrapperMicToggle = (element, type) => {
+    const videoWrapper = element.previousSibling;
+    const micButtons = videoWrapper.childNodes;
+    if (type) {
+      micButtons[3].classList.remove("off");
+      micButtons[2].classList.add("off");
+    } else {
+      micButtons[2].classList.remove("off");
+      micButtons[3].classList.add("off");
+    }
+  };
+  
