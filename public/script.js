@@ -14,7 +14,7 @@ window.addEventListener("load", function (event) {
   
     window.onresize = Dish;
   }, false);
-console.log(window.location.search);
+console.log(username);
 const urlParams = new URLSearchParams(window.location.search);
 const myParam = urlParams.get('user');
 //console.log(JSON.parse(myParam))
