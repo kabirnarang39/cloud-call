@@ -79,7 +79,6 @@ socket.on('createMessage',(message,username)=>{
     $('ul').append(`<li >
 								<span class="messageHeader">
 									<span>
-										From 
 										<span class="messageSender">${username}</span> 
 										to 
 										<span class="messageReceiver">Everyone:</span>

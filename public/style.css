@@ -98,6 +98,8 @@ body{
     flex-grow: 1;
     overflow-y: scroll;
     box-sizing: content-box;
+    width: 600px;
+    height: 1000px;
 }
 .main_message_container{
     padding: 22px 12px;
