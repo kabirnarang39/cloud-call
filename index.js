@@ -28,6 +28,7 @@ app.get('/meet-end',(req,res,next)=>{
 })
 app.get('/:room',(req,res)=>{
    // console.log(req.params)
+   console.log(io.sockets.clients(req.params.room))
     res.render('zoom',{
         roomId:req.params.room,
        username:req.query.user,

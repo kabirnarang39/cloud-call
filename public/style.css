@@ -465,7 +465,7 @@ body{
   padding: 0px 16px;
   -webkit-user-select: none;
   -moz-user-select: none;
-  color: #5f6368;
+  color: #00796b;
 }
 
 .tool-bar-wrapper .tool-bar-button:hover {
@@ -478,7 +478,7 @@ body{
 
 .tool-bar-wrapper .tool-bar-button ion-icon {
   font-size: 1.5rem;
-  color: #5f6368;
+  color: #00796b;
 }
 
 .tool-bar-wrapper #time {
