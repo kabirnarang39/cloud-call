@@ -336,11 +336,8 @@ body{
   }
   .tooltip {
     position: relative;
-    opacity: 1;
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
+    opacity: 1 !important;
+
   }
   
   .tooltip::before {
@@ -356,7 +353,7 @@ body{
     left: 50%;
     -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
-    background-color: orange;
+    background-color: blueviolet;
     color: white;
     border-radius: 0.25rem;
     padding: 0.5rem 1rem;
