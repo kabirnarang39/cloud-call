@@ -38,11 +38,7 @@ body{
     display: flex;
     flex-direction: column;
 }
-.main_right{
-   background-color: #00796b;
-   display: none;
-   position: absolute;
-}
+
 .main_videos{
     flex-grow: 1;
     display: flex;
@@ -124,7 +120,11 @@ body{
     flex-grow: 1;
     background-color: transparent;
     border: none;
-    color: orange;
+    color: black;
+    padding: 26px;
+}
+.main_message_container input:focus{
+  border: none;
 }
 .messages{
     color:black;
