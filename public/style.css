@@ -121,7 +121,7 @@ body{
     border-right: none;
     border-radius: 5px;
     color: black;
-    padding: 26px;
+    padding: 16px;
     outline: none;
 }
 .main_message_container input:focus{
