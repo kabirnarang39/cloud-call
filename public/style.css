@@ -119,16 +119,15 @@ body{
 .main_message_container input{
     flex-grow: 1;
     background-color: transparent;
-    border-left: #00796b 2px solid;
-    border-top: #00796b 2px solid;
-    border-bottom: #00796b 2px solid;
+    border-left: #00796b 1px solid;
+    border-top: #00796b 1px solid;
+    border-bottom: #00796b 1px solid;
     border-radius: 5px;
     color: black;
     padding: 26px;
     outline: none;
 }
 .main_message_container input:focus{
-  border: none;
   outline: none;
 }
 .messages{
