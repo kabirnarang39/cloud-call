@@ -519,3 +519,8 @@ body{
 span.time {
   color: #5f6368;
 }
+.messageSender{
+  font-size: 20px;
+  color: #1c1e20;
+  
+}
