@@ -522,7 +522,7 @@ span.time {
 .messageSender{
   font-size: 12px;
   font-weight: bolder;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   color: #1c1e20;
-
+  display: inline-flex;
 }
