@@ -30,7 +30,7 @@ app.get('/:room',(req,res)=>{
    // console.log(req.params)
     res.render('zoom',{
         roomId:req.params.room,
-       username:req.params.user
+       username:req.query.user
     })
 })
 io.on('connection',socket=>{
