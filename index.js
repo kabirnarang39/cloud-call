@@ -31,7 +31,7 @@ app.get('/:room',(req,res)=>{
     res.render('zoom',{
         roomId:req.params.room,
        username:req.query.user,
-       count:io.sockets.clients(req.params.room).length
+       count:10
     })
 })
 io.on('connection',socket=>{
