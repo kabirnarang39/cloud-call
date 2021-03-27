@@ -128,7 +128,7 @@ body{
     color: #f5f5f5;
 }
 .messages{
-    color:white;
+    color:orange;
     list-style: none;
     display: grid;
 }
