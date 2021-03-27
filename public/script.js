@@ -393,6 +393,3 @@ const setScreenShareDisableButton=()=>{
     `
     document.querySelector('.main_screen_button').innerHTML=html;
 }
-const meetEnd=()=>{
-    window.location.href='https://zoom-12.herokuapp.com/meet-end'
-}
