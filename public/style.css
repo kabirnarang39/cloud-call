@@ -9,8 +9,8 @@ body{
     align-items: center;
     justify-content: center;
     vertical-align: middle;
-    position: relative;
-    overflow: hidden;
+    position: absolute;
+    overflow: scroll;
     left: 0px;
     bottom: 0px;
     top: 0px;
