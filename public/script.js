@@ -404,8 +404,9 @@ shareToggleButton.addEventListener('click', e => {
 })
 const copyButton = document.querySelector('#copy-button')
 const shareLink = document.querySelector('.share-link')
-shareLink.innerHTML = window.location.href
-copyButton.setAttribute('meeting_link', window.location.href)
+console.log(window.location.href.split('?')[0])
+shareLink.innerHTML = window.location.href.split('?')[0]
+copyButton.setAttribute('meeting_link', window.location.href.split('?')[0])
 const dialogueCloseButton = document.querySelector('#close-dialogue')
 dialogueCloseButton.addEventListener('click', (e) => {
   const dialogue = document.querySelector('.dialogue-container')
