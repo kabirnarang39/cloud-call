@@ -30,7 +30,20 @@
     <div class="main">
         
     <div class="main_left" style="display: flex; flex: 1;">
-       
+        <div class="tool-bar-wrapper">
+          <button id="peoples-count" class="tool-bar-button">
+            <ion-icon name="people-outline"></ion-icon>
+            <span class="user-number" id="user-number">
+              <%= count %>
+            </span>
+          </button>
+          <button id="message-box" class="tool-bar-button">
+            <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+          </button>
+          <button id="time" class="tool-bar-button">
+            00:00 AM
+          </button>
+      </div>
         <div class="flash">
 
         </div>

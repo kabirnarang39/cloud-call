@@ -418,3 +418,12 @@ copyButton.addEventListener("mousedown", (e) => {
 copyButton.addEventListener("mouseout", (e) => {
   e.target.setAttribute("tool_tip", 'copy');
 });
+const setTime = () => {
+  const timeButton = document.getElementById('time')
+  var time = new Date();
+  timeButton.innerHTML = `${time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}`
+}
+setTime()
+setInterval(() => {
+  setTime()
+}, 500);
