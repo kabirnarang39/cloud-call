@@ -9,6 +9,7 @@ body{
     align-items: center;
     justify-content: center;
     vertical-align: middle;
+    position: relative;
     overflow: hidden;
     left: 0px;
     bottom: 0px;
