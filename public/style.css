@@ -9,7 +9,7 @@ body{
     align-items: center;
     justify-content: center;
     vertical-align: middle;
-    position: relative;
+    position: absolute;
     overflow: hidden;
     left: 0px;
     bottom: 0px;
@@ -22,7 +22,7 @@ body{
     vertical-align: middle;
     align-self: center;
     border-radius: 10px;
-    overflow: scroll;
+    overflow: hidden;
     display: inline-block;
     box-shadow: 0px 12px 22px rgba(0, 0, 0, 0.1);
     background-color: #fff;
@@ -86,7 +86,7 @@ body{
     flex-direction: column;
     background-color: #242324;
     border-left: 1px solid #3d3d42;
-    overflow: visible;
+    overflow: hidden;
 }
 .main_header{
     color:#f5f5f5;
