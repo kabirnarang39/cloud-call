@@ -526,3 +526,8 @@ span.time {
   display: inline-flex;
   margin-left: 5px;
 }
+.main_header h6{
+  display: flex;
+  float: inline-end;
+  justify-content: space-between;
+}
