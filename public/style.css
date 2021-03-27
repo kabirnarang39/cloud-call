@@ -314,7 +314,7 @@ body{
     color: #202124;
   }
   
-  .dialogue-container .dialogue-button {
+  .dialogue-container .dialogue-button ,.cancel-msg{
     font-size: 1.5rem;
     border: none;
     outline: none;
@@ -336,12 +336,12 @@ body{
     transition: all 0.24s linear;
 }
   
-  .dialogue-container .dialogue-button ion-icon {
+  .dialogue-container .dialogue-button ion-icon,.cancel-msg svg {
     pointer-events: none;
     color: #202124;
   }
   
-  .dialogue-container .dialogue-button:hover {
+  .dialogue-container .dialogue-button:hover,.cancel-msg:hover {
     background-color: #d6d6d6;
     border: none;
     outline: none;
@@ -525,9 +525,4 @@ span.time {
   color: #1c1e20;
   display: inline-flex;
   margin-left: 5px;
-}
-.cancel-msg:hover{
-  background-color: #d6d6d6;
-  border: none;
-  outline: none;
 }
