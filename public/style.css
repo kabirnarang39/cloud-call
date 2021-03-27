@@ -84,7 +84,7 @@ body{
     flex-direction: column;
     overflow: hidden;
     position: absolute;
-    margin-left: 200px;
+    margin-right: 10px;
     margin-top: 10px;
     z-index: 30000;
     -webkit-user-select: none;
