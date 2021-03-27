@@ -23,7 +23,9 @@ app.get('/',(req,res)=>{
    // res.redirect('/'+uuidv4());
     res.send(uuidv4())
 })
-
+app.get('/meet-end',(req,res,next)=>{
+    res.render('meet-end')
+})
 app.get('/:room',(req,res)=>{
    // console.log(req.params)
     res.render('zoom',{
