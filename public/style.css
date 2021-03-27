@@ -334,26 +334,86 @@ body{
     pointer-events: all;
     visibility: visible;
   }
-  #copy-button {
-    appearance: auto;
-    text-rendering: auto;
-    color: black;
-    letter-spacing: normal;
-    word-spacing: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    display: inline-block;
-    text-align: center;
-    align-items: flex-start;
-    cursor: default;
-    background-color:gray;
-    box-sizing: border-box;
-    margin: 0em;
-    font: 400 13.3333px Arial;
-    padding: 1px 6px;
-    border-width: 2px;
-    border-style: outset;
-    border-color:grey;
-    border-image: initial;
-}
+  .tooltip {
+    position: relative;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+  }
+  
+  .tooltip::before {
+    font-size: 0.65rem !important;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    content: attr(tool_tip);
+    display: inline;
+    white-space: nowrap;
+    position: absolute;
+    top: -45px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    background-color: rgba(var(--color3), 1);
+    color: white;
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem;
+    -webkit-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+  }
+  
+  .tooltip:hover::before {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .tooltip-danger::before {
+    background-color: brown;
+  }
+  
+  @media (hover: hover) {
+    .tooltip:hover .tooltip::before {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+  
+  #copy {
+    --tooltip: "copy";
+    cursor: pointer;
+    position: relative;
+  }
+  
+  #copy i {
+    pointer-events: none;
+  }
+  
+  #copy span {
+    pointer-events: none;
+  }
+  
+  #copy:before {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    -webkit-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+    position: absolute;
+    content: var(--tooltip);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    background-color: #262626;
+    top: -40px;
+    color: white;
+  }
+  
+  #copy:hover:before {
+    opacity: 1;
+    visibility: visible;
+  }
+  
