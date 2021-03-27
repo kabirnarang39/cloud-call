@@ -26,7 +26,26 @@
 <body>
     
     <div class="main">
-        
+        <div class="dialogue-container">
+            <div class="dialogue-head">
+              <p class="dialogue-title">Your meeting's ready</p>
+              <button id="close-dialogue" class="dialogue-button">
+                <ion-icon name="close-outline"></ion-icon>
+              </button>
+            </div>
+            <div class="dialogue-body">
+              <p>Share this meeting link with others you want in the meeting</p>
+              <div class="share-container">
+                <p class="share-link">meet.google.com/sij-dwa-zjm</p>
+                <button id="copy-button" class="dialogue-button tooltip" tool_tip="copy"
+                  meeting_link="meet.google.com/sij-dwa-zjm">
+                  <ion-icon name="copy-outline"></ion-icon>
+                </button>
+              </div>
+              <p class="caption">Joined as <%= user.name %>
+              </p>
+            </div>
+          </div>  
     <div class="main_left" style="display: flex; flex: 1;">
         <div class="flash">
 
@@ -63,7 +82,7 @@
                 <path fill-rule="evenodd" d="M7.646.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 1.707V10.5a.5.5 0 0 1-1 0V1.707L5.354 3.854a.5.5 0 1 1-.708-.708l3-3z"/>
               </svg>
         </div>
-        <div class="main_controls_button">
+        <div class="main_controls_button"  onclick="showShare();" id="share-toggle">
             <svg xmlns="http://www.w3.org/2000/svg" width="26px" height="26px" fill="#00796b" class="bi bi-share" viewBox="0 0 16 16">
                 <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
               </svg>
