@@ -525,4 +525,5 @@ span.time {
   font-family: 'Times New Roman', Times, serif;
   color: #1c1e20;
   display: inline-flex;
+  margin-left: 5px;
 }

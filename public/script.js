@@ -80,7 +80,8 @@ socket.on('createMessage',(message,username,image)=>{
                     vertical-align: middle;
                     width: 30px;
                     height: 30px;
-                    border-radius: 50%;">
+                    border-radius: 50%;
+                    padding:2px;">
 										<span class="messageSender">${username}</span> 
 									</span>
 									${new Date().toLocaleString('en-US', {
