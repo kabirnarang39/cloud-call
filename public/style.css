@@ -40,6 +40,7 @@ body{
 }
 .main_right{
    background-color: #00796b;
+   display: none;
    position: absolute;
 }
 .main_videos{
