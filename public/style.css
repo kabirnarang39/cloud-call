@@ -131,18 +131,16 @@ body{
     color:wheat;
     list-style: none;
     display: grid;
-    background-color: orange;
-    padding: 10px;
-    border-radius: 5px;
+
 }
-/*.messages li{
+.messages li{
     width:200px;
     word-wrap:break-word;
     background-color: brown;
     padding:10px;
     border-radius: 10px;
 }
-    */
+   
 .video-grid video:after {
     color: #aaa;
     font-size: 13px;
