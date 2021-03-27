@@ -359,10 +359,6 @@ body{
     padding: 0.5rem 1rem;
     -webkit-transition: all 0.2s linear;
     transition: all 0.2s linear;
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
   }
   
   .tooltip:hover::before {
