@@ -254,7 +254,6 @@ const displayChat=()=>{
           </svg>
     `
     document.querySelector('.main_right').style.display="flex";
-    document.querySelector('.main_right').style.width="200px";
     document.querySelector('.chat_display').innerHTML=html;
 
  }
