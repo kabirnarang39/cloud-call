@@ -22,7 +22,7 @@ body{
     vertical-align: middle;
     align-self: center;
     border-radius: 10px;
-    overflow: scroll i !important;
+    overflow: scroll;
     display: inline-block;
     box-shadow: 0px 12px 22px rgba(0, 0, 0, 0.1);
     background-color: #fff;
