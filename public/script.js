@@ -76,10 +76,12 @@ socket.on('createMessage',(message,username,image)=>{
     $('ul').append(`<li >
 								<span class="messageHeader">
 									<span>
-                    <img src=${image} width="20px" height="20px" style="border-radius:5px;">
+                    <img src=${image} style="  
+                    vertical-align: middle;
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;">
 										<span class="messageSender">${username}</span> 
-										to 
-										<span class="messageReceiver">Everyone:</span>
 									</span>
 									${new Date().toLocaleString('en-US', {
 										hour: 'numeric',
