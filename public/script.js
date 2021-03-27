@@ -78,8 +78,8 @@ socket.on('createMessage',(message,username,image)=>{
 									<span>
                     <img src=${image} style="  
                     vertical-align: middle;
-                    width: 30px;
-                    height: 30px;
+                    width: 40px;
+                    height: 40px;
                     border-radius: 50%;
                     padding:2px;">
 										<span class="messageSender">${username}</span> 
