@@ -281,7 +281,7 @@ const hideShow=()=>{
        
       }
     else
-    if(x.style.display===''&&x.style.display==='none'){
+    if(x.style.display===''||x.style.display==='none'){
        //heroku console.log('hey ')
         displayChat();
       
