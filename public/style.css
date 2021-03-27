@@ -86,8 +86,6 @@ body{
 .main_right{
     display: none;
     flex-direction: column;
-    background-color: #242324;
-    border-left: 1px solid #3d3d42;
     overflow: hidden;
     position: absolute;
     margin: 10px;
