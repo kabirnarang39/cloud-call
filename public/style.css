@@ -336,6 +336,7 @@ body{
   }
   .tooltip {
     position: relative;
+    opacity: 1;
     -webkit-user-select: none;
        -moz-user-select: none;
         -ms-user-select: none;
@@ -344,7 +345,7 @@ body{
   
   .tooltip::before {
     font-size: 0.65rem !important;
-    opacity: 1;
+    opacity: 0;
     visibility: hidden;
     pointer-events: none;
     content: attr(tool_tip);
