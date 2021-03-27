@@ -122,6 +122,7 @@ body{
     border-left: #00796b 1px solid;
     border-top: #00796b 1px solid;
     border-bottom: #00796b 1px solid;
+    border-right: none;
     border-radius: 5px;
     color: black;
     padding: 26px;
