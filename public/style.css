@@ -122,9 +122,11 @@ body{
     border: none;
     color: black;
     padding: 26px;
+    outline: none;
 }
 .main_message_container input:focus{
   border: none;
+  outline: none;
 }
 .messages{
     color:black;
