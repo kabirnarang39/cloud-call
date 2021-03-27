@@ -216,3 +216,83 @@ body{
   .info {
     color: darkgreen;
   }
+ .dialogue-container {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    position: absolute;
+    margin: 2rem;
+    top: 0;
+    z-index: 30000;
+    user-select: none;
+    background-color: white;
+    padding: 10px 24px 24px 24px;
+    width: 360px;
+    border-radius: 0.25rem;
+    transition: all 0.24s linear;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3),
+      0 2px 6px 2px rgba(60, 64, 67, 0.15);
+   
+    }
+   .dialogue-container p {
+        margin: 0px;
+        margin-top: 8px;
+        font-size: 14px;
+        font-family: "Open Sans", sans-serif;
+        color: #3c4043;
+      }
+      .dialogue-container .dialogue-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .dialogue-container .dialogue-head     p {
+          margin: 14px 0px;
+          font-size: 18px;
+          color: #202124;
+        }
+      
+    .share-container {
+      margin-top: 8px;
+      background-color: #f1f3f4;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 51px;
+      padding: 0px 8px;
+      border-radius: 0.25rem;
+     
+    }
+    .share-container  p {
+        margin: 0;
+        color: #202124;
+      }
+    .dialogue-button {
+      font-size: 1.5rem;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      transition: all 0.24s linear;
+    }
+    .dialogue-button:hover {
+        background-color: #d6d6d6;
+        border: none;
+        outline: none;
+      }
+   
+  .dialogue-button  p.caption {
+    font-size: 12px;
+    color: #5f6368;
+  }
+  .dialogue-active {
+    opacity: 1;
+    pointer-events: all;
+    visibility: visible;
+  }
