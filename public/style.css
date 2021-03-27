@@ -120,9 +120,6 @@ body{
 .main_message_container{
     padding: 22px 12px;
     display: flex;
-    background-color: #00796b;
-    border-radius: 20px;
-    padding: 20px;
 }
 .main_message_container input{
     flex-grow: 1;
@@ -134,6 +131,9 @@ body{
     color:wheat;
     list-style: none;
     display: grid;
+    background-color: orange;
+    padding: 10px;
+    border-radius: 5px;
 }
 /*.messages li{
     width:200px;
