@@ -527,7 +527,7 @@ span.time {
   margin-left: 5px;
 }
 .cancel-msg:hover{
-  background-color: #5f6368;
-  padding: 5px;
-  border-radius: 50%;
+  background-color: #d6d6d6;
+  border: none;
+  outline: none;
 }
