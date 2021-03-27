@@ -86,7 +86,7 @@ body{
     flex-direction: column;
     background-color: #242324;
     border-left: 1px solid #3d3d42;
-    overflow: hidden;
+    overflow: visible;
 }
 .main_header{
     color:#f5f5f5;
@@ -224,10 +224,6 @@ body{
     margin: 2rem;
     top: 0;
     z-index: 30000;
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
     background-color: white;
     padding: 10px 24px 24px 24px;
     width: 360px;
