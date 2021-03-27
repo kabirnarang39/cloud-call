@@ -212,7 +212,7 @@ body{
       margin: auto;
   }
   .alert.success {background-color: #00796b;}
-  .closebtn {
+  .closebtn,.cancel-msg {
     margin-left: 15px;
     color: white;
     font-weight: bold;
@@ -223,7 +223,7 @@ body{
     transition: 0.3s;
   }
   
-  .closebtn:hover {
+  .closebtn:hover ,.cancel-msg:hover{
     color: black;
   }  
   #video {
