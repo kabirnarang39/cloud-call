@@ -134,7 +134,7 @@ body{
     
 }
 .messages li{
-    width:250px;
+    width:350px;
     word-wrap:break-word;
     border: 2px solid #dedede;
     background-color: #f1f1f1;
