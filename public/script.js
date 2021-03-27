@@ -396,7 +396,6 @@ const setScreenShareDisableButton=()=>{
 const meetEnd=()=>{
     window.location.href='https://zoom-12.herokuapp.com/meet-end'
 }
-const showShare=()=>{
     const shareToggleButton = document.getElementById('share-toggle')
     shareToggleButton.addEventListener('click', e => {
       const dialogue = document.querySelector('.dialogue-container')
@@ -419,4 +418,3 @@ const showShare=()=>{
     copyButton.addEventListener("mouseout", (e) => {
       e.target.setAttribute("tool_tip", 'copy');
     });
-}
