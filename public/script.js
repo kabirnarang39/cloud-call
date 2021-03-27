@@ -76,7 +76,7 @@ socket.on('createMessage',(message,username,image)=>{
     $('ul').append(`<li >
 								<span class="messageHeader">
 									<span>
-                    <img src=${image} >
+                    <img src=${image} width="20px" height="20px" style="border-radius:5px;">
 										<span class="messageSender">${username}</span> 
 										to 
 										<span class="messageReceiver">Everyone:</span>
