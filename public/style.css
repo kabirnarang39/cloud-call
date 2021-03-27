@@ -39,7 +39,8 @@ body{
     flex-direction: column;
 }
 .main_right{
-    flex: 0.2;
+   background-color: #00796b;
+   position: absolute;
 }
 .main_videos{
     flex-grow: 1;
