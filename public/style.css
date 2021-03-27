@@ -90,7 +90,7 @@ body{
     border-left: 1px solid #3d3d42;
     overflow: hidden;
     position: absolute;
-    margin: auto;
+    margin: 10px;
     z-index: 30000;
     -webkit-user-select: none;
        -moz-user-select: none;
@@ -99,6 +99,7 @@ body{
     background-color: white;
     padding: 10px 24px 24px 24px;
     width: 500px;
+    height: 700px;
     border-radius: 1.00rem;
     -webkit-transition: all 0.24s linear;
     transition: all 0.24s linear;
