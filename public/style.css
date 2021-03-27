@@ -9,7 +9,7 @@ body{
     align-items: center;
     justify-content: center;
     vertical-align: middle;
-    position: absolute;
+    position: relative;
     overflow: hidden;
     left: 0px;
     bottom: 0px;
@@ -22,7 +22,7 @@ body{
     vertical-align: middle;
     align-self: center;
     border-radius: 10px;
-    overflow: hidden;
+    overflow: scroll i !important;
     display: inline-block;
     box-shadow: 0px 12px 22px rgba(0, 0, 0, 0.1);
     background-color: #fff;
@@ -224,6 +224,10 @@ body{
     margin: 2rem;
     top: 0;
     z-index: 30000;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
     background-color: white;
     padding: 10px 24px 24px 24px;
     width: 360px;
@@ -341,6 +345,7 @@ body{
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
+    content: attr(tool_tip);
     display: inline;
     white-space: nowrap;
     position: absolute;
@@ -392,6 +397,7 @@ body{
     -webkit-transition: all 0.2s linear;
     transition: all 0.2s linear;
     position: absolute;
+    content: var(--tooltip);
     padding: 0.25rem 0.5rem;
     border-radius: 0.25rem;
     background-color: #262626;
