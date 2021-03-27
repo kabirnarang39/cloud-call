@@ -355,7 +355,7 @@ body{
     left: 50%;
     -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
-    background-color: rgba(var(--color3), 1);
+    background-color: orange;
     color: white;
     border-radius: 0.25rem;
     padding: 0.5rem 1rem;
@@ -383,21 +383,20 @@ body{
     }
   }
   
-  #copy {
-    --tooltip: "copy";
+  #copy-button {
     cursor: pointer;
     position: relative;
   }
   
-  #copy i {
+  #copy-button i {
     pointer-events: none;
   }
   
-  #copy span {
+  #copy-button span {
     pointer-events: none;
   }
   
-  #copy:before {
+  #copy-button:before {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -412,7 +411,7 @@ body{
     color: white;
   }
   
-  #copy:hover:before {
+  #copy-button:hover:before {
     opacity: 1;
     visibility: visible;
   }
