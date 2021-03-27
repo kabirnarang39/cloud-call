@@ -1,6 +1,5 @@
 const express=require('express');
 const app=express();
-const screenshot=require('screenshot-desktop');
 const path=require('path')
 const server=require('http').Server(app);
 const io=require('socket.io')(server)
@@ -28,7 +27,6 @@ app.get('/meet-end',(req,res,next)=>{
 })
 app.get('/:room',(req,res)=>{
    // console.log(req.params)
-   console.log(io.sockets.clients())
     res.render('zoom',{
         roomId:req.params.room,
        username:req.query.user,
@@ -38,8 +36,6 @@ app.get('/:room',(req,res)=>{
 io.on('connection',socket=>{
     socket.on('join-room',(roomId,userId,username)=>{
         socket.join(roomId);
-       // console.log('joined')
-       
        socket.to(roomId).broadcast.emit('user-connected',userId,username)
        
         socket.on('message',(message,username)=>{
