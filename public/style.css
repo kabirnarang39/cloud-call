@@ -410,3 +410,89 @@ body{
     visibility: visible;
   }
   
+.tool-bar-wrapper {
+  z-index: 300000;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: white;
+  -webkit-box-shadow: 0 0px 10px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 0px 10px rgba(0, 0, 0, 0.3);
+  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-bottom-left-radius: 0.25rem;
+  -webkit-transition: all 0.24s linear;
+  transition: all 0.24s linear;
+}
+
+.tool-bar-wrapper .tool-bar-button + .tool-bar-button {
+  border-left: 1px solid lightgray;
+}
+
+.tool-bar-wrapper .dot {
+  position: relative;
+}
+
+.tool-bar-wrapper .dot::before {
+  --dot-size: 8px;
+  content: "";
+  width: var(--dot-size);
+  height: var(--dot-size);
+  background-color: var(--clr3);
+  border-radius: 50%;
+  border: 2px solid white;
+  position: absolute;
+  z-index: 1;
+  right: 13px;
+  top: 2px;
+}
+
+.tool-bar-wrapper .tool-bar-button {
+  height: 35px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  -webkit-transition: all 0.24s linear;
+  transition: all 0.24s linear;
+  background-color: transparent;
+  -ms-user-select: none !important;
+      user-select: none !important;
+  padding: 0px 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  color: #5f6368;
+}
+
+.tool-bar-wrapper .tool-bar-button:hover {
+  outline: none;
+}
+
+.tool-bar-wrapper .tool-bar-button:active {
+  background-color: white;
+}
+
+.tool-bar-wrapper .tool-bar-button ion-icon {
+  font-size: 1.5rem;
+  color: #5f6368;
+}
+
+.tool-bar-wrapper #time {
+  font-size: 1.2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+span.time {
+  color: #5f6368;
+}
