@@ -344,7 +344,7 @@ body{
   
   .tooltip::before {
     font-size: 0.65rem !important;
-    opacity: 0;
+    opacity: 1;
     visibility: hidden;
     pointer-events: none;
     content: attr(tool_tip);
