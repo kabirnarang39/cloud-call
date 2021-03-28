@@ -3,7 +3,7 @@ body{
     padding: 0;
 }
 .video-grid{
-    display: flex;
+     display: flex;
     align-content: center;
     flex-wrap: wrap;
     align-items: center;
@@ -12,8 +12,8 @@ body{
     position: relative;
     overflow: hidden;
     left: 0px;
-    bottom: 0px;
-    top: 0px;
+    bottom: 200px;
+    top: 200px;
     right: 0px;
     padding: 30px;
 }
@@ -40,11 +40,13 @@ body{
 }
 
 .main_videos{
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding:40px;
+  overflow: scroll;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  position: relative;
    
 }
 .main_controls{
