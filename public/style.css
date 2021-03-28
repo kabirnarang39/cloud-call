@@ -12,8 +12,8 @@ body{
     position: relative;
     overflow: hidden;
     left: 0px;
-    bottom: 200px;
-    top: 200px;
+    bottom: 0px;
+    top: 0px;
     right: 0px;
     padding: 30px;
 }
@@ -30,7 +30,7 @@ body{
     animation: show 0.4s ease;
 }
 .main{
-    height:100vh;
+    height:fit-content;
     display: flex;
 }
 .main_left{
@@ -47,7 +47,7 @@ body{
   align-items: center;
   padding: 40px;
   position: relative;
-   
+   height: fit-content;
 }
 .main_controls{
     display: flex;
