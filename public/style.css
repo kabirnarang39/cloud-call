@@ -19,7 +19,7 @@ body{
 }
 .video-grid video{
     margin: 10px;
-    position: absolute;
+    position: relative;
     vertical-align: middle;
     align-self: center;
     border-radius: 10px;
