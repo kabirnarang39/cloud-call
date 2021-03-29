@@ -189,7 +189,7 @@ const connectToNewUser=(userId,stream)=>{
 }
 */
 var localAudioFXElement;
-function addStream(video, stream, peerId, user, adminId) {
+function addStream(video, stream) {
   // create microphone button
   const micBtn = document.createElement("button");
   micBtn.classList.add("video-element");
@@ -202,8 +202,6 @@ function addStream(video, stream, peerId, user, adminId) {
   const audioFXElement = audioFX.createElement();
   audioFXElement.classList.add("mic-button");
 
-  if (user.audio) micBtn.classList.add("off");
-  else audioFXElement.classList.add("off");
 
   // video off element
   const videoOffIndicator = document.createElement("div");
@@ -229,7 +227,7 @@ function addStream(video, stream, peerId, user, adminId) {
 
   // peer name
   const namePara = document.createElement("p");
-  namePara.innerHTML = user.name;
+  namePara.innerHTML = username;
   namePara.classList.add("video-element");
   namePara.classList.add("name");
 
@@ -258,9 +256,7 @@ function addStream(video, stream, peerId, user, adminId) {
   videoWrapper.appendChild(elementsWrapper);
   videoWrapper.appendChild(video);
 
-  if (adminId == peerId)
-    videoGrid.insertBefore(videoWrapper, videoGrid.childNodes[0]);
-  else videoGrid.append(videoWrapper);
+ videoGrid.append(videoWrapper);
 
   const observer = new MutationObserver((mutationsList, observer) => {
     const removeNodeLength = mutationsList[0].removedNodes.length;
