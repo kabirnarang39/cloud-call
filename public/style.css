@@ -37,7 +37,7 @@
     overflow: hidden;
     position: absolute;
     margin-left: 200px;
-    margin-top: 10px;
+    margin-top: -100px;
     z-index: 30000;
     -webkit-user-select: none;
        -moz-user-select: none;
@@ -58,7 +58,7 @@
     overflow-y: scroll;
     box-sizing: content-box;
     width: 600px !important;
-    height: 600px;
+    height: 300px;
     
 }
 .main_message_container{
