@@ -38,9 +38,9 @@ body{
   display: -ms-flexbox;
   display: flex;
   padding: 6px;
-  background-color: darkslateblue;
+  background-color: lightgray;
   margin: 0.5rem;
-  color: darkslateblue;
+  color: black;
   border-radius: 0.25rem;
   cursor: pointer;
   -webkit-transition: all 0.24s linear;
@@ -686,6 +686,13 @@ span.time {
 
 .video-grid .video-wrapper .video-disable .video-off-indicator {
   opacity: 1;
+}
+.video-grid .video-wrapper .screen-share {
+  background-color: darkslateblue;
+}
+
+.video-grid .video-wrapper .screen-share .video-element {
+  background-color: darkslateblue;
 }
 .video-grid .video-wrapper video {
   width: 100%;
