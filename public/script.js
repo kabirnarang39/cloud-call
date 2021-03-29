@@ -54,6 +54,8 @@ socket.on('user-connected',(userId,username,image,count)=>{
     changeCount(count);
     
 })
+
+
 const changeCount = (count) => {
   const counter = document.getElementById("user-number");
   counter.innerHTML = count;
@@ -319,11 +321,16 @@ myVideoStream.getVideoTracks()[0].enabled=false;
 setPlayVideo();
     }
     else{
-      videoWrapperVideoToggle(myVideo, true);
+      videoWrapperVideoToggle(myVideoElement, true);
         setStopVideo();
         myVideoStream.getVideoTracks()[0].enabled=true;
     } 
 }
+const videoWrapperVideoToggle = (element, type) => {
+  const videoWrapper = element.previousSibling;
+  if (type) videoWrapper.classList.remove("video-disable");
+  else videoWrapper.classList.add("video-disable");
+};
 socket.on("user-video-toggle", (id, type) => {
   videoWrapperVideoToggle(document.querySelector(`video[peer="${id}"]`), type);
 });
@@ -587,9 +594,3 @@ const record = (stream) => {
 
 if (detectMob()) shareScreenBtn.remove();
 else camToggleBtn.remove();
-
-const videoWrapperVideoToggle = (element, type) => {
-  const videoWrapper = element.previousSibling;
-  if (type) videoWrapper.classList.remove("video-disable");
-  else videoWrapper.classList.add("video-disable");
-};
