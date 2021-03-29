@@ -32,7 +32,6 @@ body{
 .video-grid .video-wrapper .elements-wrapper .video-element {
   outline: none;
   border: none;
-  z-index: 1;
   position: absolute;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -64,9 +63,8 @@ body{
   outline: none;
 }
 .video-grid .video-wrapper .elements-wrapper .video-off-indicator {
-  --indicatorSize: 80px;
-  width: var(--indicatorSize);
-  height: var(--indicatorSize);
+  width: 80px;
+  height: 80px;
   background-color: darkslateblue;
   border-radius: 50%;
   position: absolute;
