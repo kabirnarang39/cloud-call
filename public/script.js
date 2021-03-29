@@ -241,10 +241,9 @@ function addStream(video, stream) {
   elementsWrapper.appendChild(videoOffIndicator);
 
   video.srcObject = stream;
-  video.setAttribute("peer", peerId);
-  video.setAttribute("name", user.name);
+  video.setAttribute("name", username);
 
-  if (peerId == null) {
+  if (username == undefined) {
     video.classList.add("mirror");
     localAudioFXElement = audioFX;
   }
