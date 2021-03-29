@@ -332,6 +332,7 @@ const videoWrapperVideoToggle = (element, type) => {
   else videoWrapper.classList.add("video-disable");
 };
 socket.on("user-video-toggle", (id, type) => {
+  console.log((`video[peer="${id}"]`,id,type))
   videoWrapperVideoToggle(document.querySelector(`video[peer="${id}"]`), type);
 });
 const setPlayVideo=()=>{
