@@ -178,7 +178,7 @@ const connectToNewUser=(userId,stream)=>{
   peers[userId] = call
   console.log(peers)
 }
-const addStream=(video,stream)=>{
+/*const addStream=(video,stream)=>{
     video.srcObject=stream;
    
     video.addEventListener('loadedmetadata',()=>{
@@ -187,6 +187,105 @@ const addStream=(video,stream)=>{
    videoGrid.append(video)
   // console.log(videoGrid)
 }
+*/
+var localAudioFXElement;
+function addVideoStream(video, stream, peerId, user, adminId) {
+  // create microphone button
+  const micBtn = document.createElement("button");
+  micBtn.classList.add("video-element");
+  micBtn.classList.add("mic-button");
+  micBtn.innerHTML = `<ion-icon name="mic-off-outline"></ion-icon>`;
+  micBtn.classList.add("mic-off");
+
+  // create audio FX
+  const audioFX = new SE(stream);
+  const audioFXElement = audioFX.createElement();
+  audioFXElement.classList.add("mic-button");
+
+  if (user.audio) micBtn.classList.add("off");
+  else audioFXElement.classList.add("off");
+
+  // video off element
+  const videoOffIndicator = document.createElement("div");
+  videoOffIndicator.classList.add("video-off-indicator");
+  videoOffIndicator.innerHTML = `<ion-icon name="videocam-outline"></ion-icon>`;
+
+  // create pin button
+  const pinBtn = document.createElement("button");
+  pinBtn.classList.add("video-element");
+  pinBtn.classList.add("pin-button");
+  pinBtn.innerHTML = `<ion-icon name="expand-outline"></ion-icon>`;
+
+  // create option button
+  // const optionBtn = document.createElement("button");
+  // optionBtn.classList.add("video-element");
+  // optionBtn.classList.add("options-button");
+  // optionBtn.innerHTML = `<ion-icon name="ellipsis-horizontal-outline"></ion-icon>`;
+
+  // main wrapper
+  const videoWrapper = document.createElement("div");
+  videoWrapper.id = "video-wrapper";
+  videoWrapper.classList.add("video-wrapper");
+
+  // peer name
+  const namePara = document.createElement("p");
+  namePara.innerHTML = user.name;
+  namePara.classList.add("video-element");
+  namePara.classList.add("name");
+
+  const elementsWrapper = document.createElement("div");
+  elementsWrapper.classList.add("elements-wrapper");
+  elementsWrapper.appendChild(namePara);
+  // elementsWrapper.appendChild(optionBtn);
+  elementsWrapper.appendChild(pinBtn);
+  elementsWrapper.appendChild(micBtn);
+  elementsWrapper.appendChild(audioFXElement);
+  elementsWrapper.appendChild(videoOffIndicator);
+
+  video.srcObject = stream;
+  video.setAttribute("peer", peerId);
+  video.setAttribute("name", user.name);
+
+  if (peerId == null) {
+    video.classList.add("mirror");
+    localAudioFXElement = audioFX;
+  }
+
+  video.addEventListener("loadedmetadata", () => {
+    video.play();
+  });
+
+  videoWrapper.appendChild(elementsWrapper);
+  videoWrapper.appendChild(video);
+
+  if (adminId == peerId)
+    videoGrid.insertBefore(videoWrapper, videoGrid.childNodes[0]);
+  else videoGrid.append(videoWrapper);
+
+  const observer = new MutationObserver((mutationsList, observer) => {
+    const removeNodeLength = mutationsList[0].removedNodes.length;
+    const targetNode = mutationsList[0].target;
+    if (removeNodeLength > 0) {
+      targetNode.remove();
+      observer.disconnect();
+    }
+  });
+  observer.observe(videoWrapper, {
+    childList: true,
+  });
+  eventAdd(pinBtn);
+}
+const eventAdd = (element) => {
+  element.addEventListener("click", (e) => {
+    const videoWrapper = e.target.parentElement.parentElement;
+    if (e.target.childNodes[0].getAttribute("name") == "expand-outline") {
+      e.target.innerHTML = `<ion-icon name="contract-outline"></ion-icon>`;
+    } else {
+      e.target.innerHTML = `<ion-icon name="expand-outline"></ion-icon>`;
+    }
+    videoWrapper.classList.toggle("zoom-video");
+  });
+};
 
     const scrollToBottom = () => {
         var d = document.querySelector('.main_chat_window');
