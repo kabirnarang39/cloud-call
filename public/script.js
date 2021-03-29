@@ -255,7 +255,9 @@ function addStream(video, stream) {
   videoWrapper.appendChild(elementsWrapper);
   videoWrapper.appendChild(video);
 
- videoGrid.append(videoWrapper);
+  if (username !== undefined)
+    videoGrid.insertBefore(videoWrapper, videoGrid.childNodes[0]);
+  else videoGrid.append(videoWrapper);
 
   const observer = new MutationObserver((mutationsList, observer) => {
     const removeNodeLength = mutationsList[0].removedNodes.length;
