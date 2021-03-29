@@ -167,6 +167,13 @@ const connectToNewUser=(userId,stream)=>{
     var call = peer.call(userId, stream);
     const video=document.createElement('video')
     video.id=userId;
+    fetch(`/user?peer=${call.peer}&room=${ROOM_ID}`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+       console.log(data)
+      });
     call.on('stream', userVideoStream=> {
     addStream(video,userVideoStream)
   });
