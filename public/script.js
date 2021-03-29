@@ -54,7 +54,10 @@ socket.on('user-connected',(userId,username,image,count)=>{
     changeCount(count);
     
 })
-
+const changeCount = (count) => {
+  const counter = document.getElementById("user-number");
+  counter.innerHTML = count;
+};
 const text=document.querySelector('input')
 text.addEventListener('change',(event)=>{
 if(event.target.value.length!==0){
