@@ -189,7 +189,7 @@ const connectToNewUser=(userId,stream)=>{
 }
 */
 var localAudioFXElement;
-function addVideoStream(video, stream, peerId, user, adminId) {
+function addStream(video, stream, peerId, user, adminId) {
   // create microphone button
   const micBtn = document.createElement("button");
   micBtn.classList.add("video-element");
