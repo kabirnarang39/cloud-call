@@ -34,7 +34,7 @@
 .main_right{
     display: none;
     flex-direction: column;
-    overflow: scroll;
+    overflow: hidden;
     position: absolute;
     margin-left: 200px;
     margin-top: -250px;
