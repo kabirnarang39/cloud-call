@@ -41,7 +41,7 @@ body{
   padding: 6px;
   background-color: darkslateblue;
   margin: 0.5rem;
-  color: white;
+  color: black;
   border-radius: 0.25rem;
   cursor: pointer;
   -webkit-transition: all 0.24s linear;
@@ -51,7 +51,7 @@ body{
   border-radius: 10px;
   display: inline-block;
   box-shadow: 0px 12px 22px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  background-color: lightgray;
   animation: show 0.4s ease;
 }
 .video-grid .video-wrapper .elements-wrapper .video-element ion-icon {
