@@ -9,11 +9,11 @@ var peer = new Peer(undefined,{
     host:'/',
     port:'443'
 });
-window.addEventListener("load", function (event) {
-    Dish();
+//window.addEventListener("load", function (event) {
+  //  Dish();
   
-    window.onresize = Dish;
-  }, false);
+    //window.onresize = Dish;
+//  }, false);
 //console.log(JSON.parse(myParam))
 //console.log(window.location.href.split('?')[1])
 //console.log(user);
