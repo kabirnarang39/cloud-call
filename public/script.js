@@ -243,7 +243,7 @@ function addStream(video, stream) {
   video.srcObject = stream;
   video.setAttribute("name", username);
 
-  if (username == undefined) {
+  if (username !== undefined) {
     video.classList.add("mirror");
     localAudioFXElement = audioFX;
   }
