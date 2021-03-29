@@ -314,14 +314,19 @@ const setMuteButton=()=>{
 const playStop=()=>{
     const enabled=myVideoStream.getVideoTracks()[0].enabled;
     if(enabled){
+      videoWrapperVideoToggle(myVideoElement, false);
 myVideoStream.getVideoTracks()[0].enabled=false;
 setPlayVideo();
     }
     else{
+      videoWrapperVideoToggle(myVideo, true);
         setStopVideo();
         myVideoStream.getVideoTracks()[0].enabled=true;
     } 
 }
+socket.on("user-video-toggle", (id, type) => {
+  videoWrapperVideoToggle(document.querySelector(`video[peer="${id}"]`), type);
+});
 const setPlayVideo=()=>{
     const html=`
     <svg xmlns="http://www.w3.org/2000/svg" width="26px" height="26px" fill="#cc3b33" class="bi bi-camera-video-off" viewBox="0 0 16 16">
@@ -582,3 +587,9 @@ const record = (stream) => {
 
 if (detectMob()) shareScreenBtn.remove();
 else camToggleBtn.remove();
+
+const videoWrapperVideoToggle = (element, type) => {
+  const videoWrapper = element.previousSibling;
+  if (type) videoWrapper.classList.remove("video-disable");
+  else videoWrapper.classList.add("video-disable");
+};
