@@ -38,12 +38,12 @@ navigator.mediaDevices.getUserMedia({
 })
 .then(stream=>{
 myVideoStream=stream;
-addStream(myVideoElement,stream);
+addStream(myVideoElement,stream,null,username,null);
 peer.on('call', call=> {
       call.answer(stream); // Answer the call with an A/V stream.
       const video=document.createElement('video')
       call.on('stream', userVideoStream=> {
-      addStream(video,userVideoStream)
+      addStream(video,userVideoStream,call.peer,username)
     });
 })
 socket.on('user-connected',(userId,username,image)=>{
@@ -169,7 +169,7 @@ const connectToNewUser=(userId,stream)=>{
     video.id=userId;
     
     call.on('stream', userVideoStream=> {
-    addStream(video,userVideoStream)
+    addStream(video,userVideoStream,call.peer,username,userId)
   });
   call.on('close', () => {
     video.remove()
@@ -189,14 +189,7 @@ const connectToNewUser=(userId,stream)=>{
 }
 */
 var localAudioFXElement;
-function addStream(video, stream) {
-  // create microphone button
-  const micBtn = document.createElement("button");
-  micBtn.classList.add("video-element");
-  micBtn.classList.add("mic-button");
-  micBtn.innerHTML = `<ion-icon name="mic-off-outline"></ion-icon>`;
-  micBtn.classList.add("mic-off");
-
+function addStream(video, stream,peerId,username,userId) {
   // create audio FX
   const audioFX = new SE(stream);
   const audioFXElement = audioFX.createElement();
@@ -214,12 +207,6 @@ function addStream(video, stream) {
   pinBtn.classList.add("pin-button");
   pinBtn.innerHTML = `<ion-icon name="expand-outline"></ion-icon>`;
 
-  // create option button
-  // const optionBtn = document.createElement("button");
-  // optionBtn.classList.add("video-element");
-  // optionBtn.classList.add("options-button");
-  // optionBtn.innerHTML = `<ion-icon name="ellipsis-horizontal-outline"></ion-icon>`;
-
   // main wrapper
   const videoWrapper = document.createElement("div");
   videoWrapper.id = "video-wrapper";
@@ -236,14 +223,14 @@ function addStream(video, stream) {
   elementsWrapper.appendChild(namePara);
   // elementsWrapper.appendChild(optionBtn);
   elementsWrapper.appendChild(pinBtn);
-  elementsWrapper.appendChild(micBtn);
   elementsWrapper.appendChild(audioFXElement);
   elementsWrapper.appendChild(videoOffIndicator);
 
   video.srcObject = stream;
+  video.setAttribute("peer", peerId);
   video.setAttribute("name", username);
 
-  if (username !== undefined) {
+  if (peerId == null) {
     video.classList.add("mirror");
     localAudioFXElement = audioFX;
   }
@@ -255,9 +242,9 @@ function addStream(video, stream) {
   videoWrapper.appendChild(elementsWrapper);
   videoWrapper.appendChild(video);
 
-  if (username !== undefined)
-    videoGrid.insertBefore(videoWrapper, videoGrid.childNodes[0]);
-  else videoGrid.append(videoWrapper);
+  if (userId == peerId)
+  videoGrid.insertBefore(videoWrapper, videoGrid.childNodes[0]);
+else videoGrid.append(videoWrapper);
 
   const observer = new MutationObserver((mutationsList, observer) => {
     const removeNodeLength = mutationsList[0].removedNodes.length;

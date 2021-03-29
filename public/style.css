@@ -31,6 +31,7 @@ body{
 }
 .video-grid .video-wrapper .elements-wrapper .video-element {
   outline: none;
+  z-index: 1;
   border: none;
   position: absolute;
   display: -webkit-box;
