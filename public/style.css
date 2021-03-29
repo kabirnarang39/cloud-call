@@ -40,17 +40,11 @@ body{
   padding: 6px;
   background-color: darkslateblue;
   margin: 0.5rem;
-  color: black;
+  color: darkslateblue;
   border-radius: 0.25rem;
   cursor: pointer;
   -webkit-transition: all 0.24s linear;
   transition: all 0.24s linear;
-  vertical-align: middle;
-  align-self: center;
-  border-radius: 10px;
-  display: inline-block;
-  box-shadow: 0px 12px 22px rgba(0, 0, 0, 0.1);
-  background-color: lightgray;
   animation: show 0.4s ease;
 }
 .video-grid .video-wrapper .elements-wrapper .video-element ion-icon {
