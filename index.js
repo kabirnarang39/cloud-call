@@ -8,6 +8,7 @@ const { ExpressPeerServer } = require('peer');
 const peerServer = ExpressPeerServer(server,{ 
     debug:true
 });
+var  roomData = { count: 1};
 app.use('/peerjs',peerServer);
 app.set('view engine','ejs')
 app.set('views','views');
@@ -35,7 +36,7 @@ app.get('/:room',(req,res)=>{
 })
 io.on('connection',socket=>{
     socket.on('join-room',(roomId,userId,username,image)=>{
-        var  roomData = { count: 0 };
+       
         socket.join(roomId);
        socket.to(roomId).broadcast.emit('user-connected',userId,username,image,roomData.count + 1)
        
