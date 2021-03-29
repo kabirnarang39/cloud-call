@@ -46,11 +46,12 @@ peer.on('call', call=> {
       addStream(video,userVideoStream,call.peer,username)
     });
 })
-socket.on('user-connected',(userId,username,image)=>{
+socket.on('user-connected',(userId,username,image,count)=>{
     //document.querySelector('.flash').innerHTML='User Connected'+userId;
     connectToNewUser(userId,stream);
     document.querySelector('.flash').innerHTML=(`<div class="alert success"><span class="closebtn" onClick="closeBtn();">&times;</span><strong>${username}</strong> connected.</div>`)
     //alert('Somebody connected', userId)
+    changeCount(count);
     
 })
 
@@ -101,10 +102,13 @@ socket.on('createMessage',(message,username,image)=>{
 .catch(err=>{
     console.log(err)
 })
-socket.on('user-disconnected', userId => {
+socket.on('user-disconnected', (userId,count) => {
    // document.querySelector('.flash').innerHTML='User Disconnected'+userId;
-    if (peers[userId]) peers[userId].close()
+   if (peers[userId]) {
+    peers[userId].close();
     delete peers[userId];
+    changeCount(count);
+  }
   })
 peer.on('open',id=>{
     socket.emit('join-room',ROOM_ID,id,username,image)

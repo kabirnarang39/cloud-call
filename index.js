@@ -30,20 +30,20 @@ app.get('/:room',(req,res)=>{
     res.render('zoom',{
         roomId:req.params.room,
        username:req.query.user,
-       image:req.query.image,
-       count:10
+       image:req.query.image
     })
 })
 io.on('connection',socket=>{
     socket.on('join-room',(roomId,userId,username,image)=>{
+        var  roomData = { count: 0 };
         socket.join(roomId);
-       socket.to(roomId).broadcast.emit('user-connected',userId,username,image)
+       socket.to(roomId).broadcast.emit('user-connected',userId,username,image,roomData.count + 1)
        
         socket.on('message',(message,username,image)=>{
             io.to(roomId).emit('createMessage',message,username,image)
         })
         socket.on('disconnect', () => {
-            socket.to(roomId).broadcast.emit('user-disconnected', userId)
+            socket.to(roomId).broadcast.emit('user-disconnected', userId,roomData.count - 1)
           })
     })
    
