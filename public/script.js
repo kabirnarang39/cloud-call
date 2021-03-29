@@ -525,6 +525,11 @@ recordingBtn.addEventListener("click", (e) => {
 
   // recording start
   if (indicator == null) {
+    recordingBtn.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" width="26px" height="26px" fill="#cc3b33" class="bi bi-vinyl" viewBox="0 0 16 16">
+    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+    <path d="M8 6a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM4 8a4 4 0 1 1 8 0 4 4 0 0 1-8 0z"/>
+    <path d="M9 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+  </svg>`
     currentElement.setAttribute("tool_tip", "Stop Recording");
     currentElement.classList.add("tooltip-danger");
     currentElement.classList.add("blink");
@@ -548,6 +553,11 @@ recordingBtn.addEventListener("click", (e) => {
     anchor.click();
     window.URL.revokeObjectURL(url);
     recorder.stop();
+    recordingBtn.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" width="26px" height="26px" fill="#00796b" class="bi bi-vinyl" viewBox="0 0 16 16">
+    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+    <path d="M8 6a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM4 8a4 4 0 1 1 8 0 4 4 0 0 1-8 0z"/>
+    <path d="M9 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+  </svg>`
     currentElement.setAttribute("tool_tip", "Start Recording");
     currentElement.classList.remove("tooltip-danger");
     currentElement.classList.remove("blink");
