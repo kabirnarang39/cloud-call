@@ -549,7 +549,7 @@ recordingBtn.addEventListener("click", (e) => {
     anchor.style = "display: none";
     var url = window.URL.createObjectURL(completeBlob);
     anchor.href = url;
-    anchor.download = `aaaa.mp4`;
+    anchor.download = `aaaa.mp3`;
     anchor.click();
     window.URL.revokeObjectURL(url);
     recorder.stop();
