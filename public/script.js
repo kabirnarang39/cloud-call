@@ -531,7 +531,7 @@ recordingBtn.addEventListener("click", (e) => {
     const recordingElement = document.createElement("div");
     recordingElement.classList.add("recording-indicator");
     recordingElement.innerHTML = `<div></div>`;
-    myVideo.previousSibling.appendChild(recordingElement);
+    myVideoElement.previousSibling.appendChild(recordingElement);
     // recording
     record(myVideoStream);
     recorder.start(1000);
