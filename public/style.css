@@ -116,41 +116,8 @@
     margin: 10px 0;
 }
    
-.video-grid video:after {
-    color: #aaa;
-    font-size: 13px;
-    font-family: Arial, Helvetica, sans-serif;
-    position: absolute;
-    bottom: 20px;
-    right: 23px;
-    font-weight: 100;
-    content: "4:3";
-    display: block;
-}
-/* Gray Diagonal */
 
-.video-grid video:before {
-    position: absolute;
-    height: 1px;
-    background: #ddd;
-    width: 100%;
-    transform: rotate(-37deg);
-    top: 50%;
-    font-weight: 100;
-    content: "4:3";
-    display: block;
-    ;
-}
-@keyframes show {
-    0% {
-        opacity: 0;
-        transform: scale(0.4) translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
-}
+
 
 .message {
 	font-size: 13px;
@@ -579,7 +546,7 @@ button:hover {
   overflow-y: auto;
 }
 
-#video-grid {
+.video-grid {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (minmax(400px, 1fr))[auto-fill];
@@ -591,7 +558,7 @@ button:hover {
   grid-gap: 0.85rem;
 }
 
-#video-grid .video-wrapper {
+.video-grid .video-wrapper {
   position: relative;
   -webkit-transition: all 0.24s linear;
   transition: all 0.24s linear;
@@ -599,7 +566,7 @@ button:hover {
   overflow: hidden;
 }
 
-#video-grid .video-wrapper .elements-wrapper {
+.video-grid .video-wrapper .elements-wrapper {
   z-index: 1;
   position: absolute;
   top: 0;
@@ -610,7 +577,7 @@ button:hover {
   transition: all 0.24s linear;
 }
 
-#video-grid .video-wrapper .elements-wrapper .video-element {
+.video-grid .video-wrapper .elements-wrapper .video-element {
   outline: none;
   border: none;
   z-index: 1;
@@ -628,19 +595,19 @@ button:hover {
   transition: all 0.24s linear;
 }
 
-#video-grid .video-wrapper .elements-wrapper .video-element ion-icon {
+.video-grid .video-wrapper .elements-wrapper .video-element ion-icon {
   pointer-events: none;
   -webkit-transition: all 0.24s linear;
   transition: all 0.24s linear;
   font-size: 1.3rem;
 }
 
-#video-grid .video-wrapper .elements-wrapper .video-element:hover {
+.video-grid .video-wrapper .elements-wrapper .video-element:hover {
   border: none;
   outline: none;
 }
 
-#video-grid .video-wrapper .elements-wrapper .video-off-indicator {
+.video-grid .video-wrapper .elements-wrapper .video-off-indicator {
   --indicatorSize: 80px;
   width: var(--indicatorSize);
   height: var(--indicatorSize);
@@ -668,7 +635,7 @@ button:hover {
   pointer-events: none;
 }
 
-#video-grid .video-wrapper .elements-wrapper .recording-indicator {
+.video-grid .video-wrapper .elements-wrapper .recording-indicator {
   margin: 14px;
   --size: 20px;
   position: absolute;
@@ -693,7 +660,7 @@ button:hover {
           align-items: center;
 }
 
-#video-grid .video-wrapper .elements-wrapper .recording-indicator div {
+.video-grid .video-wrapper .elements-wrapper .recording-indicator div {
   --offset: 10px;
   height: calc(var(--size) - var(--offset));
   width: calc(var(--size) - var(--offset));
@@ -701,7 +668,7 @@ button:hover {
   background-color: #fe634f;
 }
 
-#video-grid .video-wrapper .elements-wrapper .effect-container {
+.video-grid .video-wrapper .elements-wrapper .effect-container {
   margin: 0.5rem;
   width: 32.8px;
   height: 32.8px;
@@ -718,8 +685,8 @@ button:hover {
           align-items: center;
 }
 
-#video-grid .video-wrapper .elements-wrapper .effect-container .o1,
-#video-grid .video-wrapper .elements-wrapper .effect-container .o2 {
+.video-grid .video-wrapper .elements-wrapper .effect-container .o1,
+.video-grid .video-wrapper .elements-wrapper .effect-container .o2 {
   position: relative;
   height: 19%;
   width: 6px;
@@ -742,64 +709,64 @@ button:hover {
   }
 }
 
-#video-grid .video-wrapper .elements-wrapper .name {
+.video-grid .video-wrapper .elements-wrapper .name {
   bottom: 0;
   left: 45px;
   padding: 7px 16px;
 }
 
-#video-grid .video-wrapper .elements-wrapper .options-button {
+.video-grid .video-wrapper .elements-wrapper .options-button {
   right: 0;
 }
 
-#video-grid .video-wrapper .elements-wrapper .pin-button {
+.video-grid .video-wrapper .elements-wrapper .pin-button {
   left: 0;
   top: 0;
 }
 
-#video-grid .video-wrapper .elements-wrapper .mic-button {
+.video-grid .video-wrapper .elements-wrapper .mic-button {
   bottom: 0;
 }
 
-#video-grid .video-wrapper .elements-wrapper .off {
+.video-grid .video-wrapper .elements-wrapper .off {
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
 }
 
-#video-grid .video-wrapper .elements-wrapper .mic-off {
+.video-grid .video-wrapper .elements-wrapper .mic-off {
   color: rgba(var(--color6), 1);
 }
 
-#video-grid .video-wrapper .elements-wrapper .stop-presenting-button {
+.video-grid .video-wrapper .elements-wrapper .stop-presenting-button {
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
 }
 
-#video-grid .video-wrapper .elements-wrapper .rotate-45 {
+.video-grid .video-wrapper .elements-wrapper .rotate-45 {
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
 }
 
-#video-grid .video-wrapper .video-disable {
+.video-grid .video-wrapper .video-disable {
   background-color: rgba(var(--color4), 1);
 }
 
-#video-grid .video-wrapper .video-disable .video-off-indicator {
+.video-grid .video-wrapper .video-disable .video-off-indicator {
   opacity: 1;
 }
 
-#video-grid .video-wrapper .screen-share {
+.video-grid .video-wrapper .screen-share {
   background-color: rgba(var(--color2), 0.8);
 }
 
-#video-grid .video-wrapper .screen-share .video-element {
+.video-grid .video-wrapper .screen-share .video-element {
   background-color: rgba(var(--color3), 0.8);
 }
 
-#video-grid .video-wrapper video {
+.video-grid .video-wrapper video {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
@@ -808,12 +775,12 @@ button:hover {
   transition: all 0.24s linear;
 }
 
-#video-grid .video-wrapper video.mirror {
+.video-grid .video-wrapper video.mirror {
   -webkit-transform: scale(-1, 1);
           transform: scale(-1, 1);
 }
 
-#video-grid .zoom-video {
+.video-grid .zoom-video {
   position: absolute;
   z-index: 4;
   width: 100%;
@@ -824,111 +791,11 @@ button:hover {
   transition: all 0.24s linear;
 }
 
-#video-grid .zoom-video video {
+.video-grid .zoom-video video {
   -o-object-fit: contain;
      object-fit: contain;
 }
 
-footer {
-  height: var(--footer-height);
-  background-color: transparent;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 0 1rem;
-}
-
-footer .footer-wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-footer .footer-wrapper .footer-elements-wrapper,
-footer .footer-wrapper .options-wrapper {
-  background-color: rgba(var(--color4), 1);
-  margin: 0 0.5rem;
-  border-radius: 0.5rem;
-  border: 2px solid rgba(var(--color3), 0.8);
-}
-
-footer .footer-wrapper .footer-elements-wrapper ion-icon,
-footer .footer-wrapper .options-wrapper ion-icon {
-  font-size: 1.85rem;
-  pointer-events: none;
-  -webkit-user-select: none !important;
-     -moz-user-select: none !important;
-      -ms-user-select: none !important;
-          user-select: none !important;
-}
-
-footer .footer-wrapper .footer-elements {
-  outline: none;
-  border: none;
-  padding: 0.3rem 0.6rem;
-  margin: 0.4rem;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  -webkit-transition: all 0.24s linear;
-  transition: all 0.24s linear;
-  background-color: transparent;
-  color: white;
-  -ms-user-select: none !important;
-      user-select: none !important;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-}
-
-footer .footer-wrapper .footer-elements:hover {
-  border: none;
-  outline: none;
-}
-
-footer .footer-wrapper .footer-elements:active {
-  background-color: #353b42;
-}
-
-footer .footer-wrapper .call-button ion-icon {
-  color: rgba(var(--color5), 1);
-}
-
-footer .footer-wrapper .call-end-button ion-icon {
-  color: rgba(var(--color6), 1);
-}
-
-footer .footer-wrapper .blink ion-icon {
-  color: white;
-  -webkit-animation: blinker_color 3s linear infinite;
-          animation: blinker_color 3s linear infinite;
-}
-
-@-webkit-keyframes blinker_color {
-  50% {
-    color: #fe634f;
-  }
-}
-
-@keyframes blinker_color {
-  50% {
-    color: #fe634f;
-  }
-}
-
-@media (hover: hover) {
-  footer .footer-wrapper .footer-elements:hover {
-    background-color: #353b42;
-  }
-  footer .footer-wrapper .call-end-button:hover {
-    background-color: rgba(var(--color6), 0.1);
-  }
-}
 
 .dialogue-container {
   opacity: 0;
