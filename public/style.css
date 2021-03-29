@@ -21,7 +21,6 @@ body{
   overflow: hidden;
 }
 .video-grid .video-wrapper .elements-wrapper {
-  z-index: 1;
   position: absolute;
   top: 0;
   left: 0;
@@ -68,7 +67,7 @@ body{
   --indicatorSize: 80px;
   width: var(--indicatorSize);
   height: var(--indicatorSize);
-  background-color: rgba(var(--color3), 1);
+  background-color: darkslateblue;
   border-radius: 50%;
   position: absolute;
   top: 50%;
