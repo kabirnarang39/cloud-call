@@ -723,3 +723,36 @@ span.time {
   -o-object-fit: contain;
      object-fit: contain;
 }
+
+.video-grid .video-wrapper .elements-wrapper .recording-indicator {
+  margin: 14px;
+  --size: 20px;
+  position: absolute;
+  top: 0;
+  left: 38px;
+  width: var(--size);
+  height: var(--size);
+  background-color: #ffffff8f;
+  border: 2px solid white;
+  border-radius: 50%;
+  -webkit-animation: blinker 2s linear infinite;
+          animation: blinker 2s linear infinite;
+  z-index: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.video-grid .video-wrapper .elements-wrapper .recording-indicator div {
+  --offset: 10px;
+  height: calc(var(--size) - var(--offset));
+  width: calc(var(--size) - var(--offset));
+  border-radius: 50%;
+  background-color: #fe634f;
+}

@@ -116,59 +116,6 @@ socket.on('user-disconnected', (userId,count) => {
 peer.on('open',id=>{
     socket.emit('join-room',ROOM_ID,id,username,image)
 })
-function Area(Increment, Count, Width, Height, Margin = 10) {
-    let i =0, w = 0;
-    let h = Increment * 0.75 + (Margin * 2);
-    while (i < (Count)) {
-        if ((w + Increment) > Width) {
-            w = 0;
-            h = h + (Increment * 0.75) + (Margin * 2);
-        }
-        w = w + Increment + (Margin * 2);
-        i++;
-    }
-    if (h > Height) return false;
-    else return Increment;
-  }
-  // Dish:
-  function Dish() {
-  
-    // variables:
-        let Margin = 2;
-        let Scenary = document.getElementById('video-grid') || document.querySelector('.screen_share');
-        let Width = Scenary.offsetWidth - (Margin * 2);
-        let Height = Scenary.offsetHeight - (Margin * 2);
-        let Cameras = document.getElementsByTagName('video');
-        let max = 0;
-    
-    // loop (i recommend you optimize this)
-        let i = 1;
-        while (i < 5000) {
-            let w = Area(i, Cameras.length, Width, Height, Margin);
-            if (w === false) {
-                max =  i - 1;
-                break;
-            }
-            i++;
-        }
-    
-    // set styles
-        max = max - (Margin * 2);
-        setWidth(max, Margin);
-  }
-  
-  // Set Width and Margin 
-  function setWidth(width, margin) {
-    let Cameras = document.getElementsByTagName('video');
-    for (var s = 0; s < Cameras.length; s++) {
-        Cameras[s].style.width = width + "px";
-        Cameras[s].style.margin = margin + "px";
-        Cameras[s].style.height = (width * 0.75) + "px";
-    }
-  }
-  
-  // Load and Resize Event
- 
 
 const connectToNewUser=(userId,stream)=>{
     var call = peer.call(userId, stream);
@@ -179,7 +126,7 @@ const connectToNewUser=(userId,stream)=>{
     addStream(video,userVideoStream,call.peer,username,userId)
   });
   call.on('close', () => {
-    video.remove()
+    video.parentElement.remove();
   })
 
   peers[userId] = call
@@ -567,3 +514,61 @@ setTime()
 setInterval(() => {
   setTime()
 }, 500);
+///////////////
+
+const recordingBtn = document.getElementById("recording-toggle");
+const chunks = [];
+var recorder;
+recordingBtn.addEventListener("click", (e) => {
+  const currentElement = e.target;
+  const indicator = document.querySelector(".recording-indicator");
+
+  // recording start
+  if (indicator == null) {
+    currentElement.setAttribute("tool_tip", "Stop Recording");
+    currentElement.classList.add("tooltip-danger");
+    currentElement.classList.add("blink");
+    const recordingElement = document.createElement("div");
+    recordingElement.classList.add("recording-indicator");
+    recordingElement.innerHTML = `<div></div>`;
+    myVideo.previousSibling.appendChild(recordingElement);
+    // recording
+    record(myVideoStream);
+    recorder.start(1000);
+  }
+  // recording stop
+  else {
+    const completeBlob = new Blob(chunks, { type: chunks[0].type });
+    var anchor = document.createElement("a");
+    document.body.appendChild(anchor);
+    anchor.style = "display: none";
+    var url = window.URL.createObjectURL(completeBlob);
+    anchor.href = url;
+    anchor.download = `aaaa.mp4`;
+    anchor.click();
+    window.URL.revokeObjectURL(url);
+    recorder.stop();
+    currentElement.setAttribute("tool_tip", "Start Recording");
+    currentElement.classList.remove("tooltip-danger");
+    currentElement.classList.remove("blink");
+    indicator.remove();
+    while (chunks.length) {
+      chunks.pop();
+    }
+  }
+});
+
+const record = (stream) => {
+  recorder = new MediaRecorder(stream, {
+    mineType: "video/webm;codecs=H264",
+  });
+  recorder.onstop = (e) => {
+    delete recorder;
+  };
+  recorder.ondataavailable = (e) => {
+    chunks.push(e.data);
+  };
+};
+
+if (detectMob()) shareScreenBtn.remove();
+else camToggleBtn.remove();
