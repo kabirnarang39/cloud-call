@@ -434,11 +434,9 @@ shareScreenBtn.addEventListener("click", (e) => {
     })
     .then((stream) => {
       var videoTrack = stream.getVideoTracks()[0];
-      myVideoTrack = myVideoStream.getVideoTracks()[0];
-      setScreenShareDisableButton();
+      myVideoElement = myVideoStream.getVideoTracks()[0];
       replaceVideoTrack(myVideoStream, videoTrack);
       for (peer in peers) {
-        console.log(peers[peer].peerConnection.getSenders())
         let sender = peers[peer].peerConnection.getSenders().find(function (s) {
           return s.track.kind == videoTrack.kind;
         });
@@ -464,19 +462,27 @@ shareScreenBtn.addEventListener("click", (e) => {
       };
     });
 });
+
 const stopPresenting = (videoTrack) => {
-    setScreenShareButton();
-    shareScreenBtn.classList.remove("true");
-    shareScreenBtn.setAttribute("tool_tip", "Present Screen");
-    for (peer in peers) {
-      let sender = peers[peer].peerConnection.getSenders().find(function (s) {
-        return s.track.kind == videoTrack.kind;
-      });
-      sender.replaceTrack(myVideoTrack);
-    }
-    replaceVideoTrack(myVideoStream, myVideoTrack);
-  };
-/**
+  shareScreenBtn.classList.remove("true");
+  shareScreenBtn.setAttribute("tool_tip", "Present Screen");
+  for (peer in peers) {
+    let sender = peers[peer].peerConnection.getSenders().find(function (s) {
+      return s.track.kind == videoTrack.kind;
+    });
+    sender.replaceTrack(myVideoElement);
+  }
+  replaceVideoTrack(myVideoStream, myVideoElement);
+};
+
+const crossBtnClickEvent = (e) => {
+  const videoWrapper = e.target.parentElement;
+  if (videoWrapper.classList.contains("zoom-video")) {
+    videoWrapper.classList.remove("zoom-video");
+    e.target.removeEventListener("click", crossBtnClickEvent);
+    e.target.remove();
+  }
+};/**
  * Enable/disable video
  */
 
