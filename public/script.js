@@ -4,6 +4,7 @@ const videoGrid=document.querySelector('.video-grid')
 const myVideoElement=document.createElement('video')
 myVideoElement.muted=true;
 const peers = {}
+var Peer_ID;
 var peer = new Peer(undefined,{
     path:'/peerjs',
     host:'/',
@@ -43,7 +44,7 @@ peer.on('call', call=> {
   call.answer(stream); // Answer the call with an A/V stream.
   const video=document.createElement('video')
   call.on('stream', (userVideoStream)=> {
-    console.log(call)
+    console.log(call,peer)
   addStream(video,userVideoStream,call.peer,username)
 });
 })
@@ -118,7 +119,7 @@ socket.on('user-disconnected', (userId,count) => {
   }
   })
 peer.on('open',id=>{
-    socket.emit('join-room',ROOM_ID,id,username,image)
+    socket.emit('join-room',ROOM_ID,id,userId,username,image)
 })
 
 const connectToNewUser=(userId,stream,username)=>{
@@ -147,7 +148,7 @@ const connectToNewUser=(userId,stream,username)=>{
 }
 */
 var localAudioFXElement;
-function addStream(video, stream,peerId,username,userId) {
+function addStream(video, stream,peerId,username,adminId) {
   console.log(video,stream,peerId,username,userId)
   // create audio FX
   const audioFX = new SE(stream);
@@ -201,7 +202,7 @@ function addStream(video, stream,peerId,username,userId) {
   videoWrapper.appendChild(elementsWrapper);
   videoWrapper.appendChild(video);
 
-  if (userId == peerId)
+  if (adminId == peerId)
   videoGrid.insertBefore(videoWrapper, videoGrid.childNodes[0]);
 else videoGrid.append(videoWrapper);
 
@@ -427,10 +428,8 @@ shareScreenBtn.addEventListener("click", (e) => {
     .then((stream) => {
       var videoTrack = stream.getVideoTracks()[0];
       myVideoTrack = myVideoStream.getVideoTracks()[0];
-      setScreenShareDisableButton();
       replaceVideoTrack(myVideoStream, videoTrack);
       for (peer in peers) {
-        console.log(peers[peer].peerConnection.getSenders())
         let sender = peers[peer].peerConnection.getSenders().find(function (s) {
           return s.track.kind == videoTrack.kind;
         });
@@ -456,18 +455,28 @@ shareScreenBtn.addEventListener("click", (e) => {
       };
     });
 });
+
 const stopPresenting = (videoTrack) => {
-    setScreenShareButton();
-    shareScreenBtn.classList.remove("true");
-    shareScreenBtn.setAttribute("tool_tip", "Present Screen");
-    for (peer in peers) {
-      let sender = peers[peer].peerConnection.getSenders().find(function (s) {
-        return s.track.kind == videoTrack.kind;
-      });
-      sender.replaceTrack(myVideoTrack);
-    }
-    replaceVideoTrack(myVideoStream, myVideoTrack);
-  };
+  shareScreenBtn.classList.remove("true");
+  shareScreenBtn.setAttribute("tool_tip", "Present Screen");
+  for (peer in peers) {
+    let sender = peers[peer].peerConnection.getSenders().find(function (s) {
+      return s.track.kind == videoTrack.kind;
+    });
+    sender.replaceTrack(myVideoElement);
+  }
+  replaceVideoTrack(myVideoStream, myVideoElement);
+};
+
+const crossBtnClickEvent = (e) => {
+  const videoWrapper = e.target.parentElement;
+  if (videoWrapper.classList.contains("zoom-video")) {
+    videoWrapper.classList.remove("zoom-video");
+    e.target.removeEventListener("click", crossBtnClickEvent);
+    e.target.remove();
+  }
+};
+
 /**
  * Enable/disable video
  */
