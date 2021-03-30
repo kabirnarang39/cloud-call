@@ -40,7 +40,7 @@ navigator.mediaDevices.getUserMedia({
 myVideoStream=stream;
 addStream(myVideoElement,stream,null,username,null);
 peer.on('call', call=> {
-      call.answer(stream); // Answer the call with an A/V stream.
+      call.answer(stream,username); // Answer the call with an A/V stream.
       const video=document.createElement('video')
       call.on('stream', (userVideoStream,username)=> {
       addStream(video,userVideoStream,call.peer,username)
@@ -124,7 +124,7 @@ const connectToNewUser=(userId,stream,username)=>{
     const video=document.createElement('video')
     video.id=userId;
     
-    call.on('stream', (userVideoStream)=> {
+    call.on('stream', (userVideoStream,username)=> {
     addStream(video,userVideoStream,call.peer,username,userId)
   });
   call.on('close', () => {
