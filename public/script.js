@@ -38,17 +38,17 @@ navigator.mediaDevices.getUserMedia({
 })
 .then(stream=>{
 myVideoStream=stream;
-addStream(myVideoElement,stream,null,username,null);
+addStream(myVideoElement,stream,null,username,null,image);
 peer.on('call', call=> {
       call.answer(stream); // Answer the call with an A/V stream.
       const video=document.createElement('video')
       call.on('stream', userVideoStream=> {
-      addStream(video,userVideoStream,call.peer,username)
+      addStream(video,userVideoStream,call.peer,username,image)
     });
 })
 socket.on('user-connected',(userId,username,image,count)=>{
     //document.querySelector('.flash').innerHTML='User Connected'+userId;
-    connectToNewUser(userId,stream);
+    connectToNewUser(userId,stream,image);
     document.querySelector('.flash').innerHTML=(`<div class="alert success"><span class="closebtn" onClick="closeBtn();">&times;</span><strong>${username}</strong> connected.</div>`)
     //alert('Somebody connected', userId)
     changeCount(count);
@@ -119,13 +119,13 @@ peer.on('open',id=>{
     socket.emit('join-room',ROOM_ID,id,username,image)
 })
 
-const connectToNewUser=(userId,stream)=>{
+const connectToNewUser=(userId,stream,image)=>{
     var call = peer.call(userId, stream);
     const video=document.createElement('video')
     video.id=userId;
     
     call.on('stream', userVideoStream=> {
-    addStream(video,userVideoStream,call.peer,username,userId)
+    addStream(video,userVideoStream,call.peer,username,userId,image)
   });
   call.on('close', () => {
     video.parentElement.remove();
@@ -145,7 +145,7 @@ const connectToNewUser=(userId,stream)=>{
 }
 */
 var localAudioFXElement;
-function addStream(video, stream,peerId,username,userId) {
+function addStream(video, stream,peerId,username,userId,image) {
   console.log(video,stream,peerId,username,userId)
   // create audio FX
   const audioFX = new SE(stream);
@@ -156,7 +156,7 @@ function addStream(video, stream,peerId,username,userId) {
   // video off element
   const videoOffIndicator = document.createElement("div");
   videoOffIndicator.classList.add("video-off-indicator");
-  videoOffIndicator.innerHTML = `<ion-icon name="videocam-outline"></ion-icon>`;
+  videoOffIndicator.innerHTML = `<img src=${image}>`;
 
   // create pin button
   const pinBtn = document.createElement("button");
