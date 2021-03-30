@@ -44,14 +44,18 @@ peer.on('call', call=> {
   call.answer(stream); // Answer the call with an A/V stream.
   const video=document.createElement('video')
   call.on('stream', (userVideoStream)=> {
-    console.log(call)
-    console.log(username)
-      addStream(video,userVideoStream,call.peer,username)
+    var name;
+    socket.on('userName',username=>{
+      console.log(username)
+    name=username;
+    })
+    console.log(name)
+      addStream(video,userVideoStream,call.peer,name!==null?name:"User")
 
 });
 })
 socket.on('user-connected',(userId,username,image,count)=>{
-
+     socket.emit('user',username);
     //document.querySelector('.flash').innerHTML='User Connected'+userId;
     connectToNewUser(userId,stream,username);
     document.querySelector('.flash').innerHTML=(`<div class="alert success"><span class="closebtn" onClick="closeBtn();">&times;</span><strong>${username}</strong> connected.</div>`)
