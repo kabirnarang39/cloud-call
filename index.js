@@ -35,18 +35,18 @@ app.get('/:room',(req,res)=>{
     })
 })
 io.on('connection',socket=>{
-    socket.on('join-room',(roomId,peerId,userId,username,image)=>{
+    socket.on('join-room',(roomId,userId,username,image)=>{
        
         socket.join(roomId);
-       socket.to(roomId).broadcast.emit('user-connected',peerId,userId,username,image,roomData.count + 1)
+       socket.to(roomId).broadcast.emit('user-connected',userId,username,image,roomData.count + 1)
        socket.on("video-toggle", async (type) => {
-        socket.to(roomId).broadcast.emit("user-video-toggle", peerId, type);
+        socket.to(roomId).broadcast.emit("user-video-toggle", userId, type);
       });
         socket.on('message',(message,username,image)=>{
             io.to(roomId).emit('createMessage',message,username,image)
         })
         socket.on('disconnect', () => {
-            socket.to(roomId).broadcast.emit('user-disconnected', peerId,roomData.count - 1)
+            socket.to(roomId).broadcast.emit('user-disconnected', userId,roomData.count - 1)
           })
     })
    
