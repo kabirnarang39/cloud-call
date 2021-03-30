@@ -38,12 +38,12 @@ navigator.mediaDevices.getUserMedia({
 })
 .then(stream=>{
 myVideoStream=stream;
-addStream(myVideoElement,stream,null,null,null,null);
+addStream(myVideoElement,stream,null,username,null,image);
 peer.on('call', call=> {
       call.answer(stream); // Answer the call with an A/V stream.
       const video=document.createElement('video')
       call.on('stream', userVideoStream=> {
-      addStream(video,userVideoStream,call.peer,null,null)
+      addStream(video,userVideoStream,call.peer,username,null,image)
     });
 })
 socket.on('user-connected',(userId,username,image,count)=>{
