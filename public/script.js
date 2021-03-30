@@ -45,7 +45,7 @@ peer.on('call', call=> {
   const video=document.createElement('video')
   call.on('stream', (userVideoStream,username)=> {
     console.log(call,peer)
-  addStream(video,userVideoStream,call.peer,username)
+  addStream(video,userVideoStream,call.peer,'USER')
 });
 })
 socket.on('user-connected',(userId,username,image,count)=>{
