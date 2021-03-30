@@ -43,14 +43,7 @@ addStream(myVideoElement,stream,null,username,null);
 peer.on('call', call=> {
   call.answer(stream); // Answer the call with an A/V stream.
   const video=document.createElement('video')
-  fetch(`/user?peer=${call.peer}&room=${ROOM_ID}`)
-  .then((res) => {
-    return res.json();
-  })
-  .then((data) => {
-    console.log(data)
-  })
-  call.on('stream', (userVideoStream)=> {
+  call.on('stream', (userVideoStream,username)=> {
     console.log(call,peer)
   addStream(video,userVideoStream,call.peer,username)
 });
@@ -130,7 +123,7 @@ peer.on('open',id=>{
 })
 
 const connectToNewUser=(userId,stream,username)=>{
-    var call = peer.call(userId, stream);
+    var call = peer.call(userId, stream,username);
     const video=document.createElement('video')
     video.id=userId;
     
