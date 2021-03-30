@@ -123,7 +123,7 @@ peer.on('open',id=>{
 })
 
 const connectToNewUser=(userId,stream,username)=>{
-    var call = peer.call(userId, stream,username);
+    var call = peer.call(userId, stream);
     const video=document.createElement('video')
     video.id=userId;
     
