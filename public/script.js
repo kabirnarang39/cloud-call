@@ -38,17 +38,17 @@ navigator.mediaDevices.getUserMedia({
 })
 .then(stream=>{
 myVideoStream=stream;
-addStream(myVideoElement,stream,null,username,null,image);
+addStream(myVideoElement,stream,null,username,null);
 peer.on('call', call=> {
       call.answer(stream); // Answer the call with an A/V stream.
       const video=document.createElement('video')
       call.on('stream', userVideoStream=> {
-      addStream(video,userVideoStream,call.peer,username,null,null)
+      addStream(video,userVideoStream,call.peer,username)
     });
 })
 socket.on('user-connected',(userId,username,image,count)=>{
     //document.querySelector('.flash').innerHTML='User Connected'+userId;
-    connectToNewUser(userId,stream,image);
+    connectToNewUser(userId,stream,username);
     document.querySelector('.flash').innerHTML=(`<div class="alert success"><span class="closebtn" onClick="closeBtn();">&times;</span><strong>${username}</strong> connected.</div>`)
     //alert('Somebody connected', userId)
     changeCount(count);
@@ -119,13 +119,13 @@ peer.on('open',id=>{
     socket.emit('join-room',ROOM_ID,id,username,image)
 })
 
-const connectToNewUser=(userId,stream,image)=>{
+const connectToNewUser=(userId,stream,username)=>{
     var call = peer.call(userId, stream);
     const video=document.createElement('video')
     video.id=userId;
     
     call.on('stream', userVideoStream=> {
-    addStream(video,userVideoStream,call.peer,username,userId,image)
+    addStream(video,userVideoStream,call.peer,username,userId)
   });
   call.on('close', () => {
     video.parentElement.remove();
@@ -145,7 +145,7 @@ const connectToNewUser=(userId,stream,image)=>{
 }
 */
 var localAudioFXElement;
-function addStream(video, stream,peerId,username,userId,image) {
+function addStream(video, stream,peerId,username,userId) {
   console.log(video,stream,peerId,username,userId)
   // create audio FX
   const audioFX = new SE(stream);
@@ -156,7 +156,7 @@ function addStream(video, stream,peerId,username,userId,image) {
   // video off element
   const videoOffIndicator = document.createElement("div");
   videoOffIndicator.classList.add("video-off-indicator");
-  videoOffIndicator.innerHTML = `<img src=${image}>`;
+  videoOffIndicator.innerHTML = `<ion-icon name="videocam-outline"></ion-icon>`;
 
   // create pin button
   const pinBtn = document.createElement("button");
@@ -316,13 +316,11 @@ const setMuteButton=()=>{
 const playStop=()=>{
     const enabled=myVideoStream.getVideoTracks()[0].enabled;
     if(enabled){
-      socket.emit("video-toggle", false);
       videoWrapperVideoToggle(myVideoElement, false);
 myVideoStream.getVideoTracks()[0].enabled=false;
 setPlayVideo();
     }
     else{
-      socket.emit("video-toggle", true);
       videoWrapperVideoToggle(myVideoElement, true);
         setStopVideo();
         myVideoStream.getVideoTracks()[0].enabled=true;
@@ -334,7 +332,7 @@ const videoWrapperVideoToggle = (element, type) => {
   else videoWrapper.classList.add("video-disable");
 };
 socket.on("user-video-toggle", (id, type) => {
-  console.log((`video[peer="${id}"]`,id,type))
+  console.log((`video[peer="${id}"]` ))
   videoWrapperVideoToggle(document.querySelector(`video[peer="${id}"]`), type);
 });
 const setPlayVideo=()=>{
