@@ -38,7 +38,7 @@ io.on('connection',socket=>{
     socket.on('join-room',(roomId,userId,username,image)=>{
        
         socket.join(roomId);
-       io.to(roomId).emit('user-connected',userId,username,image,roomData.count + 1)
+       socket.to(roomId).broadcast.emit('user-connected',userId,username,image,roomData.count + 1)
        socket.on("video-toggle", async (type) => {
         socket.to(roomId).broadcast.emit("user-video-toggle", userId, type);
       });
