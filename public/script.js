@@ -149,7 +149,7 @@ const connectToNewUser=(userId,stream,username)=>{
 */
 var localAudioFXElement;
 function addStream(video, stream,peerId,username,adminId) {
-  console.log(video,stream,peerId,username,userId)
+  console.log(video,stream,peerId,username,adminId)
   // create audio FX
   const audioFX = new SE(stream);
   const audioFXElement = audioFX.createElement();
