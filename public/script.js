@@ -124,7 +124,7 @@ const connectToNewUser=(userId,stream,username)=>{
     const video=document.createElement('video')
     video.id=userId;
     
-    call.on('stream', (userVideoStream,username)=> {
+    call.on('stream', (userVideoStream)=> {
     addStream(video,userVideoStream,call.peer,username,userId)
   });
   call.on('close', () => {
