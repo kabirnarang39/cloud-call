@@ -39,15 +39,16 @@ navigator.mediaDevices.getUserMedia({
 .then(stream=>{
 myVideoStream=stream;
 addStream(myVideoElement,stream,null,username,null);
-peer.on('call', call=> {
-      call.answer(stream); // Answer the call with an A/V stream.
-      const video=document.createElement('video')
-      call.on('stream', (userVideoStream)=> {
-        console.log(username)
-      addStream(video,userVideoStream,call.peer,username)
-    });
-})
+
 socket.on('user-connected',(userId,username,image,count)=>{
+  peer.on('call', call=> {
+    call.answer(stream); // Answer the call with an A/V stream.
+    const video=document.createElement('video')
+    call.on('stream', (userVideoStream)=> {
+      console.log(username)
+    addStream(video,userVideoStream,call.peer,username)
+  });
+})
     //document.querySelector('.flash').innerHTML='User Connected'+userId;
     connectToNewUser(userId,stream,username);
     document.querySelector('.flash').innerHTML=(`<div class="alert success"><span class="closebtn" onClick="closeBtn();">&times;</span><strong>${username}</strong> connected.</div>`)
