@@ -43,7 +43,7 @@ peer.on('call', call=> {
       call.answer(stream); // Answer the call with an A/V stream.
       const video=document.createElement('video')
       call.on('stream', userVideoStream=> {
-      addStream(video,userVideoStream,call.peer,username,null,image)
+      addStream(video,userVideoStream,call.peer,username,null,null)
     });
 })
 socket.on('user-connected',(userId,username,image,count)=>{
