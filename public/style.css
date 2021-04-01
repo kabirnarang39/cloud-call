@@ -996,6 +996,6 @@ span.time {
   position: absolute;
   color: red;
   animation: show 2s ease;
-  margin-top: 350px;
+  margin-bottom: 50px !important;
   width: auto;
 }
