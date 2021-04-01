@@ -318,7 +318,7 @@ button:hover {
   height: calc(100vh - var(--footer-height));
   overflow-y: auto;
 }
-
+/*
 .video-grid {
   display: -ms-grid;
   display: grid;
@@ -379,7 +379,7 @@ button:hover {
   border: none;
   outline: none;
 }
-
+*/
 .video-grid .video-wrapper .elements-wrapper .video-off-indicator {
   --indicatorSize: 80px;
   width: var(--indicatorSize);
