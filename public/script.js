@@ -664,8 +664,8 @@ const record = (stream) => {
 };
 
 const mouseoverMsg=(message)=>{
-const message=document.querySelector('.button_message').innerHTML=message;
+document.querySelector('.button_message').innerHTML=message;
 }
 const mouseoutMsg=(message)=>{
-  const message=document.querySelector('.button_message').innerHTML=message;
+document.querySelector('.button_message').innerHTML=message;
 }
