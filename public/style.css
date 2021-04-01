@@ -241,7 +241,7 @@ a {
 
 html,
 body {
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 body {
@@ -518,7 +518,7 @@ button:hover {
   background-color: rgba(var(--color4), 1);
   -webkit-transition: all 0.24s linear;
   transition: all 0.24s linear;
-  
+
 }
 
 .video-grid .zoom-video video {
