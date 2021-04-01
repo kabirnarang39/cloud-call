@@ -668,27 +668,27 @@ if(message=='Mic On')
 {
  
   document.querySelector('.button_message').innerHTML=message;
-  document.querySelector('.button_message').style.marginLeft='20px;'
+  document.getElementsByClassName('button_message').style.marginLeft='20px;'
 }
 
 if(message=='Video On'){
 document.querySelector('.button_message').innerHTML=message;
-document.querySelector('.button_message').style.marginLeft='40px;'}
+ document.getElementsByClassName('button_message').style.marginLeft='40px;'}
 if(message=='Share Screen'){
 document.querySelector('.button_message').innerHTML=message;
-document.querySelector('.button_message').style.marginLeft='90px;'}
+ document.getElementsByClassName('button_message').style.marginLeft='90px;'}
 if(message=='Share Link'){
 document.querySelector('.button_message').innerHTML=message;
-document.querySelector('.button_message').style.marginLeft='140px;'}
+ document.getElementsByClassName('button_message').style.marginLeft='140px;'}
 if(message=='Chat'){
 document.querySelector('.button_message').innerHTML=message;
-document.querySelector('.button_message').style.marginLeft='160px;'}
+ document.getElementsByClassName('button_message').style.marginLeft='160px;'}
 if(message=='Start Recording'){
 document.querySelector('.button_message').innerHTML=message;
-document.querySelector('.button_message').style.marginLeft='180px;'}
+ document.getElementsByClassName('button_message').style.marginLeft='180px;'}
 if(message=='Leave Meeting'){
 document.querySelector('.button_message').innerHTML=message;
-document.querySelector('.button_message').style.marginLeft='250px;'}
+ document.getElementsByClassName('button_message').style.marginLeft='250px;'}
 }
 const mouseoutMsg=(message)=>{
   //document.querySelector('.button_message').innerHTML=message;
