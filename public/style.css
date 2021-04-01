@@ -330,7 +330,7 @@ button:hover {
   transition: all 0.24s linear;
   grid-gap: 0.85rem;
 }
-
+*/
 .video-grid .video-wrapper {
   position: relative;
   -webkit-transition: all 0.24s linear;
@@ -349,7 +349,7 @@ button:hover {
   -webkit-transition: all 0.24s linear;
   transition: all 0.24s linear;
 }
-*/
+
 .video-grid .video-wrapper .elements-wrapper .video-element {
   outline: none;
   border: none;
