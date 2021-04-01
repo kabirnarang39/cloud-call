@@ -291,7 +291,6 @@ button:hover {
   position: relative;
   -webkit-transition: all 0.24s linear;
   transition: all 0.24s linear;
-  border-radius: 0.25rem;
   overflow: hidden;
 }
 
