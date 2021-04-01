@@ -241,13 +241,13 @@ a {
 
 html,
 body {
-  overflow: hidden;
+  overflow: scroll;
 }
 
 body {
   background-color: #1b2127;
   background-color: #1b2127;
-
+  
   font-family: "Comfortaa", cursive;
 }
 
@@ -518,6 +518,7 @@ button:hover {
   background-color: rgba(var(--color4), 1);
   -webkit-transition: all 0.24s linear;
   transition: all 0.24s linear;
+  
 }
 
 .video-grid .zoom-video video {
