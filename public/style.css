@@ -277,8 +277,7 @@ button:hover {
 }
 
 .video-grid {
-  display: -ms-grid;
-  display: flex;
+  display: flexbox;
   overflow: scroll;
   position: relative;
   -webkit-transition: all 0.24s linear;
