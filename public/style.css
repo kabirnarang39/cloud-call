@@ -241,7 +241,7 @@ a {
 
 html,
 body {
-  overflow-y: scroll;
+  overflow: hidden;
 }
 
 body {
