@@ -18,7 +18,7 @@ video{
   height: fit-content;
 }
 /* Camera */
-.video-grid div video {
+.video-grid div {
   
   position: relative;
   vertical-align: middle;
@@ -337,7 +337,7 @@ button:hover {
 }
 */
 .video-grid .video-wrapper {
- /* position: relative;*/
+  position: relative;
   -webkit-transition: all 0.24s linear;
   transition: all 0.24s linear;
   border-radius: 0.25rem;
