@@ -664,7 +664,20 @@ const record = (stream) => {
 };
 
 const mouseoverMsg=(message)=>{
-document.querySelector('.button_message').innerHTML=message;
+  if(message=='Mic On')
+document.querySelector('.button_message1').innerHTML=message;
+if(message=='Video On')
+document.querySelector('.button_message2').innerHTML=message;
+if(message=='Share Screen')
+document.querySelector('.button_message3').innerHTML=message;
+if(message=='Share Link')
+document.querySelector('.button_message4').innerHTML=message;
+if(message=='Chat')
+document.querySelector('.button_message5').innerHTML=message;
+if(message=='Start Recording')
+document.querySelector('.button_message6').innerHTML=message;
+if(message=='Leave Meeting')
+document.querySelector('.button_message7').innerHTML=message;
 }
 const mouseoutMsg=(message)=>{
 document.querySelector('.button_message').innerHTML=message;
