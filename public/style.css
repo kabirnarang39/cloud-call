@@ -12,6 +12,10 @@
   top: 0px;
   right: 0px;
 }
+video{
+  width: fit-content;
+  height: fit-content;
+}
 /* Camera */
 .video-grid div {
   
