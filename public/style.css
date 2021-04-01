@@ -349,7 +349,7 @@ button:hover {
   -webkit-transition: all 0.24s linear;
   transition: all 0.24s linear;
 }
-
+*/
 .video-grid .video-wrapper .elements-wrapper .video-element {
   outline: none;
   border: none;
@@ -379,7 +379,7 @@ button:hover {
   border: none;
   outline: none;
 }
-*/
+
 .video-grid .video-wrapper .elements-wrapper .video-off-indicator {
   --indicatorSize: 80px;
   width: var(--indicatorSize);
