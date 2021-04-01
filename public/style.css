@@ -1,6 +1,7 @@
 /* Container */
 .video-grid {
   display: flex;
+  overflow: scroll;
   align-content: center;
   flex-wrap: wrap;
   align-items: center;
@@ -17,7 +18,7 @@ video{
   height: fit-content;
 }
 /* Camera */
-.video-grid div {
+.video-grid div video {
   
   position: relative;
   vertical-align: middle;
@@ -336,7 +337,7 @@ button:hover {
 }
 */
 .video-grid .video-wrapper {
-  position: relative;
+ /* position: relative;*/
   -webkit-transition: all 0.24s linear;
   transition: all 0.24s linear;
   border-radius: 0.25rem;
