@@ -993,8 +993,7 @@ span.time {
   background: rgba(var(--color3), 1);
 }
 .button_message div{
-  display: flex;
-  flex-direction: column;
+  display: inline-flex;
   color: red;
   box-shadow: 0px 12px 22px rgba(0, 0, 0, 0.4);
   background: #fff;
