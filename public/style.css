@@ -993,8 +993,8 @@ span.time {
   background: rgba(var(--color3), 1);
 }
 .button_message div{
-  display: inline-flexbox;
-  
+  display: inline-flex;
+  position: relative;
   color: red;
   animation: show 0.4s ease;
   margin-top: 300px;
