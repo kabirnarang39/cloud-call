@@ -691,5 +691,5 @@ document.querySelector('.button_message').style.marginLeft='20px;'
 document.querySelector('.button_message').style.marginLeft='250px;'}
 }
 const mouseoutMsg=(message)=>{
-document.querySelector('.button_message').innerHTML=message;
+document.querySelector('.button_message').style.display='none';
 }
