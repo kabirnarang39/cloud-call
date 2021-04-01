@@ -998,5 +998,5 @@ span.time {
   color: red;
   animation: show 0.4s ease;
   margin-top: 350px;
-  width: fit-content;
+  width: auto;
 }
