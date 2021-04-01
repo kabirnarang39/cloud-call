@@ -43,7 +43,7 @@ function Dish() {
       let Scenary = document.getElementsByClassName('video-grid');
       let Width = Scenary.offsetWidth - (Margin * 2);
       let Height = Scenary.offsetHeight - (Margin * 2);
-      let Cameras = document.getElementsByID('video-wrapper');
+      let Cameras = document.getElementsByClassName('video-wrapper');
       let max = 0;
   
   // loop (i recommend you optimize this)
@@ -64,7 +64,7 @@ function Dish() {
 
 // Set Width and Margin 
 function setWidth(width, margin) {
-  let Cameras = document.getElementsByID('video-wrapper');
+  let Cameras = document.getElementsByClassName('video-wrapper');
   for (var s = 0; s < Cameras.length; s++) {
       Cameras[s].style.width = width + "px";
       Cameras[s].style.margin = margin + "px";
