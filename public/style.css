@@ -993,7 +993,9 @@ span.time {
   background: rgba(var(--color3), 1);
 }
 .button_message {
+  position: absolute;
   color: rgba(var(--color3), 1);
   animation: show 2s ease;
+  margin-top: 350px !important;
   width: auto;
 }
