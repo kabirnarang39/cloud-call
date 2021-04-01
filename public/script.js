@@ -663,5 +663,3 @@ const record = (stream) => {
   };
 };
 
-if (detectMob()) shareScreenBtn.remove();
-else camToggleBtn.remove();
