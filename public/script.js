@@ -680,5 +680,11 @@ if(message=='Leave Meeting')
 document.querySelector('.button_message7').innerHTML=message;
 }
 const mouseoutMsg=(message)=>{
-document.querySelector('.button_message').innerHTML=message;
+document.querySelector('.button_message1').innerHTML=message;
+document.querySelector('.button_message2').innerHTML=message;
+document.querySelector('.button_message3').innerHTML=message;
+document.querySelector('.button_message4').innerHTML=message;
+document.querySelector('.button_message5').innerHTML=message;
+document.querySelector('.button_message6').innerHTML=message;
+document.querySelector('.button_message7').innerHTML=message;
 }
