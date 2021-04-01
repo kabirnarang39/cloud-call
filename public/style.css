@@ -992,3 +992,10 @@ span.time {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(var(--color3), 1);
 }
+.button_message{
+  display: flex;
+  color: red;
+  box-shadow: 0px 12px 22px rgba(0, 0, 0, 0.4);
+  background: #fff;
+  animation: show 0.4s ease;
+}
