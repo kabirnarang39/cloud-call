@@ -762,7 +762,7 @@ span.time {
   display: inline;
   white-space: nowrap;
   position: absolute;
-  top: -40px;
+  top: -50px;
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
