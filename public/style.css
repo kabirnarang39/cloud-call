@@ -762,7 +762,7 @@ span.time {
   display: inline;
   white-space: nowrap;
   position: absolute;
-  top: -50px;
+  top: -45px;
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
@@ -820,7 +820,7 @@ span.time {
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
   background-color: #262626;
-  top: -40px;
+  top: -43px;
   color: white;
 }
 
