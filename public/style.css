@@ -794,21 +794,21 @@ span.time {
   }
 }
 
-#copy {
+#copy-button {
   --tooltip: "copy";
   cursor: pointer;
   position: relative;
 }
 
-#copy i {
+#copy-button i {
   pointer-events: none;
 }
 
-#copy span {
+#copy-button span {
   pointer-events: none;
 }
 
-#copy:before {
+#copy-button:before {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -823,7 +823,7 @@ span.time {
   color: white;
 }
 
-#copy:hover:before {
+#copy-button:before {
   opacity: 1;
   visibility: visible;
 }
