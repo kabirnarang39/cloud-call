@@ -663,9 +663,3 @@ const record = (stream) => {
   };
 };
 
-const mouseoverMsg=(message)=>{
-document.querySelector('.button_message').innerHTML=message;
-}
-const mouseoutMsg=(message)=>{
-document.querySelector('.button_message').innerHTML=message;
-}
