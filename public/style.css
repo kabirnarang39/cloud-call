@@ -605,7 +605,7 @@ button:hover {
   border: none;
   outline: none;
   cursor: pointer;
-  width: 40px;
+  width: 60px;
   height: 40px;
   border-radius: 50%;
   display: -webkit-box;
@@ -798,6 +798,7 @@ span.time {
   --tooltip: "copy";
   cursor: pointer;
   position: relative;
+  opacity: 1;
 }
 
 #copy-button i {
