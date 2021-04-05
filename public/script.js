@@ -391,6 +391,7 @@ setPlayVideo();
     } 
 }
 const videoWrapperVideoToggle = (element, type) => {
+  console.log(type)
   const videoWrapper = element.previousSibling;
   if (type) videoWrapper.classList.remove("video-disable");
   else videoWrapper.classList.add("video-disable");
