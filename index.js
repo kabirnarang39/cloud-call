@@ -17,8 +17,6 @@ const videoRoom = require("./routes/video");
 const signup = require("./routes/auth/signup");
 const login = require("./routes/auth/login");
 const logout = require("./routes/auth/logout");
-const index = require("./routes/index");
-const newMeeting = require("./routes/newMeeting");
 mongoose
   .connect('mongodb+srv://kabir:9416285188@cluster0.mi2bs.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
     useNewUrlParser: true,
