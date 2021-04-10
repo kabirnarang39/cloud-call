@@ -88,13 +88,14 @@
     
 }
 .messages li{
-    width:300px;
+    width:350px;
     word-wrap:break-word;
     border: 2px solid #dedede;
     background-color: #f1f1f1;
     border-radius: 5px;
     padding: 10px;
-    margin: auto;
+    margin: 10px 0;
+    margin-left: auto;
 }
    
 
