@@ -203,10 +203,12 @@ navigator.mediaDevices
   function processStream(stream) {
     addStream(myVideoElement, myVideoStream, null, username);
     // recieve the others stream
+
     peer.on("call", (call) => {
       peers[call.peer] = call;
       call.answer(myVideoStream);
       const video = document.createElement("video");
+      call.on("stream", (userVideoStream) => {
             addStream(
               video,
               userVideoStream,
@@ -214,6 +216,7 @@ navigator.mediaDevices
               username,
               peers[peer]
             );
+      });
       call.on("close", () => {
         video.parentElement.remove();
       });
