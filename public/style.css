@@ -481,7 +481,7 @@ button:hover {
 }
 
 .video-grid .video-wrapper .video-disable {
-  background-color: #1c1e20;
+  background-color: rgba(var(--color4), 1);
 }
 
 .video-grid .video-wrapper .video-disable .video-off-indicator {
@@ -516,7 +516,7 @@ button:hover {
   width: 100%;
   left: 0;
   height: calc(100vh - var(--footer-height));
-  background-color: #1c1e20;
+  background-color: rgba(var(--color4), 1);
   -webkit-transition: all 0.24s linear;
   transition: all 0.24s linear;
 
