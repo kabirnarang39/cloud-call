@@ -55,9 +55,7 @@ app.post("/join-room", (req, res) => {
       admin: roomData.admin,
     });
   });
-  // new meeting
-  app.use("/new-meeting", newMeeting);
-  
+
   // login
   app.use("/login", login);
   
@@ -66,9 +64,6 @@ app.post("/join-room", (req, res) => {
   
   // logout
   app.use("/logout", logout);
-  
-  // video room
-  app.use("/", videoRoom);
   app.get('/meet-end',(req,res,next)=>{
     res.render('meet-end')
 })
