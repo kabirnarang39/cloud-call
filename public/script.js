@@ -207,7 +207,7 @@ navigator.mediaDevices
       peers[call.peer] = call;
       call.answer(myVideoStream);
       const video = document.createElement("video");
-            addVideoStream(
+            addStream(
               video,
               userVideoStream,
               call.peer,
