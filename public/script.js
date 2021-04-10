@@ -203,7 +203,7 @@ navigator.mediaDevices
   function processStream(stream) {
     addStream(myVideoElement, myVideoStream, null, username);
     // recieve the others stream
-    myPeer.on("call", (call) => {
+    peer.on("call", (call) => {
       peers[call.peer] = call;
       call.answer(myVideoStream);
       const video = document.createElement("video");
