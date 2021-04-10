@@ -4,7 +4,7 @@ const videoGrid=document.querySelector('.video-grid')
 var myVideoElement=document.createElement('video')
 myVideoElement.muted=true;
 const peers = {}
-console.log(window)
+
 var peer = new Peer(undefined,{
     path:'/peerjs',
     host:'/',
@@ -222,9 +222,7 @@ peer.on('open',id=>{
 
     socket.emit('join-room',ROOM_ID,id,username,image)
 })
-myPeer.on("open", (id) => {
-  Peer_ID = id;
-});
+
 const changeCount = (count) => {
   const counter = document.getElementById("user-number");
   counter.innerHTML = count;
