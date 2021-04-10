@@ -492,6 +492,7 @@ shareScreenBtn.addEventListener("click", (e) => {
       myVideoElement = myVideoStream.getVideoTracks()[0];
       replaceVideoTrack(myVideoStream, videoTrack);
       for (peer in peers) {
+        console.log(peers)
         let sender = peers[peer].peerConnection.getSenders().find(function (s) {
           return s.track.kind == videoTrack.kind;
         });
