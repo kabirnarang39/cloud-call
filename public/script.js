@@ -306,52 +306,7 @@ const eventAdd = (element) => {
     videoWrapper.classList.toggle("zoom-video");
   });
 };
-const camToggleBtn = document.getElementById("cams-toggle")
-camToggleBtn.addEventListener("click", (e) => {
-  myVideoStream.getTracks().forEach((track) => {
-    track.stop();
-  });
-  myVideoElement.classList.toggle("mirror");
-  var cams = e.target.getAttribute("camera");
-  cams = JSON.parse(cams);
-  var camId;
-  for (cam in cams) {
-    if (cams[cam] == false) {
-      camId = cam;
-      cams[cam] = true;
-    } else {
-      cams[cam] = false;
-    }
-  }
-  e.target.setAttribute("camera", JSON.stringify(cams));
-  navigator.mediaDevices
-    .getUserMedia({
-      video: { deviceId: { exact: camId } },
-      audio: true,
-    })
-    .then((stream) => {
-      myVideoStream = stream;
-      localAudioFXElement.replaceStream(stream);
-      let videoTrack = stream.getVideoTracks()[0];
-      let audioTrack = stream.getAudioTracks()[0];
-      myVideoElement.srcObject = stream;
-      for (peer in peers) {
-        let sender = peers[peer].peerConnection.getSenders().find(function (s) {
-          return s.track.kind == videoTrack.kind;
-        });
-        sender.replaceTrack(videoTrack);
-        sender = peers[peer].peerConnection.getSenders().find(function (s) {
-          return s.track.kind == audioTrack.kind;
-        });
-        sender.replaceTrack(audioTrack);
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-});
-if (detectMob()) shareScreenBtn.remove();
-else camToggleBtn.remove()
+
 class SE {
   constructor(mediaStream) {
     this.mediaStream = mediaStream;
