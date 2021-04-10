@@ -8,7 +8,6 @@ router.get("/:room", async (req, res) => {
   res.render("room", {
     tabName: "S-Meet",
     count: roomData ? roomData.count : 0,
-    layout: "layouts/videoLayout",
     roomId: req.params.room,
     screen: req.query.screen,
     username: req.query.user,

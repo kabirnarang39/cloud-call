@@ -49,9 +49,12 @@ app.get("/user", async (req, res) => {
       admin: roomData.admin,
     });
   });
-app.get('/meet-end',(req,res,next)=>{
+  app.get('/meet-end',(req,res,next)=>{
     res.render('meet-end')
 })
+  // video room
+app.use("/", videoRoom);
+
 
 /*
 io.on('connection',socket=>{
