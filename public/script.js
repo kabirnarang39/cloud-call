@@ -93,6 +93,7 @@ for (i = 0; i < close.length; i++) {
   }
 }
 }
+/*
 navigator.mediaDevices.getUserMedia({
     video:true,
     audio:true
@@ -144,6 +145,7 @@ socket.on('createMessage',(message,username,image)=>{
     ul.append(bold,node)
     scrollToBottom();
     //ul.append(`<li class="message"><b>user</b><br/>${message}</li>`)*/
+    /*
     $('ul').append(`<li >
 								<span class="messageHeader">
 									<span>
@@ -172,6 +174,108 @@ socket.on('createMessage',(message,username,image)=>{
 .catch(err=>{
     console.log(err)
 })
+*/
+navigator.mediaDevices
+  .getUserMedia({ audio: true })
+  .then((stream) => {
+    navigator.mediaDevices
+      .getUserMedia({
+        video: true,
+        audio: true,
+      })
+      .then((stream) => {
+        myVideoStream = stream;
+        myVideoTrack = stream.getVideoTracks()[0];
+        processStream(myVideoStream);
+      });
+  })
+  .catch((err) => {
+    navigator.mediaDevices
+      .getUserMedia({
+        video: true,
+        audio: false,
+      })
+      .then((stream) => {
+        myVideoStream = stream;
+        processStream(myVideoStream);
+      });
+  });
+  function processStream(stream) {
+    addStream(myVideoElement, myVideoStream, null, username);
+    // recieve the others stream
+    myPeer.on("call", (call) => {
+      peers[call.peer] = call;
+      call.answer(myVideoStream);
+      const video = document.createElement("video");
+            addVideoStream(
+              video,
+              userVideoStream,
+              call.peer,
+              data.user,
+              data.admin
+            );
+      call.on("close", () => {
+        video.parentElement.remove();
+      });
+    });
+    socket.on('user-connected',(userId,username,image,count)=>{
+      //document.querySelector('.flash').innerHTML='User Connected'+userId;
+      connectToNewUser(userId,stream,username);
+      document.querySelector('.flash').innerHTML=(`<div class="alert success"><span class="closebtn" onClick="closeBtn();">&times;</span><strong>${username}</strong> connected.</div>`)
+      //alert('Somebody connected', userId)
+      changeCount(count);
+      
+  })
+  
+  
+  const changeCount = (count) => {
+    const counter = document.getElementById("user-number");
+    counter.innerHTML = count;
+  };
+  const text=document.querySelector('input')
+  text.addEventListener('change',(event)=>{
+  if(event.target.value.length!==0){
+  socket.emit('message',event.target.value,username,image)
+  event.target.value='';
+  }
+  })
+  
+  socket.on('createMessage',(message,username,image)=>{
+   /*   const ul=document.querySelector('.messages');
+      const node=document.createElement('li');
+      const textNode=document.createTextNode(message)
+      const bold=document.createElement('b')
+      const textNode2=document.createTextNode("user")
+      bold.appendChild(textNode2)
+      node.appendChild(textNode)
+      ul.append(bold,node)
+      scrollToBottom();
+      //ul.append(`<li class="message"><b>user</b><br/>${message}</li>`)*/
+      
+      $('ul').append(`<li >
+                  <span class="messageHeader">
+                    <span>
+                      <img src=${image} style="  
+                      vertical-align: middle;
+                      width: 40px;
+                      height: 40px;
+                      border-radius: 50%;
+                      padding:2px;">
+                      <span class="messageSender">${username}</span> 
+                    </span>
+                    ${new Date().toLocaleString('en-US', {
+                      hour: 'numeric',
+                      minute: 'numeric',
+                      hour12: true,
+                    })}
+                  </span>
+                  <span class="message">${message}</span>
+                
+                </li>`)
+        scrollToBottom()
+  })
+  
+}
 socket.on('user-disconnected', (userId,count) => {
    // document.querySelector('.flash').innerHTML='User Disconnected'+userId;
    if (peers[userId]) {
