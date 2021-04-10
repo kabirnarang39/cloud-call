@@ -218,7 +218,7 @@ function addStream(video, stream,peerId,username,userId) {
   // video off element
   const videoOffIndicator = document.createElement("div");
   videoOffIndicator.classList.add("video-off-indicator");
-  videoOffIndicator.innerHTML = `<ion-icon name="videocam-outline"></ion-icon>`;
+  videoOffIndicator.innerHTML = `<img src=${avatar}>`;
 
   // create pin button
   const pinBtn = document.createElement("button");
@@ -393,7 +393,6 @@ setPlayVideo();
 const videoWrapperVideoToggle = (element, type) => {
   console.log(type)
   const videoWrapper = element.previousSibling;
-  console.log(videoWrapper)
   if (type) videoWrapper.classList.remove("video-disable");
   else videoWrapper.classList.add("video-disable");
 };
