@@ -940,3 +940,7 @@ span.time {
   margin-top: 350px;
   width: auto;
 }
+button[tooltip]{
+  color: #00796b;
+  background-color: #2e2cb4;
+}
