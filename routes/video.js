@@ -5,7 +5,7 @@ const room = require("../schema/rooms");
 router.get("/:room", async (req, res) => {
   const roomData = await room.findOne({ roomId: req.params.room }).exec();
   
-  res.render("room", {
+  res.render("zoom", {
     tabName: "S-Meet",
     count: roomData ? roomData.count : 0,
     roomId: req.params.room,
