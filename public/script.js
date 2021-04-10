@@ -235,30 +235,7 @@ const changeCount = (count) => {
   const counter = document.getElementById("user-number");
   counter.innerHTML = count;
 };
-function connectToNewUser(userId, stream) {
-  // set others peerid and send my stream
-  const call = myPeer.call(userId, stream);
-  const video = document.createElement("video");
-  call.on("stream", (userVideoStream) => {
-    fetch(`/user?peer=${call.peer}&room=${ROOM_ID}`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        addVideoStream(
-          video,
-          userVideoStream,
-          call.peer,
-          data.user,
-          data.admin
-        );
-      });
-  });
-  call.on("close", () => {
-    video.parentElement.remove();
-  });
-  peers[userId] = call;
-}
+
 /*
 const connectToNewUser=(userId,stream,username)=>{
     var call = peer.call(userId, stream);
@@ -285,6 +262,30 @@ const connectToNewUser=(userId,stream,username)=>{
   // console.log(videoGrid)
 }
 */
+function connectToNewUser(userId, stream) {
+  // set others peerid and send my stream
+  const call = myPeer.call(userId, stream);
+  const video = document.createElement("video");
+  call.on("stream", (userVideoStream) => {
+    fetch(`/user?peer=${call.peer}&room=${ROOM_ID}`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        addVideoStream(
+          video,
+          userVideoStream,
+          call.peer,
+          data.user,
+          data.admin
+        );
+      });
+  });
+  call.on("close", () => {
+    video.parentElement.remove();
+  });
+  peers[userId] = call;
+}
 var localAudioFXElement;
 function addStream(video, stream,peerId,username,userId) {
   console.log(video,stream,peerId,username,userId)
