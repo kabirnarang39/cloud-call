@@ -10,6 +10,7 @@ router.get("/:room", async (req, res) => {
     count: roomData ? roomData.count : 0,
     roomId: req.params.room,
     screen: req.query.screen,
+    image:req.query.image,
     username: req.query.user,
   });
 });
