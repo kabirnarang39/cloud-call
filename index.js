@@ -34,6 +34,7 @@ app.get('/:room',(req,res)=>{
        image:req.query.image
     })
 })
+/*
 io.on('connection',socket=>{
     socket.on('join-room',(roomId,userId,username,image)=>{
        
@@ -50,7 +51,36 @@ io.on('connection',socket=>{
           })
     })
    
-})
+})*/
+io.on("connection", (socket) => {
+    socket.on("join-room", async (roomId, peerId, userId, name, audio, video) => {
+      // add peer details
+      // add room details
+      socket.join(roomId);
+      socket
+        .to(roomId)
+        .broadcast.emit(
+          "user-connected",
+          peerId,
+          name,
+          audio,
+          video,
+          roomData.count + 1
+        );
+      socket.on("video-toggle", async (type) => {
+        socket.to(roomId).broadcast.emit("user-video-toggle", peerId, type);
+      });
+      socket.on('message',(message,username,image)=>{
+        io.to(roomId).emit('createMessage',message,username,image)
+    })
+      socket.on("disconnect", async () => {
+        socket
+          .to(roomId)
+          .broadcast.emit("user-disconnected", peerId, roomData.count - 1);
+      });
+    });
+  });
+  server.listen(process.env.PORT || 3000);
 server.listen(process.env.PORT || 8000, function(){
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
   });
