@@ -34,7 +34,7 @@ app.get('/:room',(req,res)=>{
         roomId:req.params.room,
        username:req.query.user,
        image:req.query.image,
-       avatar:generator.generateRandomAvatar(req.query.image)
+       avatar:generator.generateRandomAvatar()
     })
 })
 io.on('connection',socket=>{
