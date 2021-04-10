@@ -218,7 +218,7 @@ function addStream(video, stream,peerId,username,userId) {
   // video off element
   const videoOffIndicator = document.createElement("div");
   videoOffIndicator.classList.add("video-off-indicator");
-  videoOffIndicator.innerHTML = `<img src="${avatar}">`;
+  videoOffIndicator.innerHTML = `<ion-icon name="videocam-outline"></ion-icon>`;
 
   // create pin button
   const pinBtn = document.createElement("button");

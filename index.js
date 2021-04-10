@@ -2,7 +2,6 @@ const express=require('express');
 const app=express();
 const path=require('path')
 const server=require('http').Server(app);
-const  AvatarGenerator=require('random-avatar-generator');
 const io=require('socket.io')(server)
 const { v4 : uuidv4 } = require('uuid');
 const { ExpressPeerServer } = require('peer');
@@ -10,7 +9,6 @@ const peerServer = ExpressPeerServer(server,{
     debug:true
 });
 var  roomData = { count: 1};
-const generator = new AvatarGenerator();
 app.use('/peerjs',peerServer);
 app.set('view engine','ejs')
 app.set('views','views');
@@ -33,8 +31,7 @@ app.get('/:room',(req,res)=>{
     res.render('zoom',{
         roomId:req.params.room,
        username:req.query.user,
-       image:req.query.image,
-       avatar:generator.generateRandomAvatar()
+       image:req.query.image
     })
 })
 io.on('connection',socket=>{
