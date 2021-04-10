@@ -21,6 +21,7 @@ var peer = new Peer(undefined,{
 //console.log(videoGrid)
 ///////////////////////////////////////////////
 // Area:
+/*
 function Area(Increment, Count, Width, Height, Margin = 10) {
   let i = w = 0;
   let h = Increment * 0.75 + (Margin * 2);
@@ -77,6 +78,7 @@ window.addEventListener("load", function (event) {
   Dish();
   window.onresize = Dish;
 }, false);
+*/
 ////////////////////////////////////////
 const closeBtn=()=>{
     var close = document.getElementsByClassName("closebtn");
