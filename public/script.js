@@ -262,7 +262,7 @@ const connectToNewUser=(userId,stream,username)=>{
 */
 function connectToNewUser(userId, stream) {
   // set others peerid and send my stream
-  const call = myPeer.call(userId, stream);
+  const call = peer.call(userId, stream);
   const video = document.createElement("video");
   call.on("stream", (userVideoStream) => {
     fetch(`/user?peer=${call.peer}&room=${ROOM_ID}`)
