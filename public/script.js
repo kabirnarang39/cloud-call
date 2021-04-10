@@ -49,7 +49,7 @@ navigator.mediaDevices
       });
   });
   function processStream(stream) {
-    addStream(myVideo, myVideoStream, null, {
+    addStream(myVideoElement, myVideoStream, null, {
       name: name,
       audio: myVideoStream.getAudioTracks()[0].enabled,
       video: myVideoStream.getVideoTracks()[0].enabled,
