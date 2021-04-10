@@ -581,7 +581,7 @@ dialogueCloseButton.addEventListener('click', (e) => {
   const dialogue = document.querySelector('.dialogue-container')
   dialogue.classList.toggle('dialogue-active')
 })
-copyButton.addEventListener("mousedown", (e) => {
+copyButton.addEventListener("mouseover", (e) => {
   const copyText = e.target.getAttribute('meeting_link')
   navigator.clipboard.writeText(copyText);
   e.target.setAttribute("tool_tip", 'copied');
