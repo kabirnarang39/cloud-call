@@ -50,7 +50,7 @@ navigator.mediaDevices
   });
   function processStream(stream) {
     addStream(myVideoElement, myVideoStream, null, {
-      name: name,
+      name: username,
       audio: myVideoStream.getAudioTracks()[0].enabled,
       video: myVideoStream.getVideoTracks()[0].enabled,
     });
