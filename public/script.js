@@ -4,7 +4,7 @@ const videoGrid=document.querySelector('.video-grid')
 var myVideoElement=document.createElement('video')
 myVideoElement.muted=true;
 const peers = {}
-
+console.log(window)
 var peer = new Peer(undefined,{
     path:'/peerjs',
     host:'/',
@@ -60,11 +60,6 @@ navigator.mediaDevices
       call.answer(myVideoStream);
       const video = document.createElement("video");
       call.on("stream", (userVideoStream) => {
-        fetch(`/user?peer=${call.peer}&room=${ROOM_ID}`)
-          .then((res) => {
-            return res.json();
-          })
-          .then((data) => {
             addStream(
               video,
               userVideoStream,
@@ -72,7 +67,6 @@ navigator.mediaDevices
               data.user,
               data.admin
             );
-          });
       });
       call.on("close", () => {
         video.parentElement.remove();
@@ -81,7 +75,7 @@ navigator.mediaDevices
   
     socket.on('user-connected',(userId,username,image,count)=>{
       //document.querySelector('.flash').innerHTML='User Connected'+userId;
-      connectToNewUser(userId, myVideoStream);
+      connectToNewUser(userId, myVideoStream,username);
       document.querySelector('.flash').innerHTML=(`<div class="alert success"><span class="closebtn" onClick="closeBtn();">&times;</span><strong>${username}</strong> connected.</div>`)
       //alert('Somebody connected', userId)
       changeCount(count);
@@ -224,17 +218,18 @@ socket.on('user-disconnected', (userId,count) => {
   }
   })
 peer.on('open',id=>{
-  Peer_ID = id;
+    Peer_ID = id;
 
     socket.emit('join-room',ROOM_ID,id,username,image)
 })
-
+myPeer.on("open", (id) => {
+  Peer_ID = id;
+});
 const changeCount = (count) => {
   const counter = document.getElementById("user-number");
   counter.innerHTML = count;
 };
 
-/*
 const connectToNewUser=(userId,stream,username)=>{
     var call = peer.call(userId, stream);
     const video=document.createElement('video')
@@ -260,30 +255,6 @@ const connectToNewUser=(userId,stream,username)=>{
   // console.log(videoGrid)
 }
 */
-function connectToNewUser(userId, stream) {
-  // set others peerid and send my stream
-  const call = peer.call(userId, stream);
-  const video = document.createElement("video");
-  call.on("stream", (userVideoStream) => {
-    fetch(`/user?peer=${call.peer}&room=${ROOM_ID}`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        addVideoStream(
-          video,
-          userVideoStream,
-          call.peer,
-          data.user,
-          data.admin
-        );
-      });
-  });
-  call.on("close", () => {
-    video.parentElement.remove();
-  });
-  peers[userId] = call;
-}
 var localAudioFXElement;
 function addStream(video, stream,peerId,username,userId) {
   console.log(video,stream,peerId,username,userId)
