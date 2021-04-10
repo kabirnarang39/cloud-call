@@ -8,7 +8,6 @@ const { ExpressPeerServer } = require('peer');
 const peerServer = ExpressPeerServer(server,{ 
     debug:true
 });
-var user=[];
 var  roomData = { count: 1};
 app.use('/peerjs',peerServer);
 app.set('view engine','ejs')
@@ -24,9 +23,6 @@ app.get('/',(req,res)=>{
    // res.redirect('/'+uuidv4());
     res.send(uuidv4())
 })
-app.post('/user',(req,res,next)=>{
-user.push(res.data.user);
-})
 app.get('/meet-end',(req,res,next)=>{
     res.render('meet-end')
 })
@@ -34,7 +30,7 @@ app.get('/:room',(req,res)=>{
    // console.log(req.params)
     res.render('zoom',{
         roomId:req.params.room,
-       username:user,
+       username:req.query.user,
        image:req.query.image
     })
 })

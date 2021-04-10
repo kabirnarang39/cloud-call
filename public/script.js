@@ -1,15 +1,100 @@
+function detectMob() {
+  const toMatch = [
+    /Android/i,
+    /webOS/i,
+    /iPhone/i,
+    /iPad/i,
+    /iPod/i,
+    /BlackBerry/i,
+    /Windows Phone/i,
+  ];
+
+  return toMatch.some((toMatchItem) => {
+    return navigator.userAgent.match(toMatchItem);
+  });
+}
 var socket = io('/');
 let myVideoStream;
 const videoGrid=document.querySelector('.video-grid')
 var myVideoElement=document.createElement('video')
 myVideoElement.muted=true;
 const peers = {}
-console.log(username)
+
 var peer = new Peer(undefined,{
     path:'/peerjs',
     host:'/',
     port:'443'
 });
+//window.addEventListener("load", function (event) {
+  //  Dish();
+  
+    //window.onresize = Dish;
+//  }, false);
+//console.log(JSON.parse(myParam))
+//console.log(window.location.href.split('?')[1])
+//console.log(user);
+//console.log(videoGrid)
+///////////////////////////////////////////////
+// Area:
+/*
+function Area(Increment, Count, Width, Height, Margin = 10) {
+  let i = w = 0;
+  let h = Increment * 0.75 + (Margin * 2);
+  while (i < (Count)) {
+      if ((w + Increment) > Width) {
+          w = 0;
+          h = h + (Increment * 0.75) + (Margin * 2);
+      }
+      w = w + Increment + (Margin * 2);
+      i++;
+  }
+  if (h > Height) return false;
+  else return Increment;
+}
+// Dish:
+function Dish() {
+
+  // variables:
+      let Margin = 2;
+      let Scenary = document.getElementsByClassName('video-grid');
+      let Width = Scenary.offsetWidth - (Margin * 2);
+      let Height = Scenary.offsetHeight - (Margin * 2);
+      let Cameras = document.getElementsByClassName('video-wrapper');
+      let max = 0;
+  
+  // loop (i recommend you optimize this)
+      let i = 1;
+      while (i < 5000) {
+          let w = Area(i, Cameras.length, Width, Height, Margin);
+          if (w === false) {
+              max =  i - 1;
+              break;
+          }
+          i++;
+      }
+  
+  // set styles
+      max = max - (Margin * 2);
+      setWidth(max, Margin);
+}
+
+// Set Width and Margin 
+function setWidth(width, margin) {
+  let Cameras = document.getElementsByClassName('video-wrapper');
+  for (var s = 0; s < Cameras.length; s++) {
+      Cameras[s].style.width = width + "px";
+      Cameras[s].style.margin = margin + "px";
+      Cameras[s].style.height = (width * 0.75) + "px";
+  }
+}
+
+// Load and Resize Event
+window.addEventListener("load", function (event) {
+  Dish();
+  window.onresize = Dish;
+}, false);
+*/
+////////////////////////////////////////
 const closeBtn=()=>{
     var close = document.getElementsByClassName("closebtn");
 var i;
@@ -22,111 +107,6 @@ for (i = 0; i < close.length; i++) {
   }
 }
 }
-////
-navigator.mediaDevices
-  .getUserMedia({ audio: true })
-  .then((stream) => {
-    navigator.mediaDevices
-      .getUserMedia({
-        video: true,
-        audio: true,
-      })
-      .then((stream) => {
-        myVideoStream = stream;
-        myVideoTrack = stream.getVideoTracks()[0];
-        processStream(myVideoStream);
-      });
-  })
-  .catch((err) => {
-    navigator.mediaDevices
-      .getUserMedia({
-        video: true,
-        audio: false,
-      })
-      .then((stream) => {
-        myVideoStream = stream;
-        processStream(myVideoStream);
-      });
-  });
-  function processStream(stream) {
-    addStream(myVideoElement, myVideoStream, null, {
-      name: username,
-      audio: myVideoStream.getAudioTracks()[0].enabled,
-      video: myVideoStream.getVideoTracks()[0].enabled,
-    });
-    // recieve the others stream
-    peer.on("call", (call) => {
-      peers[call.peer] = call;
-      call.answer(myVideoStream);
-      const video = document.createElement("video");
-      call.on("stream", (userVideoStream) => {
-            addStream(
-              video,
-              userVideoStream,
-              call.peer,
-              data.user,
-              data.admin
-            );
-      });
-      call.on("close", () => {
-        video.parentElement.remove();
-      });
-    });
-  
-    socket.on('user-connected',(userId,username,image,count)=>{
-      //document.querySelector('.flash').innerHTML='User Connected'+userId;
-      connectToNewUser(userId, myVideoStream,username);
-      document.querySelector('.flash').innerHTML=(`<div class="alert success"><span class="closebtn" onClick="closeBtn();">&times;</span><strong>${username}</strong> connected.</div>`)
-      //alert('Somebody connected', userId)
-      changeCount(count);
-      
-  })
-const text=document.querySelector('input')
-text.addEventListener('change',(event)=>{
-if(event.target.value.length!==0){
-socket.emit('message',event.target.value,username,image)
-event.target.value='';
-}
-})
-
-socket.on('createMessage',(message,username,image)=>{
- /*   const ul=document.querySelector('.messages');
-    const node=document.createElement('li');
-    const textNode=document.createTextNode(message)
-    const bold=document.createElement('b')
-    const textNode2=document.createTextNode("user")
-    bold.appendChild(textNode2)
-    node.appendChild(textNode)
-    ul.append(bold,node)
-    scrollToBottom();
-    //ul.append(`<li class="message"><b>user</b><br/>${message}</li>`)*/
-    $('ul').append(`<li >
-								<span class="messageHeader">
-									<span>
-                    <img src=${image} style="  
-                    vertical-align: middle;
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 50%;
-                    padding:2px;">
-										<span class="messageSender">${username}</span> 
-									</span>
-									${new Date().toLocaleString('en-US', {
-										hour: 'numeric',
-										minute: 'numeric',
-										hour12: true,
-									})}
-								</span>
-								<span class="message">${message}</span>
-							
-							</li>`)
-			scrollToBottom()
-})
-
-
-  }
-////
-/*
 navigator.mediaDevices.getUserMedia({
     video:true,
     audio:true
@@ -178,7 +158,6 @@ socket.on('createMessage',(message,username,image)=>{
     ul.append(bold,node)
     scrollToBottom();
     //ul.append(`<li class="message"><b>user</b><br/>${message}</li>`)*/
-    /*
     $('ul').append(`<li >
 								<span class="messageHeader">
 									<span>
@@ -204,11 +183,9 @@ socket.on('createMessage',(message,username,image)=>{
 
 
 })
-
 .catch(err=>{
     console.log(err)
 })
-*/
 socket.on('user-disconnected', (userId,count) => {
    // document.querySelector('.flash').innerHTML='User Disconnected'+userId;
    if (peers[userId]) {
@@ -218,15 +195,8 @@ socket.on('user-disconnected', (userId,count) => {
   }
   })
 peer.on('open',id=>{
-    Peer_ID = id;
-
     socket.emit('join-room',ROOM_ID,id,username,image)
 })
-
-const changeCount = (count) => {
-  const counter = document.getElementById("user-number");
-  counter.innerHTML = count;
-};
 
 const connectToNewUser=(userId,stream,username)=>{
     var call = peer.call(userId, stream);
