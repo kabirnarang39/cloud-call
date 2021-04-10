@@ -81,18 +81,12 @@ navigator.mediaDevices
   
     socket.on('user-connected',(userId,username,image,count)=>{
       //document.querySelector('.flash').innerHTML='User Connected'+userId;
-      connectToNewUser(userId,stream,username);
+      connectToNewUser(userId, myVideoStream);
       document.querySelector('.flash').innerHTML=(`<div class="alert success"><span class="closebtn" onClick="closeBtn();">&times;</span><strong>${username}</strong> connected.</div>`)
       //alert('Somebody connected', userId)
       changeCount(count);
       
   })
-
-
-const changeCount = (count) => {
-  const counter = document.getElementById("user-number");
-  counter.innerHTML = count;
-};
 const text=document.querySelector('input')
 text.addEventListener('change',(event)=>{
 if(event.target.value.length!==0){
@@ -232,7 +226,38 @@ socket.on('user-disconnected', (userId,count) => {
 peer.on('open',id=>{
     socket.emit('join-room',ROOM_ID,id,username,image)
 })
-
+myPeer.on("open", (id) => {
+  Peer_ID = id;
+});
+const changeCount = (count) => {
+  const counter = document.getElementById("user-number");
+  counter.innerHTML = count;
+};
+function connectToNewUser(userId, stream) {
+  // set others peerid and send my stream
+  const call = myPeer.call(userId, stream);
+  const video = document.createElement("video");
+  call.on("stream", (userVideoStream) => {
+    fetch(`/user?peer=${call.peer}&room=${ROOM_ID}`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        addVideoStream(
+          video,
+          userVideoStream,
+          call.peer,
+          data.user,
+          data.admin
+        );
+      });
+  });
+  call.on("close", () => {
+    video.parentElement.remove();
+  });
+  peers[userId] = call;
+}
+/*
 const connectToNewUser=(userId,stream,username)=>{
     var call = peer.call(userId, stream);
     const video=document.createElement('video')
