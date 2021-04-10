@@ -228,9 +228,7 @@ peer.on('open',id=>{
 
     socket.emit('join-room',ROOM_ID,id,username,image)
 })
-myPeer.on("open", (id) => {
-  Peer_ID = id;
-});
+
 const changeCount = (count) => {
   const counter = document.getElementById("user-number");
   counter.innerHTML = count;
