@@ -224,6 +224,8 @@ socket.on('user-disconnected', (userId,count) => {
   }
   })
 peer.on('open',id=>{
+  Peer_ID = id;
+
     socket.emit('join-room',ROOM_ID,id,username,image)
 })
 myPeer.on("open", (id) => {
