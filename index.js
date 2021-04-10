@@ -14,6 +14,11 @@ const peerServer = ExpressPeerServer(server,{
 const peerUser = require("./schema/peerUser");
 const room = require("./schema/rooms");
 const videoRoom = require("./routes/video");
+const signup = require("./routes/auth/signup");
+const login = require("./routes/auth/login");
+const logout = require("./routes/auth/logout");
+const index = require("./routes/index");
+const newMeeting = require("./routes/newMeeting");
 mongoose
   .connect('mongodb+srv://kabir:9416285188@cluster0.mi2bs.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
     useNewUrlParser: true,
@@ -38,17 +43,32 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
 });
-app.get('/',(req,res)=>{
-   // res.redirect('/'+uuidv4());
-    res.send(uuidv4())
-})
-app.get("/user", async (req, res) => {
+app.post("/join-room", (req, res) => {
+    res.redirect(`/${req.body.room_id}`);
+  });
+  
+  // user id get
+  app.get("/user", async (req, res) => {
     const roomData = await room.findOne({ roomId: req.query.room }).exec();
     res.json({
       user: await peerUser.findOne({ peerId: req.query.peer }).exec(),
       admin: roomData.admin,
     });
   });
+  // new meeting
+  app.use("/new-meeting", newMeeting);
+  
+  // login
+  app.use("/login", login);
+  
+  // signup
+  app.use("/signup", signup);
+  
+  // logout
+  app.use("/logout", logout);
+  
+  // video room
+  app.use("/", videoRoom);
   app.get('/meet-end',(req,res,next)=>{
     res.render('meet-end')
 })
