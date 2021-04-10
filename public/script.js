@@ -211,8 +211,8 @@ navigator.mediaDevices
               video,
               userVideoStream,
               call.peer,
-              data.user,
-              data.admin
+              username,
+              peers[peer]
             );
       call.on("close", () => {
         video.parentElement.remove();
