@@ -127,6 +127,7 @@
   }
   .flash{
       margin: auto;
+      display: none;
   }
   .alert.success {background-color: #00796b;}
   .closebtn{
