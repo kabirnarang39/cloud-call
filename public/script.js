@@ -306,7 +306,7 @@ const eventAdd = (element) => {
     videoWrapper.classList.toggle("zoom-video");
   });
 };
-const camToggleBtn = document.getElementById("cams-toggle");
+const camToggleBtn = document.getElementById("cams-toggle")
 camToggleBtn.addEventListener("click", (e) => {
   myVideoStream.getTracks().forEach((track) => {
     track.stop();
