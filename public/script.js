@@ -4,7 +4,7 @@ const videoGrid=document.querySelector('.video-grid')
 var myVideoElement=document.createElement('video')
 myVideoElement.muted=true;
 const peers = {}
-console.log(window)
+console.log(window.user)
 var peer = new Peer(undefined,{
     path:'/peerjs',
     host:'/',
