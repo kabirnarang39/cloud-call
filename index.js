@@ -12,7 +12,7 @@ const peerServer = ExpressPeerServer(server,{
     debug:true
 });
 const peerUser = require("./schema/peerUser");
-const room = require("./schema/room");
+const room = require("./schema/rooms");
 const videoRoom = require("./routes/video");
 mongoose
   .connect('mongodb+srv://kabir:9416285188@cluster0.mi2bs.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
