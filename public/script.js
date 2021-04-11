@@ -625,5 +625,8 @@ const record = (stream) => {
 };
 
 const emojiPicker=()=>{
-  document.querySelector('.main_message_container').innerHTML=`<emoji-picker style="display:absolute;"></emoji-picker>`;
+  if(document.querySelector('.main_message_container_chat').style.display=='none')
+  document.querySelector('.main_message_container_chat').style.display="absolute";
+  else
+  document.querySelector('.main_message_container_chat').style.display="none";
 }
