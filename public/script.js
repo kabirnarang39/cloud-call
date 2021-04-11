@@ -331,7 +331,7 @@ function addStream(video, stream,peerId,username,userId) {
    const audioFXElement = audioFX.createElement();
    audioFXElement.classList.add("mic-button");
  
-   if (user.audio) micBtn.classList.add("off");
+   if (username) micBtn.classList.add("off");
    else audioFXElement.classList.add("off");
   // video off element
   const videoOffIndicator = document.createElement("div");
