@@ -623,10 +623,3 @@ const record = (stream) => {
     chunks.push(e.data);
   };
 };
-
-const emojiPicker=()=>{
-  document.querySelector('.main_message_container_chat').style.display='block';
-  document.querySelector('.main_message_container_chat').style.overflow='scroll';
-  document.querySelector('.main_message_container_chat').style.position='absolute';
-  document.querySelector('.main_message_container_chat').innerHTML=`<emoji-picker style="display:absolute;"></emoji-picker>`;
-}
