@@ -76,7 +76,7 @@
   height: 100%;
 }
 
-.conversation-compose .send {
+.main_message_container .send {
   background: transparent;
   border: 0;
   cursor: pointer;
