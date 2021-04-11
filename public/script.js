@@ -23,7 +23,7 @@ window.onload = function () {
         <div class="spinner-item"></div>
         <div class="spinner-item"></div>
         </div>
-        <p>HEY ${username} <p style="font-size:100px">&#128540;</p></p>
+        <p>Welcome, ${username} <span>&#128540;</span></p>
     </div>`;
   document.body.appendChild(loader);
   setTimeout(() => {
