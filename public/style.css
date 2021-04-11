@@ -32,11 +32,6 @@
     border-radius: 5px;
 }
 .main_right{
-  background-color: #0d1418;
-  background-image: url(https://web.whatsapp.com/img/bg-chat-tile-dark_a4be512e7195b6b733d9110b408f075d.png);
-  background-size: inherit;
-  background-position: top;
-  background-repeat: repeat;
    overflow: scroll;
     display: none;
     flex-direction: column;
