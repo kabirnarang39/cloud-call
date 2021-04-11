@@ -804,7 +804,7 @@ span.time {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 95vh;
+  height: 100vh;
   z-index: 99999999;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -815,7 +815,7 @@ span.time {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: rgba(0, 0, 0, 0.816);
+  background-color: rgba(0, 0, 0, 1);
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
