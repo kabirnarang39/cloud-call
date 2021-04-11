@@ -319,12 +319,20 @@ const connectToNewUser=(userId,stream,username)=>{
 var localAudioFXElement;
 function addStream(video, stream,peerId,username,userId) {
   console.log(video,stream,peerId,username,userId)
-  // create audio FX
-  const audioFX = new SE(stream);
-  const audioFXElement = audioFX.createElement();
-  audioFXElement.classList.add("mic-button");
-
-
+   // create microphone button
+   const micBtn = document.createElement("button");
+   micBtn.classList.add("video-element");
+   micBtn.classList.add("mic-button");
+   micBtn.innerHTML = `<ion-icon name="mic-off-outline"></ion-icon>`;
+   micBtn.classList.add("mic-off");
+ 
+   // create audio FX
+   const audioFX = new SE(stream);
+   const audioFXElement = audioFX.createElement();
+   audioFXElement.classList.add("mic-button");
+ 
+   if (user.audio) micBtn.classList.add("off");
+   else audioFXElement.classList.add("off");
   // video off element
   const videoOffIndicator = document.createElement("div");
   videoOffIndicator.classList.add("video-off-indicator");
