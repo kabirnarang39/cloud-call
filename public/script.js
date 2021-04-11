@@ -625,7 +625,9 @@ const record = (stream) => {
 };
 
 const emojiPicker=()=>{
-  document.querySelector('.main_message_container_chat').style.display='flex';
+  document.querySelector('.main_message_container_chat').style.display='bolck';
+  document.querySelector('.main_message_container_chat').style.margin='20px';
+  document.querySelector('.main_message_container_chat').style.overflow='scroll';
   document.querySelector('.main_message_container_chat').style.position='absolute';
   document.querySelector('.main_message_container_chat').innerHTML=`<emoji-picker style="display:absolute;"></emoji-picker>`;
 }
