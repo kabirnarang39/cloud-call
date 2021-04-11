@@ -625,5 +625,5 @@ const record = (stream) => {
 };
 
 const emojiPicker=()=>{
-  document.querySelector('.main_message_container').append(`<emoji-picker style="display:absolute;"></emoji-picker>`);
+  document.querySelector('.main_message_container').innerHTML=`<emoji-picker style="display:absolute;"></emoji-picker>`;
 }
