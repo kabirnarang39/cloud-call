@@ -461,14 +461,32 @@ class SE {
 const muteUnmute=()=>{
     const enabled=myVideoStream.getAudioTracks()[0].enabled;
     if(enabled){
+      socket.emit("audio-toggle", false);
 myVideoStream.getAudioTracks()[0].enabled=false;
 setUnmuteButton();
     }
     else{
+      socket.emit("audio-toggle", true);
         setMuteButton();
         myVideoStream.getAudioTracks()[0].enabled=true;
     }
 }
+socket.on("user-audio-toggle", (id, type) => {
+  videoWrapperMicToggle(document.querySelector(`video[peer="${id}"]`), type);
+});
+
+
+const videoWrapperMicToggle = (element, type) => {
+  const videoWrapper = element.previousSibling;
+  const micButtons = videoWrapper.childNodes;
+  if (type) {
+    micButtons[3].classList.remove("off");
+    micButtons[2].classList.add("off");
+  } else {
+    micButtons[2].classList.remove("off");
+    micButtons[3].classList.add("off");
+  }
+};
 const setUnmuteButton=()=>{
     const html=`
     <svg xmlns="http://www.w3.org/2000/svg" width="26px" height="26px" fill="#cc3b33" class="bi bi-mic-mute" viewBox="0 0 16 16">
