@@ -11,76 +11,6 @@ var peer = new Peer(undefined,{
     host:'/',
     port:'443'
 });
-//window.addEventListener("load", function (event) {
-  //  Dish();
-  
-    //window.onresize = Dish;
-//  }, false);
-//console.log(JSON.parse(myParam))
-//console.log(window.location.href.split('?')[1])
-//console.log(user);
-//console.log(videoGrid)
-///////////////////////////////////////////////
-// Area:
-/*
-function Area(Increment, Count, Width, Height, Margin = 10) {
-  let i = w = 0;
-  let h = Increment * 0.75 + (Margin * 2);
-  while (i < (Count)) {
-      if ((w + Increment) > Width) {
-          w = 0;
-          h = h + (Increment * 0.75) + (Margin * 2);
-      }
-      w = w + Increment + (Margin * 2);
-      i++;
-  }
-  if (h > Height) return false;
-  else return Increment;
-}
-// Dish:
-function Dish() {
-
-  // variables:
-      let Margin = 2;
-      let Scenary = document.getElementsByClassName('video-grid');
-      let Width = Scenary.offsetWidth - (Margin * 2);
-      let Height = Scenary.offsetHeight - (Margin * 2);
-      let Cameras = document.getElementsByClassName('video-wrapper');
-      let max = 0;
-  
-  // loop (i recommend you optimize this)
-      let i = 1;
-      while (i < 5000) {
-          let w = Area(i, Cameras.length, Width, Height, Margin);
-          if (w === false) {
-              max =  i - 1;
-              break;
-          }
-          i++;
-      }
-  
-  // set styles
-      max = max - (Margin * 2);
-      setWidth(max, Margin);
-}
-
-// Set Width and Margin 
-function setWidth(width, margin) {
-  let Cameras = document.getElementsByClassName('video-wrapper');
-  for (var s = 0; s < Cameras.length; s++) {
-      Cameras[s].style.width = width + "px";
-      Cameras[s].style.margin = margin + "px";
-      Cameras[s].style.height = (width * 0.75) + "px";
-  }
-}
-
-// Load and Resize Event
-window.addEventListener("load", function (event) {
-  Dish();
-  window.onresize = Dish;
-}, false);
-*/
-////////////////////////////////////////
 const closeBtn=()=>{
     var close = document.getElementsByClassName("closebtn");
 var i;
@@ -93,88 +23,6 @@ for (i = 0; i < close.length; i++) {
   }
 }
 }
-/*
-navigator.mediaDevices.getUserMedia({
-    video:true,
-    audio:true
-})
-.then(stream=>{
-myVideoStream=stream;
-addStream(myVideoElement,stream,null,username,null);
-peer.on('call', call=> {
-  call.answer(stream); // Answer the call with an A/V stream.
-  const video=document.createElement('video')
-  socket.on('user-connected',null,username=>{
-   console.log(username)
-  })
-  call.on('stream', (userVideoStream)=> {
-      addStream(video,userVideoStream,call.peer,"User")
-
-});
-})
-socket.on('user-connected',(userId,username,image,count)=>{
-    //document.querySelector('.flash').innerHTML='User Connected'+userId;
-    connectToNewUser(userId,stream,username);
-    document.querySelector('.flash').innerHTML=(`<div class="alert success"><span class="closebtn" onClick="closeBtn();">&times;</span><strong>${username}</strong> connected.</div>`)
-    //alert('Somebody connected', userId)
-    changeCount(count);
-    
-})
-
-
-const changeCount = (count) => {
-  const counter = document.getElementById("user-number");
-  counter.innerHTML = count;
-};
-const text=document.querySelector('input')
-text.addEventListener('change',(event)=>{
-if(event.target.value.length!==0){
-socket.emit('message',event.target.value,username,image)
-event.target.value='';
-}
-})
-
-socket.on('createMessage',(message,username,image)=>{
- /*   const ul=document.querySelector('.messages');
-    const node=document.createElement('li');
-    const textNode=document.createTextNode(message)
-    const bold=document.createElement('b')
-    const textNode2=document.createTextNode("user")
-    bold.appendChild(textNode2)
-    node.appendChild(textNode)
-    ul.append(bold,node)
-    scrollToBottom();
-    //ul.append(`<li class="message"><b>user</b><br/>${message}</li>`)*/
-    /*
-    $('ul').append(`<li >
-								<span class="messageHeader">
-									<span>
-                    <img src=${image} style="  
-                    vertical-align: middle;
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 50%;
-                    padding:2px;">
-										<span class="messageSender">${username}</span> 
-									</span>
-									${new Date().toLocaleString('en-US', {
-										hour: 'numeric',
-										minute: 'numeric',
-										hour12: true,
-									})}
-								</span>
-								<span class="message">${message}</span>
-							
-							</li>`)
-			scrollToBottom()
-})
-
-
-})
-.catch(err=>{
-    console.log(err)
-})
-*/
 navigator.mediaDevices
   .getUserMedia({ audio: true })
   .then((stream) => {
@@ -243,18 +91,7 @@ navigator.mediaDevices
   }
   })
   
-  socket.on('createMessage',(message,username,image)=>{
-   /*   const ul=document.querySelector('.messages');
-      const node=document.createElement('li');
-      const textNode=document.createTextNode(message)
-      const bold=document.createElement('b')
-      const textNode2=document.createTextNode("user")
-      bold.appendChild(textNode2)
-      node.appendChild(textNode)
-      ul.append(bold,node)
-      scrollToBottom();
-      //ul.append(`<li class="message"><b>user</b><br/>${message}</li>`)*/
-      
+  socket.on('createMessage',(message,username,image)=>{      
       $('ul').append(`<li >
                   <span class="messageHeader">
                     <span>
@@ -305,16 +142,7 @@ const connectToNewUser=(userId,stream,username)=>{
   peers[userId] = call
   console.log(peers)
 }
-/*const addStream=(video,stream)=>{
-    video.srcObject=stream;
-   
-    video.addEventListener('loadedmetadata',()=>{
-        video.play();
-    })
-   videoGrid.append(video)
-  // console.log(videoGrid)
-}
-*/
+
 var localAudioFXElement;
 function addStream(video, stream,peerId,username,userId) {
   console.log(video,stream,peerId,username,userId)
@@ -451,7 +279,7 @@ class SE {
     this.element.remove();
   }
 }
-//////////////////
+
     const scrollToBottom = () => {
         var d = document.querySelector('.main_chat_window');
         d.scrollTop = d.scrollHeight;
