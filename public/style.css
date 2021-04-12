@@ -617,7 +617,6 @@ button:hover {
 }
 
 .dialogue-container .share-container {
-  margin-top: 8px;
   background-color: #f1f3f4;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -629,7 +628,6 @@ button:hover {
       -ms-flex-align: center;
           align-items: center;
   height: 51px;
-  padding: 0px 8px;
   border-radius: 0.25rem;
 }
 
