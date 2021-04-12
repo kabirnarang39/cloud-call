@@ -135,7 +135,13 @@
     </div>
     <div class="main_right">
     <div class="main_header">
-     <h6 ><img src="<%=image%>"><span style="font-style:italic;color:#cc3b33; font-size:26px;">BaaTcheeT</span>
+     <h6 ><img src="<%=image%>" style="  
+      vertical-align: middle;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      padding:2px;">
+      <span style="font-style:italic;color:#cc3b33; font-size:26px;">BaaTcheeT</span>
      <span onclick="hideShow()" class="cancel-msg">
       <svg xmlns="http://www.w3.org/2000/svg" width="26px" height="26px" fill="black" class="bi bi-x" viewBox="0 0 16 16" >
         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
@@ -144,15 +150,15 @@
     </div>
     <div class="main_chat_window">
     <ul class="messages">
-      <div class="typing">
-        <div class="bubble">
-          <div class="ellipsis dot_1"></div>
-          <div class="ellipsis dot_2"></div>
-          <div class="ellipsis dot_3"></div>
-        </div>
-      </div>
-    </ul>
    
+    </ul>
+    <div class="typing">
+      <div class="bubble">
+        <div class="ellipsis dot_1"></div>
+        <div class="ellipsis dot_2"></div>
+        <div class="ellipsis dot_3"></div>
+      </div>
+    </div>
     </div>
     <div class="main_message_container">
    <input type="text" id="chat_message" placeholder="Type a message" autocomplete="off" autofocus>
