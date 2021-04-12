@@ -125,14 +125,14 @@ button:hover svg {
  .my-time{
 	display:flex;
   margin: 10px;
-	justify-content: right;
+	float: left;
 	font-size: 11px;
 	color: #8086ac;
 }
  .your-time{
 	display: flex;
   margin: 10px;
-	justify-content: left;
+	float: right;
 	font-size: 11px;
 	color: #8086ac;
 }
