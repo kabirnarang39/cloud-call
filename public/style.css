@@ -58,6 +58,7 @@
     overflow-y: scroll;
     box-sizing: content-box;
     padding-left: 20px;
+    background-color: #F9FBFF;
 }
 input[type="text"],
 .button {
@@ -954,7 +955,7 @@ span.time {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: white;
+  background: #F9FBFF;
 }
 
 /* Handle */
