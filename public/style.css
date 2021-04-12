@@ -108,9 +108,16 @@ button:hover svg {
 	font-size: 11px;
 	color: #8086ac;
 }
-.messageHeader {
+.messageHeader .my-name{
 	display: flex;
 	justify-content: flex-end;
+	margin-top: 10px;
+	font-size: 11px;
+	color: #8086ac;
+}
+.messageHeader .your-name{
+	display: flex;
+	justify-content: flex-start;
 	margin-top: 10px;
 	font-size: 11px;
 	color: #8086ac;
