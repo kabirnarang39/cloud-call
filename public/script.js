@@ -5,7 +5,7 @@ const videoGrid=document.querySelector('.video-grid')
 var myVideoElement=document.createElement('video')
 myVideoElement.muted=true;
 const peers = {}
-
+const user=username;
 var peer = new Peer(undefined,{
     path:'/peerjs',
     host:'/',
@@ -122,7 +122,7 @@ navigator.mediaDevices
                       height: 40px;
                       border-radius: 50%;
                       padding:2px;">
-                      <span class="messageSender">${username===username?'You':username}</span> 
+                      <span class="messageSender">${user==username?'You':username}</span> 
                     </span>
                     ${new Date().toLocaleString('en-US', {
                       hour: 'numeric',
@@ -130,7 +130,7 @@ navigator.mediaDevices
                       hour12: true,
                     })}
                   </span>
-                  <span class=${username===username?"message me":"message you"}>${message}</span>
+                  <span class=${user==username?"message me":"message you"}>${message}</span>
                 
                 </li>`)
         scrollToBottom()
