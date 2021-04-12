@@ -81,39 +81,20 @@ button:hover svg {
     color:black;
     list-style: none;
     display: grid;
-    
+    width: max-content;
 }
-.messages li .message-me{
-  color: #f9fbff;
-	font-size: 14px;
-	text-align: left;
-	line-height: 1.4;
-}
-.messages li .message-you{
-  color: #f9fbff;
-	font-size: 14px;
-	text-align: right;
-	line-height: 1.4;
-}
-   
 
 .message-me{
-	display: inline-block;
-	padding: 10px;
-	margin-bottom: 5px;
-	border-radius: 15px;
-  background-color: #b2b2b2;
-  text-align: left;
-  max-width: 60%;
+	float: right;
+	background-color: #ECEFF1;
+	color: #607D8B;
+	border-bottom-right-radius: 0.125rem;
 }
 .message-you{
-	display: inline-block;
-	padding: 10px;
-	margin-bottom: 5px;
-	border-radius: 15px;
-  background-color: #309af6;
-  text-align: left;
-  max-width: 60%;
+	float: left;
+	background-color: #E91E63;
+	color: #fff;
+	border-bottom-left-radius: 0.125rem;
 }
 .messageHeader {
 	display: flex;
