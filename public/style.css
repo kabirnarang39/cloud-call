@@ -110,7 +110,7 @@ button:hover svg {
 }
 .messageHeader {
 	display: flex;
-	justify-content: space-around;
+	justify-content: flex-end;
 	margin-top: 10px;
 	font-size: 11px;
 	color: #8086ac;

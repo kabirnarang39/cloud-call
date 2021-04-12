@@ -118,7 +118,6 @@ navigator.mediaDevices
                       <span class="${user==username?"my-name":"your-name"}">${username}</span> 
                    
                   </span>
-                  </br>
                   <span class="${user==username?"message-me":"message-you"}">${message}</span>
                 </li><br>`)
         scrollToBottom()
