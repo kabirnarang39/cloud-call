@@ -62,25 +62,21 @@
     height: 300px;
    
 }
-.main_message_container{
-    padding: 22px 12px;
-    display: flex;
+input[type="text"],
+button {
+	padding: 4px 8px;
+	border: 0;
+	outline: 0;
 }
-.main_message_container input{
-    flex-grow: 1;
-    background-color: transparent;
-    border-left: #00796b 1px solid;
-    border-top: #00796b 1px solid;
-    border-bottom: #00796b 1px solid;
-    border-right: none;
-    border-radius: 5px;
-    color: black;
-    padding: 16px;
-    outline: none;
+button {
+	background-color: transparent;
+	cursor: pointer;
 }
-.main_message_container input:focus{
-  outline: none;
+button:hover i {
+	color: #79c7c5;
+	transform: scale(1.2);
 }
+
 .messages{
     color:black;
     list-style: none;
