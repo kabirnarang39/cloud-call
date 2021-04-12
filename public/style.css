@@ -937,3 +937,29 @@ span.time {
   width: auto;
 }
 
+
+@keyframes bounce {
+	50% {
+		transform: translate(0, 5px);
+	}
+	100% {
+		transform: translate(0, 0);
+	}
+}
+.ellipsis {
+	display: inline-block;
+	width: 5px;
+	height: 5px;
+	border-radius: 50%;
+	background-color: #b7b7b7;
+}
+.dot_1 {
+	/* animation: name duration timing-function delay iteration-count */
+	animation: bounce 0.8s linear 0.1s infinite;
+}
+.dot_2 {
+	animation: bounce 0.8s linear 0.2s infinite;
+}
+.dot_3 {
+	animation: bounce 0.8s linear 0.3s infinite;
+}
