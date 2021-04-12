@@ -58,8 +58,6 @@
     flex-grow: 1;
     overflow-y: scroll;
     box-sizing: content-box;
-    width: 600px !important;
-    height: 300px;
    
 }
 input[type="text"],
