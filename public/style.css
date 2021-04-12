@@ -45,7 +45,6 @@
         -ms-user-select: none;
             user-select: none;
     background-color: white;
-    padding: 10px 24px 24px 24px;
     width: 500px;
     height: 700px;
     border-radius: 1.00rem;
@@ -58,7 +57,7 @@
     flex-grow: 1;
     overflow-y: scroll;
     box-sizing: content-box;
-   
+    padding-left: 20px;
 }
 input[type="text"],
 .button {
@@ -66,6 +65,13 @@ input[type="text"],
 	border: 0;
 	outline: 0;
   flex: 0.9;
+}
+.main_header {
+  background-color: darkkhaki;
+}
+.main_message_container {
+  padding: 20px;
+  background-color: darkkhaki;
 }
 .main_message_container {
   display: flex;
