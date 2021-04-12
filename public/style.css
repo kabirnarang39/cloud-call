@@ -122,6 +122,20 @@ button:hover svg {
 	font-size: 11px;
 	color: #8086ac;
 }
+ .my-time{
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 10px;
+	font-size: 11px;
+	color: #8086ac;
+}
+ .your-time{
+	display: flex;
+	justify-content: flex-start;
+	margin-top: 10px;
+	font-size: 11px;
+	color: #8086ac;
+}
 .messageReceiver {
 	color: #309af6;
 }

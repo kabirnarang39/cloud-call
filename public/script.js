@@ -120,7 +120,7 @@ navigator.mediaDevices
       </span>
       <span class="${user==username?"message-me":"message-you"}">${message}</span>
       </br>
-      <span class="${user==username?"my-name":"your-name"}"> ${new Date().toLocaleString('en-US', {
+      <span class="${user==username?"my-time":"your-time"}"> ${new Date().toLocaleString('en-US', {
         hour: 'numeric',
         minute: 'numeric',
         hour12: true,
