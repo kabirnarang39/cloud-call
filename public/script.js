@@ -120,12 +120,6 @@ navigator.mediaDevices
                   </span>
                   </br>
                   <span class="${user==username?"message-me":"message-you"}">${message}</span>
-                  <br>
-                  <span class="time"> ${new Date().toLocaleString('en-US', {
-                    hour: 'numeric',
-                    minute: 'numeric',
-                    hour12: true,
-                  })}</span>
                 </li><br>`)
         scrollToBottom()
   })

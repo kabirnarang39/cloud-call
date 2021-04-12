@@ -85,17 +85,21 @@ button:hover svg {
 }
 .messages li .message-me{
 	float: right;
+  text-align:justify;
 	background-color: #ECEFF1;
 	color: #607D8B;
 	border-radius: 5px;
   padding: 10px;
+  max-width: 60%;
 }
 .messages li .message-you{
 	float: left;
+  text-align: justify;
 	background-color: #E91E63;
 	color: #fff;
 	border-radius: 5px;
   padding: 10px;
+  max-width: 60%;
 }
 .time{
   display: flex;
