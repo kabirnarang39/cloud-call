@@ -81,7 +81,7 @@ button:hover svg {
     color:black;
     list-style: none;
     display: grid;
-    width: max-content;
+    width:60%;
 }
 .message-me{
 	float: right;
@@ -98,22 +98,15 @@ button:hover svg {
   padding: 10px;
 }
 .time{
-  display: flex;
+  display: block;
 	justify-content: end;
 	margin-top: 10px;
 	font-size: 11px;
 	color: #8086ac;
 }
-.messageHeader .my-name {
+.messageHeader {
 	display: flex;
 	justify-content: right;
-	margin-top: 10px;
-	font-size: 11px;
-	color: #8086ac;
-}
-.messageHeader .your-name {
-	display: flex;
-	justify-content: left;
 	margin-top: 10px;
 	font-size: 11px;
 	color: #8086ac;
