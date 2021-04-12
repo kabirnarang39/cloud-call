@@ -65,10 +65,15 @@ button {
 	padding: 4px 8px;
 	border: 0;
 	outline: 0;
+  flex: 0.9;
+}
+.main_message_container {
+  display: flex;
 }
 button {
 	background-color: transparent;
 	cursor: pointer;
+  flex: 0.1;
 }
 button:hover svg {
 	color: #79c7c5;
@@ -79,7 +84,7 @@ button:hover svg {
     color:black;
     list-style: none;
     display: grid;
-    width:75%;
+    width:95%;
 }
 .messages li .message-me{
 	float: right;
