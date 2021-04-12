@@ -110,6 +110,7 @@ button:hover svg {
 }
 .messageHeader .my-name{
 	display: flex;
+  margin-bottom: 5px;
 	justify-content: flex-end;
 	margin-top: 10px;
 	font-size: 11px;
@@ -117,6 +118,7 @@ button:hover svg {
 }
 .messageHeader .your-name{
 	display: flex;
+  margin-bottom: 5px;
 	justify-content: flex-start;
 	margin-top: 10px;
 	font-size: 11px;
