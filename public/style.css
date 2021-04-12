@@ -67,11 +67,10 @@ input[type="text"],
   flex: 0.9;
 }
 .main_header {
-  background-color:  rgb(107, 189, 144);
+  padding: 10px;
 }
 .main_message_container {
   padding: 20px;
-  background-color: rgb(107, 189, 144);
 }
 .main_message_container {
   display: flex;
