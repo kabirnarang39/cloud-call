@@ -83,10 +83,16 @@ button:hover svg {
     display: grid;
     
 }
-.messages li{
+.messages li .message-me{
   color: #f9fbff;
 	font-size: 14px;
 	text-align: left;
+	line-height: 1.4;
+}
+.messages li .message-you{
+  color: #f9fbff;
+	font-size: 14px;
+	text-align: right;
 	line-height: 1.4;
 }
    
@@ -98,6 +104,7 @@ button:hover svg {
 	border-radius: 15px;
   background-color: #b2b2b2;
   text-align: left;
+  max-width: 60%;
 }
 .message-you{
 	display: inline-block;
@@ -105,7 +112,8 @@ button:hover svg {
 	margin-bottom: 5px;
 	border-radius: 15px;
   background-color: #309af6;
-  text-align: right;
+  text-align: left;
+  max-width: 60%;
 }
 .messageHeader {
 	display: flex;
