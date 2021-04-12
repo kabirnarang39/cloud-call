@@ -104,7 +104,7 @@ input[type="text"],
 .messages li .message-you{
 	float: left;
   text-align: justify;
-	background-color: #b2b2b2;
+	background-color: #f4c2c2;
 	color: #F9FBFF;
 	border-radius: 5px;
   padding: 10px;
