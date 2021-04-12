@@ -130,7 +130,7 @@ navigator.mediaDevices
                       hour12: true,
                     })}
                   </span>
-                  <span class="${user==username?"message me":"message you"}">${message}</span>
+                  <span class="${user==username?"message-me":"message-you"}">${message}</span>
                 
                 </li>`)
         scrollToBottom()

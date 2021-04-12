@@ -91,7 +91,7 @@ button:hover svg {
 }
    
 
-.message .me{
+.message-me{
 	display: inline-block;
 	padding: 10px;
 	margin-bottom: 5px;
@@ -99,7 +99,7 @@ button:hover svg {
   background-color: #b2b2b2;
   text-align: left;
 }
-.message .you{
+.message-you{
 	display: inline-block;
 	padding: 10px;
 	margin-bottom: 5px;
