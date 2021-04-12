@@ -124,19 +124,17 @@ button:hover svg {
 }
  .my-time{
 	display:flex;
-  position: relative;
+  position: absolute;
   margin: 10px;
 	justify-content: right;
-	margin-top: 10px;
 	font-size: 11px;
 	color: #8086ac;
 }
  .your-time{
-   position: relative;
+   position: absolute;
 	display: flex;
   margin: 10px;
 	justify-content: flex-start;
-	margin-top: 10px;
 	font-size: 11px;
 	color: #8086ac;
 }
