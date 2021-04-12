@@ -81,7 +81,7 @@ button:hover svg {
     color:black;
     list-style: none;
     display: grid;
-    width:70%;
+    width:75%;
 }
 .messages li .message-me{
 	float: right;
