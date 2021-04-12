@@ -98,15 +98,15 @@ button:hover svg {
   padding: 10px;
 }
 .time{
-  display: block;
-	justify-content: end;
+  display: flex;
+	justify-content:right;
 	margin-top: 10px;
 	font-size: 11px;
 	color: #8086ac;
 }
 .messageHeader {
 	display: flex;
-	justify-content: right;
+	justify-content: space-around;
 	margin-top: 10px;
 	font-size: 11px;
 	color: #8086ac;
