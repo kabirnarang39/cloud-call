@@ -116,15 +116,15 @@ navigator.mediaDevices
       $('ul').append(`<li >
                   <span class="messageHeader">
                
-                      <span>${username}</span> 
-                 
+                      <span class="${user==username?"my-name":"your-name"}">${username}</span> 
+                    ${new Date().toLocaleString('en-US', {
+                      hour: 'numeric',
+                      minute: 'numeric',
+                      hour12: true,
+                    })}
                   </span>
                   <span class="${user==username?"message-me":"message-you"}">${message}</span>
-                  ${new Date().toLocaleString('en-US', {
-                    hour: 'numeric',
-                    minute: 'numeric',
-                    hour12: true,
-                  })}
+                
                 </li>`)
         scrollToBottom()
   })
