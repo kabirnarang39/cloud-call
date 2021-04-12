@@ -72,7 +72,7 @@ button {
 	background-color: transparent;
 	cursor: pointer;
 }
-button:hover i {
+button:hover svg {
 	color: #79c7c5;
 	transform: scale(1.2);
 }
