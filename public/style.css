@@ -954,19 +954,16 @@ span.time {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: rgba(var(--color4), 1);
+  background: white;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgba(var(--color3), 0.6);
+  background: lightgray;
   border-radius: 10px;
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(var(--color3), 1);
-}
+
 .button_message {
   position: absolute;
   color: red;
