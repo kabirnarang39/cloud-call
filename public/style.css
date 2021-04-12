@@ -83,14 +83,14 @@ button:hover svg {
     display: grid;
     width:60%;
 }
-.message-me{
+.messages li .message-me{
 	float: right;
 	background-color: #ECEFF1;
 	color: #607D8B;
 	border-radius: 5px;
   padding: 10px;
 }
-.message-you{
+.messages li .message-you{
 	float: left;
 	background-color: #E91E63;
 	color: #fff;
