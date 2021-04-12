@@ -83,12 +83,6 @@ button:hover svg {
     display: grid;
     width: max-content;
 }
-.my-name{
-  float: right;
-}
-.your-name{
-  float: left;
-}
 .message-me{
 	float: right;
 	background-color: #ECEFF1;
@@ -103,14 +97,27 @@ button:hover svg {
 	border-radius: 5px;
   padding: 10px;
 }
-.messageHeader {
-	display: flex;
-	justify-content: space-between;
+.time{
+  display: flex;
+	justify-content: end;
 	margin-top: 10px;
 	font-size: 11px;
 	color: #8086ac;
 }
-
+.messageHeader .my-name {
+	display: flex;
+	justify-content: right;
+	margin-top: 10px;
+	font-size: 11px;
+	color: #8086ac;
+}
+.messageHeader .your-name {
+	display: flex;
+	justify-content: left;
+	margin-top: 10px;
+	font-size: 11px;
+	color: #8086ac;
+}
 .messageReceiver {
 	color: #309af6;
 }

@@ -115,16 +115,15 @@ navigator.mediaDevices
   socket.on('createMessage',(message,username,image)=>{      
       $('ul').append(`<li >
                   <span class="messageHeader">
-               
                       <span class="${user==username?"my-name":"your-name"}">${username}</span> 
-                    ${new Date().toLocaleString('en-US', {
-                      hour: 'numeric',
-                      minute: 'numeric',
-                      hour12: true,
-                    })}
+                   
                   </span>
                   <span class="${user==username?"message-me":"message-you"}">${message}</span>
-                
+                  <span class="time"> ${new Date().toLocaleString('en-US', {
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    hour12: true,
+                  })}</span>
                 </li>`)
         scrollToBottom()
   })
