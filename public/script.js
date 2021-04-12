@@ -122,7 +122,7 @@ navigator.mediaDevices
                       height: 40px;
                       border-radius: 50%;
                       padding:2px;">
-                      <span class="messageSender">${username}</span> 
+                      <span class="messageSender">${username===username?'You':username}</span> 
                     </span>
                     ${new Date().toLocaleString('en-US', {
                       hour: 'numeric',
@@ -130,7 +130,7 @@ navigator.mediaDevices
                       hour12: true,
                     })}
                   </span>
-                  <span class="message">${message}</span>
+                  <span class=${username===username?"message me":"message you"}>${message}</span>
                 
                 </li>`)
         scrollToBottom()
