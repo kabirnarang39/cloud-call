@@ -90,7 +90,7 @@ navigator.mediaDevices
           return res.json();
         })
         .then((data) => {
-          addVideoStream(
+          addStream(
             video,
             userVideoStream,
             call.peer,
@@ -173,7 +173,7 @@ const connectToNewUser=(userId,stream)=>{
           return res.json();
         })
         .then((data) => {
-          addVideoStream(
+          addStream(
             video,
             userVideoStream,
             call.peer,
