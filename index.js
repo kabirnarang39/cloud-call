@@ -8,7 +8,6 @@ const { ExpressPeerServer } = require('peer');
 const cookie = require("cookie-session");
 const passport = require("passport");
 const mongoose = require("mongoose");
-const passportAuthenticator = require("./functions/passportStrategy");
 const user = require("./schema/user");
 const peerServer = ExpressPeerServer(server,{ 
     debug:true
@@ -24,7 +23,6 @@ mongoose
   .then(() => {
     console.log("database connected");
   });
-  passportAuthenticator(passport, user);
   app.use(express.json());
 app.use('/peerjs',peerServer);
 app.set('view engine','ejs')
