@@ -51,16 +51,19 @@ app.get("/user", async (req, res) => {
 app.get('/meet-end',(req,res,next)=>{
     res.render('meet-end')
 })
-app.get('/:room',(req,res)=>{
+app.get('/:room',async(req,res)=>{
    // console.log(req.params)
+   const roomData = await room.findOne({ roomId: req.params.room }).exec();
    user.findOne({ username: req.query.user }, (err, data) => {
     if (err) console.log(err);
     if (data) {
      console.log(data)
      res.render('zoom',{
+        count: roomData ? roomData.count : 0,
         roomId:req.params.room,
        username:req.query.user,
-       image:req.query.image
+       image:req.query.image,
+       user:req.user
     })
     } else {
       user({
@@ -70,9 +73,11 @@ app.get('/:room',(req,res)=>{
       }).save((err, data) => {
        console.log(data,err)
        res.render('zoom',{
+        count: roomData ? roomData.count : 0,
         roomId:req.params.room,
        username:req.query.user,
-       image:req.query.image
+       image:req.query.image,
+       user:req.user
     })
       });
     }

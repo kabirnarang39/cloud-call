@@ -151,7 +151,16 @@ socket.on('user-disconnected', (userId,count) => {
   })
 peer.on('open',id=>{
   Peer_ID = id;
-    socket.emit('join-room',ROOM_ID,id,username,image)
+  socket.emit(
+    "join-room",
+    ROOM_ID,
+    Peer_ID,
+    USER_ID,
+    username,
+    myVideoStream.getAudioTracks()[0].enabled,
+    myVideoStream.getVideoTracks()[0].enabled,
+    image
+  );
 })
 
 const connectToNewUser=(userId,stream)=>{
