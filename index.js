@@ -55,7 +55,7 @@ app.get('/meet-end',(req,res,next)=>{
 })
 app.get('/:room',async(req,res)=>{
    // console.log(req.params)
-   console.log(req.user)
+   console.log(req)
    const roomData = await room.findOne({ roomId: req.params.room }).exec();
    user.findOne({ username: req.query.user }, (err, data) => {
     if (err) console.log(err);
