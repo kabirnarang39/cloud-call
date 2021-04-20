@@ -11,6 +11,7 @@ var peer = new Peer(undefined,{
     host:'/',
     port:'443'
 });
+var Peer_ID;
 //Loading spinner
 window.onload = function () {
   const loader = document.createElement("div");
@@ -51,6 +52,7 @@ navigator.mediaDevices
       .getUserMedia({
         video: true,
         audio: true,
+        user:username
       })
       .then((stream) => {
         myVideoStream = stream;
@@ -63,6 +65,7 @@ navigator.mediaDevices
       .getUserMedia({
         video: true,
         audio: false,
+        user:username
       })
       .then((stream) => {
         myVideoStream = stream;
@@ -70,7 +73,11 @@ navigator.mediaDevices
       });
   });
   function processStream(stream) {
-    addStream(myVideoElement, myVideoStream, null, username);
+    addStream(myVideoElement, myVideoStream, null, {
+      name: username,
+      audio: myVideoStream.getAudioTracks()[0].enabled,
+      video: myVideoStream.getVideoTracks()[0].enabled,
+    });
     // recieve the others stream
 
     peer.on("call", (call) => {
@@ -78,21 +85,27 @@ navigator.mediaDevices
       call.answer(myVideoStream);
       const video = document.createElement("video");
       call.on("stream", (userVideoStream) => {
-            addStream(
-              video,
-              userVideoStream,
-              call.peer,
-              username,
-              peers[peer]
-            )
-      call.on("close", () => {
-        video.parentElement.remove();
-      });
+        fetch(`/user?peer=${call.peer}&room=${ROOM_ID}`)
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          addVideoStream(
+            video,
+            userVideoStream,
+            call.peer,
+            data.user,
+            data.admin
+          );
+        });  
+    });
+    call.on("close", () => {
+      video.parentElement.remove();
     });
   })
-    socket.on('user-connected',(userId,username,image,count)=>{
+    socket.on('user-connected',(userId,username,audio,video,count,image)=>{
       //document.querySelector('.flash').innerHTML='User Connected'+userId;
-      connectToNewUser(userId,stream,username);
+      connectToNewUser(userId,stream);
       document.querySelector('.flash').innerHTML=(`<div class="alert success"><span class="closebtn" onClick="closeBtn();">&times;</span><strong>${username}</strong> connected.</div>`)
       //alert('Somebody connected', userId)
       changeCount(count);
@@ -137,28 +150,37 @@ socket.on('user-disconnected', (userId,count) => {
   }
   })
 peer.on('open',id=>{
+  Peer_ID = id;
     socket.emit('join-room',ROOM_ID,id,username,image)
 })
 
-const connectToNewUser=(userId,stream,username)=>{
-    var call = peer.call(userId, stream);
-    const video=document.createElement('video')
-    video.id=userId;
-    
-    call.on('stream', (userVideoStream)=> {
-    addStream(video,userVideoStream,call.peer,username,userId)
-  });
-  call.on('close', () => {
-    video.parentElement.remove();
-  })
-
-  peers[userId] = call
-  console.log(peers)
+const connectToNewUser=(userId,stream)=>{
+    // set others peerid and send my stream
+    const call = myPeer.call(userId, stream);
+    const video = document.createElement("video");
+    call.on("stream", (userVideoStream) => {
+      fetch(`/user?peer=${call.peer}&room=${ROOM_ID}`)
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          addVideoStream(
+            video,
+            userVideoStream,
+            call.peer,
+            data.user,
+            data.admin
+          );
+        });
+    });
+    call.on("close", () => {
+      video.parentElement.remove();
+    });
+    peers[userId] = call;
 }
 
 var localAudioFXElement;
-function addStream(video, stream,peerId,username,userId) {
-  console.log(video,stream,peerId,username,userId)
+function addStream(video, stream,peerId,user,adminId) {
   // create audio FX
   const audioFX = new SE(stream);
   const audioFXElement = audioFX.createElement();
@@ -183,7 +205,7 @@ function addStream(video, stream,peerId,username,userId) {
 
   // peer name
   const namePara = document.createElement("p");
-  namePara.innerHTML = username;
+  namePara.innerHTML = user.name;
   namePara.classList.add("video-element");
   namePara.classList.add("name");
 
@@ -197,7 +219,7 @@ function addStream(video, stream,peerId,username,userId) {
 
   video.srcObject = stream;
   video.setAttribute("peer", peerId);
-  video.setAttribute("name", username);
+  video.setAttribute("name", user.name);
 
   if (peerId == null) {
     video.classList.add("mirror");
@@ -211,7 +233,7 @@ function addStream(video, stream,peerId,username,userId) {
   videoWrapper.appendChild(elementsWrapper);
   videoWrapper.appendChild(video);
 
-  if (userId == peerId)
+  if (adminId == peerId)
   videoGrid.insertBefore(videoWrapper, videoGrid.childNodes[0]);
 else videoGrid.append(videoWrapper);
 
