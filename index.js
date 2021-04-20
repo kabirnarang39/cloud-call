@@ -114,7 +114,7 @@ io.on('connection',socket=>{
         socket.on('message',(message,username,image)=>{
             io.to(roomId).emit('createMessage',message,username,image)
         })
-        socket.on('disconnect', () => {
+        socket.on('disconnect',async () => {
             roomData = await room.findOne({ roomId: roomId }).exec();
             await room.updateOne({ roomId: roomId }, { count: roomData.count - 1 });
             // remove peer details
