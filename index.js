@@ -25,6 +25,7 @@ mongoose
     console.log("database connected");
   });
   passportAuthenticator(passport, user);
+  app.use(express.json());
 app.use('/peerjs',peerServer);
 app.set('view engine','ejs')
 app.set('views','views');
@@ -66,7 +67,7 @@ app.get('/:room',async(req,res)=>{
         roomId:req.params.room,
        username:req.query.user,
        image:req.query.image,
-       user:req.user
+       user:data
     })
     } else {
       user({
@@ -80,7 +81,7 @@ app.get('/:room',async(req,res)=>{
         roomId:req.params.room,
        username:req.query.user,
        image:req.query.image,
-       user:req.user
+       user:data
     })
       });
     }
