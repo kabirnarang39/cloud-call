@@ -57,6 +57,11 @@ app.get('/:room',(req,res)=>{
     if (err) console.log(err);
     if (data) {
      console.log(data)
+     res.render('zoom',{
+        roomId:req.params.room,
+       username:req.query.user,
+       image:req.query.image
+    })
     } else {
       user({
         name:req.query.email,
