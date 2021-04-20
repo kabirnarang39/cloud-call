@@ -1,6 +1,5 @@
-
 var socket = io('/');
-let myVideoStream;
+var myVideoStream;
 const videoGrid=document.querySelector('.video-grid')
 var myVideoElement=document.createElement('video')
 myVideoElement.muted=true;
@@ -105,7 +104,7 @@ navigator.mediaDevices
   })
     socket.on('user-connected',(userId,username,audio,video,count,image)=>{
       //document.querySelector('.flash').innerHTML='User Connected'+userId;
-      connectToNewUser(userId,stream);
+      connectToNewUser(userId,myVideoStream);
       document.querySelector('.flash').innerHTML=(`<div class="alert success"><span class="closebtn" onClick="closeBtn();">&times;</span><strong>${username}</strong> connected.</div>`)
       //alert('Somebody connected', userId)
       changeCount(count);
