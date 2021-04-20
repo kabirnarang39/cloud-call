@@ -56,8 +56,7 @@ app.get('/:room',(req,res)=>{
    user.findOne({ username: req.query.user }, (err, data) => {
     if (err) console.log(err);
     if (data) {
-      req.flash("err", "Username Already taken");
-      res.redirect("/signup");
+     console.log(data)
     } else {
       user({
         name:req.query.email,
