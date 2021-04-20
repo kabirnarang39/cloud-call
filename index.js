@@ -76,7 +76,7 @@ app.get('/:room',(req,res)=>{
   
 })
 io.on('connection',socket=>{
-    socket.on('join-room',(roomId,peerId,userId,name,audio,video,image)=>{
+    socket.on('join-room',async(roomId,peerId,userId,name,audio,video,image)=>{
         await peerUser({
             peerId: peerId,
             name: name,
