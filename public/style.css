@@ -32,6 +32,7 @@
     border-radius: 5px;
 }
 .main_right{
+   overflow: scroll;
     display: none;
     flex-direction: column;
     overflow: hidden;
