@@ -16,6 +16,7 @@ var offset = [0,0];
 var div;
 div=document.querySelector('.main_right');
 var isDown = false;
+document.body.appendChild(div);
 div.addEventListener('mousedown', function(e) {
   isDown = true;
   offset = [
