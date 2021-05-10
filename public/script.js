@@ -14,9 +14,39 @@ var Peer_ID;
 var mousePosition;
 var offset = [0,0];
 var div;
+var mouseP;
+var ofset = [0,0];
+var divider=document.querySelector('.dialogue-container');
 div=document.querySelector('.main_right');
+var isD = false;
 var isDown = false;
 document.body.appendChild(div);
+ocument.body.appendChild(divider);
+divider.addEventListener('mousedown', function(e) {
+  isD = true;
+  offset = [
+      divider.offsetLeft - e.clientX,
+      divider.offsetTop - e.clientY
+  ];
+}, true);
+
+document.addEventListener('mouseup', function() {
+  isD = false;
+}, true);
+
+document.addEventListener('mousemove', function(event) {
+  event.preventDefault();
+  if (isD) {
+      mousePosition = {
+  
+          x : event.clientX,
+          y : event.clientY
+  
+      };
+      divider.style.left = (mousePosition.x + ofset[0]) + 'px';
+      divider.style.top  = (mousePosition.y + ofset[1]) + 'px';
+  }
+}, true);
 div.addEventListener('mousedown', function(e) {
   isDown = true;
   offset = [
