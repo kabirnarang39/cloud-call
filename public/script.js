@@ -14,7 +14,7 @@ var Peer_ID;
 var mousePosition;
 var offset = [0,0];
 var div;
-div=document.getElementsByClassName('main-right');
+div=document.getElementsByClassName('main_right');
 var isDown = false;
 div.style.position = "absolute";
 div.style.left = "0px";
