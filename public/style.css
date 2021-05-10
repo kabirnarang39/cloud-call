@@ -207,8 +207,6 @@ input[type="text"],
     -ms-flex-align: center;
     align-items: center;
     background-color: transparent;
-    -webkit-transition: all 0.24s linear;
-    transition: all 0.24s linear;
 }
   
   .dialogue-container .dialogue-button ion-icon,.cancel-msg svg {
