@@ -21,7 +21,7 @@ div=document.querySelector('.main_right');
 var isD = false;
 var isDown = false;
 document.body.appendChild(div);
-ocument.body.appendChild(divider);
+document.body.appendChild(divider);
 divider.addEventListener('mousedown', function(e) {
   isD = true;
   offset = [
