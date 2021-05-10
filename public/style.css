@@ -36,7 +36,7 @@
     display: none;
     flex-direction: column;
     overflow: hidden;
-    position: relative;
+    position: absolute;
     margin-left: 200px;
     margin-top: -300px;
     z-index: 30000;
