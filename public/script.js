@@ -16,17 +16,6 @@ var offset = [0,0];
 var div;
 div=document.querySelector('.main_right');
 var isDown = false;
-div.style.position = "absolute";
-div.style.left = "0px";
-div.style.top = "0px";
-div.style.width = "100px";
-div.style.height = "100px";
-div.style.background = "red";
-div.style.color = "blue";
-
-document.body.appendChild(div);
-
-
 div.addEventListener('mousedown', function(e) {
   isDown = true;
   offset = [
