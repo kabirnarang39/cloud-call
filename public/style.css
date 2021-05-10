@@ -35,6 +35,7 @@
    overflow: scroll;
     display: none;
     flex-direction: column;
+    overflow: hidden;
     position: absolute;
     margin-left: 200px;
     z-index: 30000;
