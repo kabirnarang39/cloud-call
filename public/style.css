@@ -193,6 +193,7 @@ input[type="text"],
     border: none;
     outline: none;
     cursor: pointer;
+    margin-right: 20px;
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -561,7 +562,6 @@ button:hover {
   pointer-events: none;
   visibility: hidden;
   position: absolute;
-  margin: 2rem;
   top: 0;
   z-index: 30000;
   -webkit-user-select: none;
