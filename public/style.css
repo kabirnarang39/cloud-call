@@ -1019,3 +1019,52 @@ span.time {
 .footer-elements:active {
   background-color: #353b42;
 }
+
+.tooltip {
+  position: relative;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.tooltip::before {
+  font-size: 0.65rem !important;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  content: attr(tool_tip);
+  display: inline;
+  white-space: nowrap;
+  position: absolute;
+  top: -45px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  background-color: rgba(var(--color3), 1);
+  color: white;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.tooltip:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tooltip-danger::before {
+  background-color: brown;
+}
+
+@media (hover: hover) {
+  .tooltip:hover .tooltip::before {
+    opacity: 1;
+    visibility: visible;
+  }
+}
