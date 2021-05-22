@@ -715,8 +715,8 @@ meetingToggleBtn.addEventListener("click", (e) => {
     changeCount(count);
     currentElement.classList.remove("call-button");
     currentElement.classList.add("call-end-button");
-    //currentElement.classList.add("tooltip-danger");
-    //currentElement.setAttribute("tool_tip", "Leave the Meeting");
+    currentElement.classList.add("tooltip-danger");
+    currentElement.setAttribute("tool_tip", "Leave the Meeting");
     socket.emit(
       "join-room",
       ROOM_ID,
