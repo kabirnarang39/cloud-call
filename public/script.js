@@ -145,14 +145,7 @@ navigator.mediaDevices
         processStream(myVideoStream);
       });
   });
-  socket.on('user-disconnected', (userId,count) => {
-    // document.querySelector('.flash').innerHTML='User Disconnected'+userId;
-    if (peers[userId]) {
-     peers[userId].close();
-     delete peers[userId];
-     changeCount(count);
-   }
-   })
+
   
    function processStream(stream) {
     addStream(myVideoElement, myVideoStream, null, {
@@ -194,6 +187,20 @@ navigator.mediaDevices
       changeCount(count);
       
   })
+  
+  const changeCount = (count) => {
+    const counter = document.getElementById("user-number");
+    counter.innerHTML = count;
+  };
+  const text=document.querySelector('#chat_message')
+  text.addEventListener('change',(event)=>{
+    console.log(event.target.value)
+  if(event.target.value.length!==0){
+  socket.emit('message',event.target.value,username)
+  event.target.value='';
+  }
+  })
+  
   socket.on('createMessage',(message,username)=>{      
     $('ul').append(`<li >
     <span class="messageHeader">
@@ -211,15 +218,19 @@ navigator.mediaDevices
 })
 
 }
+socket.on('user-disconnected', (userId,count) => {
+  // document.querySelector('.flash').innerHTML='User Disconnected'+userId;
+  if (peers[userId]) {
+   peers[userId].close();
+   delete peers[userId];
+   changeCount(count);
+ }
+ })
   peer.on('open',id=>{
     Peer_ID = id;
 
   })
-  
-  const changeCount = (count) => {
-    const counter = document.getElementById("user-number");
-    counter.innerHTML = count;
-  };
+
   const connectToNewUser=(userId,stream)=>{
     // set others peerid and send my stream
     const call = peer.call(userId, stream);
@@ -702,15 +713,7 @@ const record = (stream) => {
   };
 };
 
-const text=document.querySelector('#chat_message')
-  text.addEventListener('change',(event)=>{
-    console.log(event.target.value)
-  if(event.target.value.length!==0){
-  socket.emit('message',event.target.value,username)
-  event.target.value='';
-  }
-  })
-  
+
 //Enter Meeting
   const meetingToggleBtn = document.getElementById("meeting-toggle");
   meetingToggleBtn.addEventListener("click", (e) => {
