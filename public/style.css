@@ -990,7 +990,12 @@ span.time {
 	animation: bounce 0.8s linear 0.3s infinite;
 }
 
-
+.call-button ion-icon {
+  color: green;
+}
+.call-end-button ion-icon {
+  color: rgba(var(--color6), 1);
+}
 .footer-elements {
   outline: none;
   border: none;
