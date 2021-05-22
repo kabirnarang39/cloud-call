@@ -155,7 +155,7 @@ app.use(error404)
     });
    */ 
 
-    mongoose.connect('mongodb+srv://Kabir:9416285188@cluster0-rsbgg.mongodb.net/shop')
+    mongoose.connect('mongodb+srv://Kabir:9416285188@cluster0-rsbgg.mongodb.net/meet')
     .then(result=>{
      console.log("DBS CONNECTED")
      server.listen(process.env.PORT || 8000, function(){
