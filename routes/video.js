@@ -3,6 +3,7 @@ const route = express.Router();
 const room = require("../models/rooms");
 
 route.get("/:room", async (req, res) => {
+  console.log(req.user)
   const roomData = await room.findOne({ roomId: req.params.room }).exec();
   res.render("zoom", {
     tabName: "S-Meet",

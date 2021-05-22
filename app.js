@@ -28,7 +28,15 @@ const indexRoute=require('./routes/index')
 const newMeeting = require("./routes/newMeeting");
 const peerUser = require("./models/peerUser");
 const room = require("./models/rooms");
-
+mongoose
+  .connect("mongodb+srv://Kabir:9416285188@cluster0-rsbgg.mongodb.net/meet", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  })
+  .then(() => {
+    console.log("database connected");
+  });
 app.use(express.json());
 app.use("/peerjs", peerServer);
 app.set("view engine", "ejs");
@@ -75,6 +83,7 @@ app.post("/join-room", (req, res) => {
 });
 app.use(indexRoute)
 app.get("/user", async (req, res) => {
+ console.log(peerUser.findOne({ peerId: req.query.peer }).exec())
   const roomData = await room.findOne({ roomId: req.query.room }).exec();
   res.json({
     user: await peerUser.findOne({ peerId: req.query.peer }).exec(),
@@ -155,14 +164,7 @@ app.use(error404)
     });
    */ 
 
-    mongoose.connect('mongodb+srv://Kabir:9416285188@cluster0-rsbgg.mongodb.net/meet')
-    .then(result=>{
-     console.log("DBS CONNECTED")
-     server.listen(process.env.PORT || 8000, function(){
+ 
+    server.listen(process.env.PORT || 8000, function(){
       console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
     });
-    })
-    .catch(err=>{
-        console.log(err)
-    })
-  

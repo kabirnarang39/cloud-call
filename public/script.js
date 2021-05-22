@@ -1,22 +1,3 @@
-function detectMob() {
-  const toMatch = [
-    /Android/i,
-    /webOS/i,
-    /iPhone/i,
-    /iPad/i,
-    /iPod/i,
-    /BlackBerry/i,
-    /Windows Phone/i,
-  ];
-
-  return toMatch.some((toMatchItem) => {
-    return navigator.userAgent.match(toMatchItem);
-  });
-}
-const changeCount = (count) => {
-  const counter = document.getElementById("user-number");
-  counter.innerHTML = count;
-};
 var socket = io('/');
 var myVideoStream;
 const videoGrid=document.querySelector('.video-grid')
@@ -24,11 +5,7 @@ var myVideoElement=document.createElement('video')
 myVideoElement.muted=true;
 const peers = {}
 const user=username;
-var peer = new Peer(undefined,{
-    path:'/peerjs',
-    host:'localhost',
-    port:'443'
-});
+var peer =  new Peer({host:'peerjs-server.herokuapp.com', secure:true, port:443})
 var Peer_ID;
 var mousePosition;
 var offset = [0,0];
@@ -130,7 +107,8 @@ navigator.mediaDevices
     navigator.mediaDevices
       .getUserMedia({
         video: true,
-        audio: true
+        audio: true,
+        user:username
       })
       .then((stream) => {
         myVideoStream = stream;
@@ -142,16 +120,15 @@ navigator.mediaDevices
     navigator.mediaDevices
       .getUserMedia({
         video: true,
-        audio: false
+        audio: false,
+        user:username
       })
       .then((stream) => {
         myVideoStream = stream;
         processStream(myVideoStream);
       });
   });
-
-  
-   function processStream(stream) {
+  function processStream(stream) {
     addStream(myVideoElement, myVideoStream, null, {
       name: username,
       audio: myVideoStream.getAudioTracks()[0].enabled,
@@ -182,20 +159,20 @@ navigator.mediaDevices
       video.parentElement.remove();
     });
   })
-    socket.on('user-connected',(userId,username,audio,video,count)=>{
-      socket.emit("user-callback");
+    socket.on('user-connected',(userId,user,audio,video,count)=>{
       //document.querySelector('.flash').innerHTML='User Connected'+userId;
       connectToNewUser(userId,myVideoStream);
-      document.querySelector('.flash').innerHTML=(`<div class="alert success"><span class="closebtn" onClick="closeBtn();">&times;</span><strong>${username}</strong> connected.</div>`)
+      document.querySelector('.flash').innerHTML=(`<div class="alert success"><span class="closebtn" onClick="closeBtn();">&times;</span><strong>${user}</strong> connected.</div>`)
       //alert('Somebody connected', userId)
       changeCount(count);
       
   })
   
+  
 
-  const text=document.querySelector('#chat_message')
+  
+  const text=document.querySelector('input')
   text.addEventListener('change',(event)=>{
-    console.log(event.target.value)
   if(event.target.value.length!==0){
   socket.emit('message',event.target.value,username)
   event.target.value='';
@@ -203,45 +180,34 @@ navigator.mediaDevices
   })
   
   socket.on('createMessage',(message,username)=>{      
-    $('ul').append(`<li >
-    <span class="messageHeader">
-        <span class="${user==username?"my-name":"your-name"}">${username}</span> 
-     
-    </span>
-    <span class="${user==username?"message-me":"message-you"}">${message}</span>
-    <span class="${user==username?"my-time":"your-time"}"> ${new Date().toLocaleString('en-US', {
-      hour: 'numeric',
-      minute: 'numeric',
-      hour12: true,
-    })}</span> 
-  </li>`)
-      scrollToBottom()
-})
-
+      $('ul').append(`<li >
+      <span class="messageHeader">
+          <span class="${user==username?"my-name":"your-name"}">${username}</span> 
+       
+      </span>
+      <span class="${user==username?"message-me":"message-you"}">${message}</span>
+      <span class="${user==username?"my-time":"your-time"}"> ${new Date().toLocaleString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true,
+      })}</span> 
+    </li>`)
+        scrollToBottom()
+  })
 }
 socket.on('user-disconnected', (userId,count) => {
-  // document.querySelector('.flash').innerHTML='User Disconnected'+userId;
-  if (peers[userId]) {
-   peers[userId].close();
-   delete peers[userId];
-   changeCount(count);
- }
- })
- peer.on('open',id=>{
+   // document.querySelector('.flash').innerHTML='User Disconnected'+userId;
+   if (peers[userId]) {
+    peers[userId].close();
+    delete peers[userId];
+    changeCount(count);
+  }
+  })
+peer.on('open',id=>{
   Peer_ID = id;
-  socket.emit(
-    "join-room",
-    ROOM_ID,
-    Peer_ID,
-    USER_ID,
-    username,
-    myVideoStream.getAudioTracks()[0].enabled,
-    myVideoStream.getVideoTracks()[0].enabled,
-    image
-  );
 })
 
-  const connectToNewUser=(userId,stream)=>{
+const connectToNewUser=(userId,stream)=>{
     // set others peerid and send my stream
     const call = peer.call(userId, stream);
     const video = document.createElement("video");
@@ -251,6 +217,7 @@ socket.on('user-disconnected', (userId,count) => {
           return res.json();
         })
         .then((data) => {
+          console.log(data.user)
           addStream(
             video,
             userVideoStream,
@@ -265,13 +232,14 @@ socket.on('user-disconnected', (userId,count) => {
     });
     peers[userId] = call;
 }
-  
+
 var localAudioFXElement;
 function addStream(video, stream,peerId,user,adminId) {
   // create audio FX
   const audioFX = new SE(stream);
   const audioFXElement = audioFX.createElement();
   audioFXElement.classList.add("mic-button");
+
 
   // video off element
   const videoOffIndicator = document.createElement("div");
@@ -434,7 +402,7 @@ const setMuteButton=()=>{
     `
     document.querySelector('.main_mute_button').innerHTML=html;
 }
-const playStop=(event)=>{
+const playStop=()=>{
     const enabled=myVideoStream.getVideoTracks()[0].enabled;
     if(enabled){
       socket.emit("video-toggle", false);
@@ -450,6 +418,7 @@ setPlayVideo();
     } 
 }
 const videoWrapperVideoToggle = (element, type) => {
+  console.log(type)
   const videoWrapper = element.previousSibling;
   if (type) videoWrapper.classList.remove("video-disable");
   else videoWrapper.classList.add("video-disable");
@@ -722,34 +691,28 @@ const record = (stream) => {
     chunks.push(e.data);
   };
 };
-
-
-//Enter Meeting
-  const meetingToggleBtn = document.getElementById("meeting-toggle");
-  meetingToggleBtn.addEventListener("click", (e) => {
-    const currentElement = e.target;
-    const counter = document.getElementById("user-number");
-    const count = Number(counter.innerText) + 1;
-    if (currentElement.classList.contains("call-button")) {
-      changeCount(count);
-      currentElement.classList.remove("call-button");
-      currentElement.classList.add("call-end-button");
-      currentElement.classList.add("tooltip-danger");
-      currentElement.setAttribute("tool_tip", "Leave the Meeting");
-      socket.emit(
-        "join-room",
-        ROOM_ID,
-        Peer_ID,
-        USER_ID,
-        name,
-        myVideoStream.getAudioTracks()[0].enabled,
-        myVideoStream.getVideoTracks()[0].enabled
-      );
-    } else location.replace(`/`);
-  });
-
-
-  
+const meetingToggleBtn = document.getElementById("meeting-toggle");
+meetingToggleBtn.addEventListener("click", (e) => {
+  const currentElement = e.target;
+  const counter = document.getElementById("user-number");
+  const count = Number(counter.innerText) + 1;
+  if (currentElement.classList.contains("call-button")) {
+    changeCount(count);
+    currentElement.classList.remove("call-button");
+    currentElement.classList.add("call-end-button");
+    currentElement.classList.add("tooltip-danger");
+    currentElement.setAttribute("tool_tip", "Leave the Meeting");
+    socket.emit(
+      "join-room",
+      ROOM_ID,
+      Peer_ID,
+      USER_ID,
+      user,
+      myVideoStream.getAudioTracks()[0].enabled,
+      myVideoStream.getVideoTracks()[0].enabled
+    );
+  } else location.replace(`/`);
+});
 const camToggleBtn = document.getElementById("cams-toggle");
 camToggleBtn.addEventListener("click", (e) => {
   myVideoStream.getTracks().forEach((track) => {
@@ -794,8 +757,7 @@ camToggleBtn.addEventListener("click", (e) => {
       console.log(error);
     });
 });
-
-
-
-  if (detectMob()) shareScreenBtn.remove();
-else camToggleBtn.remove();
+const changeCount = (count) => {
+  const counter = document.getElementById("user-number");
+  counter.innerHTML = count;
+};
