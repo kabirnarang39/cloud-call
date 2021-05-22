@@ -1,3 +1,18 @@
+function detectMob() {
+  const toMatch = [
+    /Android/i,
+    /webOS/i,
+    /iPhone/i,
+    /iPad/i,
+    /iPod/i,
+    /BlackBerry/i,
+    /Windows Phone/i,
+  ];
+
+  return toMatch.some((toMatchItem) => {
+    return navigator.userAgent.match(toMatchItem);
+  });
+}
 var socket = io('/');
 var myVideoStream;
 const videoGrid=document.querySelector('.video-grid')
@@ -761,3 +776,5 @@ const changeCount = (count) => {
   const counter = document.getElementById("user-number");
   counter.innerHTML = count;
 };
+if (detectMob()) shareScreenBtn.remove();
+else camToggleBtn.remove();
