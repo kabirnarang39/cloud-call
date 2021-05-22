@@ -733,7 +733,7 @@ camToggleBtn.addEventListener("click", (e) => {
   myVideoStream.getTracks().forEach((track) => {
     track.stop();
   });
-  myVideo.classList.toggle("mirror");
+  myVideoElement.classList.toggle("mirror");
   var cams = e.target.getAttribute("camera");
   cams = JSON.parse(cams);
   var camId;
@@ -756,7 +756,7 @@ camToggleBtn.addEventListener("click", (e) => {
       localAudioFXElement.replaceStream(stream);
       let videoTrack = stream.getVideoTracks()[0];
       let audioTrack = stream.getAudioTracks()[0];
-      myVideo.srcObject = stream;
+      myVideoElement.srcObject = stream;
       for (peer in peers) {
         let sender = peers[peer].peerConnection.getSenders().find(function (s) {
           return s.track.kind == videoTrack.kind;
