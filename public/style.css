@@ -989,3 +989,28 @@ span.time {
 .dot_3 {
 	animation: bounce 0.8s linear 0.3s infinite;
 }
+
+
+.footer-elements {
+  outline: none;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  margin: 0.4rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  -webkit-transition: all 0.24s linear;
+  transition: all 0.24s linear;
+  background-color: transparent;
+  color: white;
+  -ms-user-select: none !important;
+      user-select: none !important;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+.footer-elements:hover {
+  border: none;
+  outline: none;
+}
+.footer-elements:active {
+  background-color: #353b42;
+}

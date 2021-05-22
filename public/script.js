@@ -1,3 +1,18 @@
+function detectMob() {
+  const toMatch = [
+    /Android/i,
+    /webOS/i,
+    /iPhone/i,
+    /iPad/i,
+    /iPod/i,
+    /BlackBerry/i,
+    /Windows Phone/i,
+  ];
+
+  return toMatch.some((toMatchItem) => {
+    return navigator.userAgent.match(toMatchItem);
+  });
+}
 var socket = io('/');
 var myVideoStream;
 const videoGrid=document.querySelector('.video-grid')
@@ -7,7 +22,7 @@ const peers = {}
 const user=username;
 var peer = new Peer(undefined,{
     path:'/peerjs',
-    host:'/',
+    host:'localhost',
     port:'443'
 });
 var Peer_ID;
@@ -111,8 +126,7 @@ navigator.mediaDevices
     navigator.mediaDevices
       .getUserMedia({
         video: true,
-        audio: true,
-        user:username
+        audio: true
       })
       .then((stream) => {
         myVideoStream = stream;
@@ -124,15 +138,23 @@ navigator.mediaDevices
     navigator.mediaDevices
       .getUserMedia({
         video: true,
-        audio: false,
-        user:username
+        audio: false
       })
       .then((stream) => {
         myVideoStream = stream;
         processStream(myVideoStream);
       });
   });
-  function processStream(stream) {
+  socket.on('user-disconnected', (userId,count) => {
+    // document.querySelector('.flash').innerHTML='User Disconnected'+userId;
+    if (peers[userId]) {
+     peers[userId].close();
+     delete peers[userId];
+     changeCount(count);
+   }
+   })
+  
+   function processStream(stream) {
     addStream(myVideoElement, myVideoStream, null, {
       name: username,
       audio: myVideoStream.getAudioTracks()[0].enabled,
@@ -163,7 +185,8 @@ navigator.mediaDevices
       video.parentElement.remove();
     });
   })
-    socket.on('user-connected',(userId,username,audio,video,count,image)=>{
+    socket.on('user-connected',(userId,username,audio,video,count)=>{
+      socket.emit("user-callback");
       //document.querySelector('.flash').innerHTML='User Connected'+userId;
       connectToNewUser(userId,myVideoStream);
       document.querySelector('.flash').innerHTML=(`<div class="alert success"><span class="closebtn" onClick="closeBtn();">&times;</span><strong>${username}</strong> connected.</div>`)
@@ -171,59 +194,33 @@ navigator.mediaDevices
       changeCount(count);
       
   })
-  
+  socket.on('createMessage',(message,username)=>{      
+    $('ul').append(`<li >
+    <span class="messageHeader">
+        <span class="${user==username?"my-name":"your-name"}">${username}</span> 
+     
+    </span>
+    <span class="${user==username?"message-me":"message-you"}">${message}</span>
+    <span class="${user==username?"my-time":"your-time"}"> ${new Date().toLocaleString('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true,
+    })}</span> 
+  </li>`)
+      scrollToBottom()
+})
+
+}
+  peer.on('open',id=>{
+    Peer_ID = id;
+
+  })
   
   const changeCount = (count) => {
     const counter = document.getElementById("user-number");
     counter.innerHTML = count;
   };
-  const text=document.querySelector('input')
-  text.addEventListener('change',(event)=>{
-  if(event.target.value.length!==0){
-  socket.emit('message',event.target.value,username,image)
-  event.target.value='';
-  }
-  })
-  
-  socket.on('createMessage',(message,username,image)=>{      
-      $('ul').append(`<li >
-      <span class="messageHeader">
-          <span class="${user==username?"my-name":"your-name"}">${username}</span> 
-       
-      </span>
-      <span class="${user==username?"message-me":"message-you"}">${message}</span>
-      <span class="${user==username?"my-time":"your-time"}"> ${new Date().toLocaleString('en-US', {
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: true,
-      })}</span> 
-    </li>`)
-        scrollToBottom()
-  })
-}
-socket.on('user-disconnected', (userId,count) => {
-   // document.querySelector('.flash').innerHTML='User Disconnected'+userId;
-   if (peers[userId]) {
-    peers[userId].close();
-    delete peers[userId];
-    changeCount(count);
-  }
-  })
-peer.on('open',id=>{
-  Peer_ID = id;
-  socket.emit(
-    "join-room",
-    ROOM_ID,
-    Peer_ID,
-    USER_ID,
-    username,
-    myVideoStream.getAudioTracks()[0].enabled,
-    myVideoStream.getVideoTracks()[0].enabled,
-    image
-  );
-})
-
-const connectToNewUser=(userId,stream)=>{
+  const connectToNewUser=(userId,stream)=>{
     // set others peerid and send my stream
     const call = peer.call(userId, stream);
     const video = document.createElement("video");
@@ -247,14 +244,13 @@ const connectToNewUser=(userId,stream)=>{
     });
     peers[userId] = call;
 }
-
+  
 var localAudioFXElement;
 function addStream(video, stream,peerId,user,adminId) {
   // create audio FX
   const audioFX = new SE(stream);
   const audioFXElement = audioFX.createElement();
   audioFXElement.classList.add("mic-button");
-
 
   // video off element
   const videoOffIndicator = document.createElement("div");
@@ -417,7 +413,7 @@ const setMuteButton=()=>{
     `
     document.querySelector('.main_mute_button').innerHTML=html;
 }
-const playStop=()=>{
+const playStop=(event)=>{
     const enabled=myVideoStream.getVideoTracks()[0].enabled;
     if(enabled){
       socket.emit("video-toggle", false);
@@ -433,7 +429,6 @@ setPlayVideo();
     } 
 }
 const videoWrapperVideoToggle = (element, type) => {
-  console.log(type)
   const videoWrapper = element.previousSibling;
   if (type) videoWrapper.classList.remove("video-disable");
   else videoWrapper.classList.add("video-disable");
@@ -707,3 +702,87 @@ const record = (stream) => {
   };
 };
 
+const text=document.querySelector('#chat_message')
+  text.addEventListener('change',(event)=>{
+    console.log(event.target.value)
+  if(event.target.value.length!==0){
+  socket.emit('message',event.target.value,username)
+  event.target.value='';
+  }
+  })
+  
+//Enter Meeting
+  const meetingToggleBtn = document.getElementById("meeting-toggle");
+  meetingToggleBtn.addEventListener("click", (e) => {
+    const currentElement = e.target;
+    const counter = document.getElementById("user-number");
+    const count = Number(counter.innerText) + 1;
+    if (currentElement.classList.contains("call-button")) {
+      changeCount(count);
+      currentElement.classList.remove("call-button");
+      currentElement.classList.add("call-end-button");
+      currentElement.classList.add("tooltip-danger");
+      currentElement.setAttribute("tool_tip", "Leave the Meeting");
+      socket.emit(
+        "join-room",
+        ROOM_ID,
+        Peer_ID,
+        USER_ID,
+        name,
+        myVideoStream.getAudioTracks()[0].enabled,
+        myVideoStream.getVideoTracks()[0].enabled
+      );
+    } else location.replace(`/`);
+  });
+
+
+  
+const camToggleBtn = document.getElementById("cams-toggle");
+camToggleBtn.addEventListener("click", (e) => {
+  myVideoStream.getTracks().forEach((track) => {
+    track.stop();
+  });
+  myVideo.classList.toggle("mirror");
+  var cams = e.target.getAttribute("camera");
+  cams = JSON.parse(cams);
+  var camId;
+  for (cam in cams) {
+    if (cams[cam] == false) {
+      camId = cam;
+      cams[cam] = true;
+    } else {
+      cams[cam] = false;
+    }
+  }
+  e.target.setAttribute("camera", JSON.stringify(cams));
+  navigator.mediaDevices
+    .getUserMedia({
+      video: { deviceId: { exact: camId } },
+      audio: true,
+    })
+    .then((stream) => {
+      myVideoStream = stream;
+      localAudioFXElement.replaceStream(stream);
+      let videoTrack = stream.getVideoTracks()[0];
+      let audioTrack = stream.getAudioTracks()[0];
+      myVideo.srcObject = stream;
+      for (peer in peers) {
+        let sender = peers[peer].peerConnection.getSenders().find(function (s) {
+          return s.track.kind == videoTrack.kind;
+        });
+        sender.replaceTrack(videoTrack);
+        sender = peers[peer].peerConnection.getSenders().find(function (s) {
+          return s.track.kind == audioTrack.kind;
+        });
+        sender.replaceTrack(audioTrack);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
+
+
+  if (detectMob()) shareScreenBtn.remove();
+else camToggleBtn.remove();
