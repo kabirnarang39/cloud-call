@@ -13,6 +13,10 @@ function detectMob() {
     return navigator.userAgent.match(toMatchItem);
   });
 }
+const changeCount = (count) => {
+  const counter = document.getElementById("user-number");
+  counter.innerHTML = count;
+};
 var socket = io('/');
 var myVideoStream;
 const videoGrid=document.querySelector('.video-grid')
@@ -188,10 +192,7 @@ navigator.mediaDevices
       
   })
   
-  const changeCount = (count) => {
-    const counter = document.getElementById("user-number");
-    counter.innerHTML = count;
-  };
+
   const text=document.querySelector('#chat_message')
   text.addEventListener('change',(event)=>{
     console.log(event.target.value)
