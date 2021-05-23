@@ -1,6 +1,5 @@
 const path=require('path')
 const express=require('express');
-//const rateLimiterUsingThirdParty =require('./middleware/rateLimiter').rateLimiterUsingThirdParty;
 const mongoose = require("mongoose");
 const session = require('express-session');
 const mongoDBStore=require('connect-mongodb-session')(session);
