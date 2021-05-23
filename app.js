@@ -153,7 +153,7 @@ io.on('connection',socket=>{
 })
 
 
-//app.get('/500',errorController.get500)
+
 app.use(error404)
 app.use((error,req, res, next) => {
   return res.status(500).render('500', {
