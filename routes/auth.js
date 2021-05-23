@@ -1,20 +1,15 @@
 const express = require('express');
 const User=require('../models/user')
-const {check,body}=require('express-validator');
+const {check,body}=require('express-validator/check');
 const authController = require('../controllers/auth');
-const rateLimit=require('express-rate-limit');
-const limit = rateLimit({
-  max: 10,// max requests
-  windowMs: 60 * 60 * 1000, // 1 Hour
-  message: 'Too many requests' // message to send
-});
+
 const router = express.Router();
 
-router.get('/login',limit, authController.getLogin);
+router.get('/login', authController.getLogin);
 
-router.get('/signup',limit, authController.getSignup);
+router.get('/signup', authController.getSignup);
 
-router.post('/login',limit,[check('email').isEmail().withMessage('Cant find a user with this email!').normalizeEmail(),
+router.post('/login',[check('email').isEmail().withMessage('Cant find a user with this email!').normalizeEmail(),
 body('password',
 'Password Should Be valid')
 .isLength({min:5}).
@@ -22,7 +17,7 @@ isAlphanumeric()
 .trim()
 ], authController.postLogin);
 
-router.post('/signup',limit,[
+router.post('/signup',[
 check('email').isEmail().withMessage('Enter a valid Email')
 .custom((value,{req})=>{
    return User.findOne({email:value})
@@ -46,9 +41,9 @@ body('confirmPassword').trim()
 })
 ], authController.postSignup);
 
-router.post('/logout',limit, authController.postLogout);
-router.get('/reset',limit,authController.getReset)
-router.post('/reset',limit,authController.postReset)
-router.get('/reset/:token',limit,authController.getUpdatePassword)
-router.post('/reset-password',limit,authController.postNewPassword)
+router.post('/logout', authController.postLogout);
+router.get('/reset',authController.getReset)
+router.post('/reset',authController.postReset)
+router.get('/reset/:token',authController.getUpdatePassword)
+router.post('/reset-password',authController.postNewPassword)
 module.exports = router;

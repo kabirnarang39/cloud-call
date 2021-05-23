@@ -1,14 +1,11 @@
 const path=require('path')
 const express=require('express');
-const rateLimit=require('express-rate-limit');
+const rateLimiterUsingThirdParty =require('./middleware/rateLimiter').rateLimiterUsingThirdParty;
 const mongoose = require("mongoose");
 const session = require('express-session');
 const mongoDBStore=require('connect-mongodb-session')(session);
 const csrf = require('csurf');
 var flash=require("connect-flash")
-const mongoSanitize = require('express-mongo-sanitize');
-var xss = require('xss-clean')
-const helmet = require("helmet");
 const errorController=require('./controllers/error');
 const User=require('./models/user');
 const app=express();
@@ -41,16 +38,9 @@ mongoose
   .then(() => {
     console.log("database connected");
   });
- 
-  const limit = rateLimit({
-    max: 10,// max requests
-    windowMs: 60 * 60 * 1000, // 1 Hour
-    message: 'Too many requests' // message to send
-});
-
+app.use(express.json());
 app.use("/peerjs", peerServer);
 app.set("view engine", "ejs");
-app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname,'public')));
 app.use(session({
@@ -60,9 +50,7 @@ app.use(session({
   store:store
 }))
 app.use(csrfProtection);
-app.use(xss());
-app.use(helmet());
-app.use(mongoSanitize());
+
 app.use(flash());
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.session.isLoggedIn;
@@ -86,11 +74,12 @@ app.use((req, res, next) => {
       next(new Error(err));
     });
 });
-app.post("/join-room",limit, (req, res) => {
+app.use(rateLimiterUsingThirdParty);
+app.post("/join-room", (req, res) => {
   res.redirect(`/${req.body.room_id}`);
 });
 app.use(indexRoute)
-app.get("/user",limit, async (req, res) => {
+app.get("/user", async (req, res) => {
  console.log(peerUser.findOne({ peerId: req.query.peer }).exec())
   const roomData = await room.findOne({ roomId: req.query.room }).exec();
   res.json({
@@ -98,13 +87,13 @@ app.get("/user",limit, async (req, res) => {
     admin: roomData.admin,
   });
 });
-app.use("/new-meeting",limit, newMeeting);
+app.use("/new-meeting", newMeeting);
 app.use(authRoute)
 
-app.get('/meet-end',limit,(req,res,next)=>{
+app.get('/meet-end',(req,res,next)=>{
   res.render('meet-end')
 })
-app.use("/",limit, videoRoom);
+app.use("/", videoRoom);
 io.on('connection',socket=>{
   socket.on('join-room',async(roomId,peerId,userId,name,audio,video)=>{
     console.log(name)
