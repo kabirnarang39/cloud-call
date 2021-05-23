@@ -20,7 +20,11 @@ var myVideoElement=document.createElement('video')
 myVideoElement.muted=true;
 const peers = {}
 const user=username;
-var peer =  new Peer({host:'peerjs-server.herokuapp.com', secure:true, port:443})
+var peer = new Peer(undefined,{
+  path:'/peerjs',
+  host:'/',
+  port:'443'
+});
 var Peer_ID;
 var mousePosition;
 var offset = [0,0];
