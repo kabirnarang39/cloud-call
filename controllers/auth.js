@@ -6,7 +6,7 @@ const {validationResult}=require('express-validator/check')
 const User = require('../models/user');
 const transport=nodemailer.createTransport(sendGridTransport({
   auth:{
-    api_key:"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"
+    api_key:"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"
   }
 }))
 
@@ -221,10 +221,10 @@ crypto.randomBytes(32,(err,buffer)=>{
     res.redirect('/')
     transport.sendMail({
       to:req.body.email,
-      from:'narang0211@gmail.com',
+      from:'kabirnarang39@gmail.com',
       subject:'Reset Password',
       html:`<p>You requested for a change in resetting of password</p>
-            <p><a href="http://localhost:3200/reset/${token}">Click this link to reset your password</a></p>
+            <p><a href="http://localhost:8000/reset/${token}">Click this link to reset your password</a></p>
       `
     })
     

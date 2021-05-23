@@ -1,90 +1,3 @@
-<%- include('includes/head.ejs') %>
-</head>
-
-<body>
-    <%- include('includes/navigation.ejs') %>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid nav-contcnt">
-        <div class="d-flex">
-            <p class="m-0 px-3" style="font-weight: bold; color: #5F6368;">
-                <% if (isAuthenticated){%>
-                <%= user.name %>
-                <% } %>
-            </p>
-        </div>
-        <style>
-            
-            @media (max-width: 440px) {
-                .nav-contcnt {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                }
-                .new-meeting {
-                    width: 124px;
-                    white-space: nowrap;
-                }
-            }
-            .icon {
-                text-decoration: none;
-                color: #5F6368;
-                padding: 0rem .25rem;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                border-radius: .25rem;
-                margin: 0rem .35rem;
-            }
-            .icon:hover {
-                background-color: rgb(197, 197, 197);
-                color: #5F6368;
-            }
-            .icon ion-icon {
-                font-size: 1.7rem;
-            }
-        </style>
-    </div>
-</nav>
-<div class="container py-5">
-    <div class="row g-3">
-        <div class="col-md-6">
-            <h1 class="mb-3">
-                Premium video meetings. Now free for everyone.
-            </h1>
-            <p style="color: #5F6368;">We re-engineered the service we built for secure business meetings, Google Meet,
-                to make it free and
-                available for all.</p>
-                <% if (isAuthenticated){%>
-            <div class="a123 my-5" style="display: flex; ">
-                <a class="btn btn-primary new-meeting" style="width: 180px;" href="/new-meeting" role="button">New
-                    Meeting</a>
-                <form action="join-room" style="margin-left: 1rem;" method="POST">
-                    <div class="input-group ">
-                        <span class="input-group-text" id="inputGroup-sizing-default">
-                            <ion-icon name="planet-outline"></ion-icon>
-                        </span>
-                        <input name="room_id" type="text" class="form-control" placeholder="Enter a code or Link"
-                            aria-label="Recipient's username" aria-describedby="button-addon2">
-                            <input type="hidden" name="_csrf" value="<%=csrfToken%>">
-                        <button class="btn btn-outline-primary" type="submit" id="button-addon2">Join</button>
-                    </div>
-                </form>
-            </div>
-            <% } %>
-            <hr>
-            <p><a href="#" style="text-decoration: none;">Learn more about</a> S Meet</p>
-        </div>
-        <div class="col-md-6">
-            <div class="card" style="box-shadow: 0 0 5px #b8b8b8;">
-                <div class="card-body">
-                    <img src="/images/ss.png" width="100%" class="rounded" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<%- include('includes/end.ejs') %>
 
 <!DOCTYPE HTML>
 <!--
@@ -94,11 +7,12 @@
 -->
 <html>
 	<head>
-		<title>Hyperspace by HTML5 UP</title>
+		<title>CLOUD CALL</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="../assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+		<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
 
@@ -107,9 +21,11 @@
 				<div class="inner">
 					<nav>
 						<ul>
-							<li><a href="#intro">Welcome</a></li>
+							<li><a href="#intro">Welcome <% if (isAuthenticated){%>
+								<%=user.username%>
+								<% } %></a></li>
 							<li><a href="#one">Who we are</a></li>
-							<li><a href="#two">What we do</a></li>
+							<li><a href="#two">What we did</a></li>
 							<li><a href="#three">Get in touch</a></li>
 						</ul>
 					</nav>
@@ -122,11 +38,39 @@
 				<!-- Intro -->
 					<section id="intro" class="wrapper style1 fullscreen fade-up">
 						<div class="inner">
-							<h1>Hyperspace</h1>
-							<p>Just another fine responsive site template designed by <a href="http://html5up.net">HTML5 UP</a><br />
-							and released for free under the <a href="http://html5up.net/license">Creative Commons</a>.</p>
+							<h1>Cloud Call</h1>
+							<p>Adding Care through Calls...<br />
+                            In-person or afar, Cloud call brings everyone together...</p>
 							<ul class="actions">
-								<li><a href="#one" class="button scrolly">Learn more</a></li>
+                                <% if (!isAuthenticated) { %>
+                                    <li>
+                                        <a class="button scrolly" href="/login">Login</a>
+                                    </li>
+                                    <li>
+                                        <a class="button scrolly" href="/signup">Signup</a>
+                                    </li>
+                                <% } else { %>
+                                            <li>
+                                                <a class="button scrolly" style="width: 180px;" href="/new-meeting" role="button">New
+                                                    Meeting</a>
+                                            </li>
+                                            <li>
+                                           <form action="join-room" method="POST">
+                                              
+                                                <input name="room_id" type="text" class="form-control  " placeholder="Enter a code or Link">
+                                                    </li>
+                                                    <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                                                    <li> <button class="btn btn-outline-primary" type="submit" id="button-addon2">Join</button></li>
+                                               
+                                        </form>
+                                            
+                                    <li>
+                                        <form action="/logout" method="post">
+                                            <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                                            <button type="submit" class="button scrolly">Logout</button>
+                                        </form>
+                                    </li>
+                                <% } %>
 							</ul>
 						</div>
 					</section>
@@ -134,37 +78,37 @@
 				<!-- One -->
 					<section id="one" class="wrapper style2 spotlights">
 						<section>
-							<a href="#" class="image"><img src="../images/pic01.jpg" alt="" data-position="center center" /></a>
+							<a href="#" class="image"><img src="images/pic01.jpg" alt="" data-position="center center" /></a>
 							<div class="content">
 								<div class="inner">
-									<h2>Sed ipsum dolor</h2>
-									<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus.</p>
+									<h2>Kabir Narang</h2>
+									<p>A motivated individual with in-depth knowledge of languages and development tools, seeking a position in a growth-oriented company where I can use my skills to the advantage of the company while having the scope to develop my own skills.</p>
 									<ul class="actions">
-										<li><a href="generic.html" class="button">Learn more</a></li>
+										<li><a href="https://www.linkedin.com/in/kabir-narang-109194175/" class="button">Learn more</a></li>
 									</ul>
 								</div>
 							</div>
 						</section>
 						<section>
-							<a href="#" class="image"><img src="../images/pic02.jpg" alt="" data-position="top center" /></a>
+							<a href="#" class="image"><img src="images/pic02.jpg" alt="" data-position="top center" /></a>
 							<div class="content">
 								<div class="inner">
-									<h2>Feugiat consequat</h2>
-									<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus.</p>
+									<h2>Mayank Sharma</h2>
+									<p>A security researcher seeking opportunities to work in a challenging environment to prove my skills and utilize my knowledge and intelligence to serve the community, with passion for Penetration Testing, Malware Analysis and Reverse Engineering.</p>
 									<ul class="actions">
-										<li><a href="generic.html" class="button">Learn more</a></li>
+										<li><a href="https://403exploit.github.io/" class="button">Learn more</a></li>
 									</ul>
 								</div>
 							</div>
 						</section>
 						<section>
-							<a href="#" class="image"><img src="../images/pic03.jpg" alt="" data-position="25% 25%" /></a>
+							<a href="#" class="image"><img src="images/pic03.jpg" alt="" data-position="25% 25%" /></a>
 							<div class="content">
 								<div class="inner">
-									<h2>Ultricies aliquam</h2>
-									<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus.</p>
+									<h2>Aravind</h2>
+									<p>Talented individual with information technology background, strong desire to grow technical skills, and ability to learn new technologies swiftly. Hopeful for to be a Cyber Security Specialist with great communication skills, and proficiency in all Microsoft Office tools, as well as high attention to detail.</p>
 									<ul class="actions">
-										<li><a href="generic.html" class="button">Learn more</a></li>
+										<li><a href="https://www.linkedin.com/in/aravind-‎‎‎‎-381230176" class="button">Learn more</a></li>
 									</ul>
 								</div>
 							</div>
@@ -174,42 +118,42 @@
 				<!-- Two -->
 					<section id="two" class="wrapper style3 fade-up">
 						<div class="inner">
-							<h2>What we do</h2>
-							<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus, lacus eget hendrerit bibendum, urna est aliquam sem, sit amet imperdiet est velit quis lorem.</p>
+							<h2>What we did</h2>
+							<p>In-person or afar, Cloud call brings everyone together...</p>
 							<div class="features">
 								<section>
 									<span class="icon solid major fa-code"></span>
-									<h3>Lorem ipsum amet</h3>
-									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
+									<h3>Coding</h3>
+									<p>Implemented several libraries of Java Script including nodeJS following secure coding practices.</p>
 								</section>
 								<section>
 									<span class="icon solid major fa-lock"></span>
-									<h3>Aliquam sed nullam</h3>
-									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
+									<h3>Information Security</h3>
+									<p>Followed security framework benchmarks for the most secure communication.</p>
 								</section>
 								<section>
 									<span class="icon solid major fa-cog"></span>
-									<h3>Sed erat ullam corper</h3>
-									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
+									<h3>Nessus</h3>
+									<p>Nessus is a proprietary vulnerability scanner developed by Tenable, Inc</p>
 								</section>
 								<section>
 									<span class="icon solid major fa-desktop"></span>
-									<h3>Veroeros quis lorem</h3>
-									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
+									<h3>Digital Workforce</h3>
+									<p>Cloud Call not only creates a more collaborative meeting culture in your organization, it’s a foundation for enabling today’s digital workforce.</p>
 								</section>
 								<section>
 									<span class="icon solid major fa-link"></span>
-									<h3>Urna quis bibendum</h3>
-									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
+									<h3>RTC</h3>
+									<p>Video call without tramissions delays and minimal latency.</p>
 								</section>
 								<section>
 									<span class="icon major fa-gem"></span>
-									<h3>Aliquam urna dapibus</h3>
-									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
+									<h3>Reduced Redundancy</h3>
+									<p>Companies are upgrading their legacy audio or web conferencing providers and finding more value in full video conferencing solutions that include audio conferencing, screen sharing, chat, meeting recording and event live streaming.</p>
 								</section>
 							</div>
 							<ul class="actions">
-								<li><a href="generic.html" class="button">Learn more</a></li>
+								<li><a href="https://webrtc.org/" class="button">Learn more</a></li>
 							</ul>
 						</div>
 					</section>
@@ -218,10 +162,11 @@
 					<section id="three" class="wrapper style1 fade-up">
 						<div class="inner">
 							<h2>Get in touch</h2>
-							<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus, lacus eget hendrerit bibendum, urna est aliquam sem, sit amet imperdiet est velit quis lorem.</p>
+							<p> Hope you had a great experience, just in case of any inconvenience! We really appreciate you giving us a moment of your time to report problem at kabirnarang39@gmail.com. Thanks for being you.</p>
 							<div class="split style1">
 								<section>
-									<form method="post" action="#">
+									<form method="post" action="/message" action = "send" id="contact-form"> 
+										<input type="hidden" name="_csrf" value="<%=csrfToken%>">
 										<div class="fields">
 											<div class="field half">
 												<label for="name">Name</label>
@@ -236,8 +181,9 @@
 												<textarea name="message" id="message" rows="5"></textarea>
 											</div>
 										</div>
+										
 										<ul class="actions">
-											<li><a href="" class="button submit">Send Message</a></li>
+											<li><button class="button submit" type="submit">Send Message</button></li>
 										</ul>
 									</form>
 								</section>
@@ -245,17 +191,19 @@
 									<ul class="contact">
 										<li>
 											<h3>Address</h3>
-											<span>12345 Somewhere Road #654<br />
-											Nashville, TN 00000-0000<br />
-											USA</span>
+											<span>Hno-240 Sector-14/2<br />
+											Karnal, Haryana 132001<br />
+											INDIA</span>
 										</li>
 										<li>
 											<h3>Email</h3>
-											<a href="#">user@untitled.tld</a>
+											<a href="#">kabirnarang39@gmail.com</a>
+											<a href="#">mayank.sharma1608@gmail.com</a>
+											<a href="#">aravind1027@gmail.com</a>
 										</li>
 										<li>
 											<h3>Phone</h3>
-											<span>(000) 000-0000</span>
+											<span>(+91) 8448337343</span>
 										</li>
 										<li>
 											<h3>Social</h3>
@@ -279,19 +227,18 @@
 			<footer id="footer" class="wrapper style1-alt">
 				<div class="inner">
 					<ul class="menu">
-						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						<li>&copy; Cloud Call Company. All rights reserved.</li><li>Developed By <a href="http://html5up.net">Kabir,Mayank,Aravind</a></li>
 					</ul>
 				</div>
 			</footer>
 
 		<!-- Scripts -->
-			<script src="../assets/js/jquery.min.js"></script>
-			<script src="../assets/js/jquery.scrollex.min.js"></script>
-			<script src="../assets/js/jquery.scrolly.min.js"></script>
-			<script src="../assets/js/browser.min.js"></script>
-			<script src="../assets/js/breakpoints.min.js"></script>
-			<script src="../assets/js/util.js"></script>
-			<script src="../assets/js/main.js"></script>
-
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
 	</body>
 </html>

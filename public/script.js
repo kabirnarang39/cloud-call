@@ -186,11 +186,12 @@ navigator.mediaDevices
   
 
   
-  const text=document.querySelector('input')
-  text.addEventListener('change',(event)=>{
-  if(event.target.value.length!==0){
-  socket.emit('message',event.target.value,username)
-  event.target.value='';
+  const text=document.querySelector('#button-msg')
+
+  text.addEventListener('click',()=>{
+  if(document.getElementById('chat_message').value.toString().length!==0){
+  socket.emit('message',document.getElementById('chat_message').value.toString(),username)
+  document.getElementById('chat_message').value='';
   }
   })
   
@@ -713,6 +714,7 @@ meetingToggleBtn.addEventListener("click", (e) => {
   const count = Number(counter.innerText) + 1;
   if (currentElement.classList.contains("call-button")) {
     changeCount(count);
+    document.getElementById('meeting-toggle').innerText='Leave Meeting';
     currentElement.classList.remove("call-button");
     currentElement.classList.add("call-end-button");
     currentElement.classList.add("tooltip-danger");
@@ -726,7 +728,7 @@ meetingToggleBtn.addEventListener("click", (e) => {
       myVideoStream.getAudioTracks()[0].enabled,
       myVideoStream.getVideoTracks()[0].enabled
     );
-  } else location.replace(`/`);
+  } else location.replace(`/meet-end`);
 });
 const camToggleBtn = document.getElementById("cams-toggle");
 camToggleBtn.addEventListener("click", (e) => {

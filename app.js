@@ -155,16 +155,14 @@ io.on('connection',socket=>{
 
 //app.get('/500',errorController.get500)
 app.use(error404)
-/*app.use((error,req, res, next) => {
+app.use((error,req, res, next) => {
   return res.status(500).render('500', {
         pageTitle: 'Error!',
         path: '/500',
         isAuthenticated: req.session.isLoggedIn
       });
     });
-   */ 
 
- 
     server.listen(process.env.PORT || 8000, function(){
       console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
     });

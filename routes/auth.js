@@ -31,7 +31,7 @@ check('email').isEmail().withMessage('Enter a valid Email')
 body('username',
 'Please enter a username with atleast 5 characters').isLength({min:5}).trim(),
 body('password',
-'Please enter a password with atleast 5 characters and a combination of numbers and text').isLength({min:5}).isAlphanumeric().trim(),
+'Please enter a password with atleast 8 characters and a combination of numbers and text').isLength({min:8}).isAlphanumeric().trim(),
 body('confirmPassword').trim()
 .custom((value,{req})=>{
     if(value!==req.body.password){
