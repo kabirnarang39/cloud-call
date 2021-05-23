@@ -1,5 +1,6 @@
 const path=require('path')
 const express=require('express');
+const rateLimiterUsingThirdParty =require('./middleware/rateLimiter').rateLimiterUsingThirdParty;
 const mongoose = require("mongoose");
 const session = require('express-session');
 const mongoDBStore=require('connect-mongodb-session')(session);
@@ -55,6 +56,7 @@ app.use(session({
   store:store
 }))
 app.use(csrfProtection);
+app.use(rateLimiterUsingThirdParty);
 app.use(flash());
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.session.isLoggedIn;
