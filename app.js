@@ -42,20 +42,22 @@ app.use("/peerjs", peerServer);
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname,'public')));
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
+
 app.use(session({
   secret:'sjdfkjsjdiodsnohsoidjniousdhiolksdiucshaionhoihoiaidnqiahdioqwohdoiahsdoiahsdahsjoidhasodjaisnhiudhcoaisnchoiashchjyewf87iuhwe6474y46465454t2yuegd3qwudgy67325e63eg',
   resave:false,
   saveUninitialized:false,
   store:store
 }))
+
 app.use(csrfProtection);
 app.use(flash());
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.session.isLoggedIn;
   res.locals.csrfToken = req.csrfToken();
