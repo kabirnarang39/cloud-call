@@ -2,14 +2,17 @@ const express = require('express');
 const User=require('../models/user')
 const {check,body}=require('express-validator');
 const authController = require('../controllers/auth');
-
+var ExpressBrute = require('express-brute');
+ 
+var store = new ExpressBrute.MemoryStore(); // stores state locally, don't use this in production
+var bruteforce = new ExpressBrute(store);
 const router = express.Router();
 
 router.get('/login', authController.getLogin);
 
 router.get('/signup', authController.getSignup);
 
-router.post('/login',[check('email').isEmail().withMessage('Cant find a user with this email!').normalizeEmail(),
+router.post('/login',bruteforce.prevent,[check('email').isEmail().withMessage('Cant find a user with this email!').normalizeEmail(),
 body('password',
 'Password Should Be valid')
 .isLength({min:5}).
