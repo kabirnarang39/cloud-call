@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const session = require('express-session');
 const mongoDBStore=require('connect-mongodb-session')(session);
 const csrf = require('csurf');
+var cors = require('cors')
 var flash=require("connect-flash")
 const errorController=require('./controllers/error');
 const User=require('./models/user');
@@ -42,7 +43,7 @@ app.use("/peerjs", peerServer);
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname,'public')));
-
+app.use(cors())
 app.use(session({
   secret:'sjdfkjsjdiodsnohsoidjniousdhiolksdiucshaionhoihoiaidnqiahdioqwohdoiahsdoiahsdahsjoidhasodjaisnhiudhcoaisnchoiashchjyewf87iuhwe6474y46465454t2yuegd3qwudgy67325e63eg',
   resave:false,
