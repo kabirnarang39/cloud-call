@@ -15,7 +15,7 @@ const peerServer = ExpressPeerServer(server,{
   debug:true
 });
 const store=new mongoDBStore({
-  uri:'mongodb+srv://Kabir:9416285188@cluster0-rsbgg.mongodb.net/meet',
+  uri:'mongodb+srv://kabir:9416285188@cluster0.mi2bs.mongodb.net/?retryWrites=true&w=majority',
   collection:'sessions'
 })
 const csrfProtection=csrf();
@@ -29,7 +29,7 @@ const newMeeting = require("./routes/newMeeting");
 const peerUser = require("./models/peerUser");
 const room = require("./models/rooms");
 mongoose
-  .connect("mongodb+srv://Kabir:9416285188@cluster0-rsbgg.mongodb.net/meet", {
+  .connect("mongodb+srv://kabir:9416285188@cluster0.mi2bs.mongodb.net/?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,

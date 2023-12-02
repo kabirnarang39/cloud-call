@@ -1,6 +1,6 @@
 const express = require('express');
 const User=require('../models/user')
-const {check,body}=require('express-validator/check');
+const {check,body}=require('express-validator');
 const authController = require('../controllers/auth');
 
 const router = express.Router();
@@ -9,12 +9,7 @@ router.get('/login', authController.getLogin);
 
 router.get('/signup', authController.getSignup);
 
-router.post('/login',[check('email').isEmail().withMessage('Cant find a user with this email!').normalizeEmail(),
-body('password',
-'Password Should Be valid')
-.isLength({min:5}).
-isAlphanumeric()
-.trim()
+router.post('/login',[check('email').isEmail().withMessage('Cant find a user with this email!').normalizeEmail()
 ], authController.postLogin);
 
 router.post('/signup',[
@@ -29,16 +24,7 @@ check('email').isEmail().withMessage('Enter a valid Email')
 })
 .normalizeEmail(),
 body('username',
-'Please enter a username with atleast 5 characters').isLength({min:5}).trim(),
-body('password',
-'Please enter a password with atleast 8 characters and a combination of numbers and text').isLength({min:8}).isAlphanumeric().trim(),
-body('confirmPassword').trim()
-.custom((value,{req})=>{
-    if(value!==req.body.password){
-        throw new Error('Passwords does not match!')
-    }
-    return true;
-})
+'Please enter a username with atleast 5 characters').isLength({min:5}).trim()
 ], authController.postSignup);
 
 router.post('/logout', authController.postLogout);
