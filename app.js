@@ -15,7 +15,7 @@ const peerServer = ExpressPeerServer(server,{
   debug:true
 });
 const store=new mongoDBStore({
-  uri:'mongodb+srv://kabir:9416285188@cluster0.mi2bs.mongodb.net/?retryWrites=true&w=majority',
+  uri:'mongodb+srv://user:pass@host/?retryWrites=true&w=majority',
   collection:'sessions'
 })
 const csrfProtection=csrf();
